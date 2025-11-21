@@ -185,17 +185,31 @@ import heroImage from '../assets/images/avatar4.png';
     margin-top: 3rem;
   }
 
+  /* V src/components/Hero.astro */
+
   .glow-effect {
     position: absolute;
-    top: 20%;
+    /* Vycentrujeme žiaru presne na stred obrázka */
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 60%;
-    background: radial-gradient(circle, rgba(34, 211, 238, 0.4) 0%, transparent 70%);
-    z-index: 1;
-    filter: blur(40px);
-    opacity: 0.6;
+    transform: translate(-50%, -50%);
+    
+    /* ZMENA 1: Box pre žiaru bude o 50% väčší ako obrázok */
+    /* Tým pádom sa "rozmazanie" neusekne na hranách obrázka */
+    width: 160%; 
+    height: 160%;
+    
+    /* ZMENA 2: Gradient */
+    /* 'closest-side' zabezpečí, že kruh sa zmestí dovnútra */
+    /* Farba končí na 50% a zvyšok do 100% je jemný prechod do stratena */
+    background: radial-gradient(closest-side, rgba(34, 211, 238, 0.4) 20%, transparent 100%);
+    
+    z-index: 1; /* Pod obrázkom */
+    
+    /* ZMENA 3: Väčší blur pre jemnosť */
+    filter: blur(60px); 
+    opacity: 0.7;
+    pointer-events: none;
   }
 
   @keyframes float {
