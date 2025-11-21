@@ -1,6 +1,6 @@
 backend:
-  name: github
-  repo: Laifix/LaifixCreative # Tu daj presne nazov svojho repozitára (Meno/Repo)
+ backend:
+  name: git-gateway
   branch: main
 
 # Nastavenie obrázkov pre Astro optimalizáciu
