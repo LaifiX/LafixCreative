@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://laifix.com/sitemap-index.xml

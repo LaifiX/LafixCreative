@@ -1,0 +1,515 @@
+---
+
+const navLinks = [
+  { name: 'O Mne', href: '#about' },
+  { name: 'Zručnosti', href: '#skills' },
+  { name: 'Projekty', href: '#projects' },
+  { name: 'Blog', href: '#blog' },
+  { name: 'Na stiahnutie', href: '#download' },
+];
+---
+
+<header id="main-header" class="header">
+  <nav class="nav-container">
+   <a href="#" class="logo">
+      <span class="logo-part">
+        <span class="text-white">L</span><span class="text-cyan">AI</span><span class="text-white">FIX</span>
+      </span>
+      
+      <span class="logo-part">
+        <span class="text-cyan">CREA</span><span class="text-white">TIVE AGENCY</span>
+      </span>
+      
+    </a>
+
+    <div class="desktop-menu">
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-link">
+          {link.name}
+        </a>
+      ))}
+      <a href="#contact" class="contact-btn">
+        Kontakt
+      </a>
+    </div>
+
+    <button id="menu-toggle" class="mobile-toggle" aria-label="Menu">
+      <svg class="icon-hamburger" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </nav>
+  
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="scroll-bar"></div>
+  </div>
+</header>
+
+<div id="mobile-menu" class="mobile-menu-overlay">
+  <div class="mobile-menu-content">
+    <div class="mobile-links">
+      {navLinks.map((link) => (
+        <a href={link.href} class="mobile-link">
+          {link.name}
+        </a>
+      ))}
+      <a href="#contact" class="mobile-link highlight">
+        Kontakt
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* 1. DEFINÍCIA PREMENNÝCH */
+  :root {
+    --cyan: #22d3ee;
+    --cyan-hover: #67e8f9;
+    --fuchsia: #d946ef;
+    --gray: #d1d5db;
+    --bg-dark: rgba(0, 0, 0, 0.5);
+  }
+
+  /* 2. HEADER LAYOUT */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3000; /* Najvyššia priorita */
+    padding: 1rem 0;
+    /* Opravená transition - odstránené 'all' pre lepší výkon */
+    transition: background-color 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;
+    background-color: transparent; 
+  }
+
+  .header.scrolled {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  /* LOGO */
+  /* LOGO KONTAJNER */
+  /* LOGO HLAVNÝ KONTAJNER */
+  .logo {
+    font-family: 'Impact', 'Oswald', 'Space Grotesk', sans-serif; /* Hrubý font */
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem; /* Medzera medzi LAIFIX a CREATOR */
+    z-index: 3001;
+    line-height: 1;
+  }
+
+  /* POMOCNÉ TRIEDY PRE FARBY */
+  
+  /* Biela */
+  .text-white {
+    color: #eae9e9;
+    /* Jemný tieň pre kontrast */
+   
+  }
+
+  /* Červená (Tech Red - ladená k obrázku) */
+  .text-red {
+    color: #ff4d4d; 
+    /* Červená žiara */
+   
+  }
+
+  /* Modrá (Tvoja Cyan) */
+  .text-cyan {
+    color: var(--cyan);
+    /* Modrá žiara */
+    
+  }
+
+  /* Hover efekt pre celé logo */
+  .logo:hover .text-red {
+    filter: drop-shadow(0 0 12px rgba(255, 77, 77, 0.9));
+  }
+  .logo:hover .text-cyan {
+    filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.9));
+  }
+  
+  .logo:hover .text-white {
+    filter: drop-shadow(0 0 12px rgba(226, 226, 226, 0.9));
+  }
+
+  /* TLAČIDLO MENU (JEDNO TLAČIDLO) */
+  .mobile-toggle {
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    display: flex; /* Flex zabezpečí, že je viditeľné */
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Pre absolútne ikonky vnútri */
+    z-index: 3001; /* Musí byť nad overlayom */
+  }
+  
+  .mobile-toggle:hover { color: var(--fuchsia); }
+
+  /* Ikonky vnútri tlačidla */
+  .icon-hamburger, .icon-close {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    /* Toto zabezpečí dokonalé centrovanie */
+    transform-origin: center;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* STAV 1: ZATVORENÉ (Vidíme Hamburger) */
+  .icon-hamburger {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    color: var(--cyan); /* Alebo --gray podľa preferencie */
+  }
+  .icon-close {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0.5);
+  }
+
+  /* STAV 2: OTVORENÉ (Vidíme Krížik) */
+  .mobile-toggle.is-active .icon-hamburger {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.5);
+  }
+  .mobile-toggle.is-active .icon-close {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    color: var(--fuchsia);
+  }
+
+  /* DESKTOP MENU */
+  .desktop-menu {
+    display: none; /* Defaultne skryté na mobile */
+    align-items: center;
+    gap: 2rem;
+  }
+  /*
+  .nav-link {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 1.125rem;
+    position: relative;
+    transition: color 0.3s;
+    transition: transform 0.1s ease-out;
+  }
+  .nav-link:hover, .nav-link.active { color: var(--cyan); }
+  .nav-link::after {
+    content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+    background-color: var(--cyan); transition: width 0.3s;
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+ /* UPRAVENÉ TLAČIDLO KONTAKT (Glassy Style) */
+
+.nav-link {
+    color: var(--gray); /* Neaktívny stav (šedá) */
+    text-decoration: none;
+    font-size: 1.125rem;
+    position: relative;
+    transition: color 0.3s, text-shadow 0.3s; /* Pridaný prechod pre tieň */
+  }
+
+  /* HOVER a ACTIVE stav (Desktop) - ZMENA */
+  .nav-link:hover, .nav-link.active {
+    color: #ffffff; /* Svietivá biela */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Biela žiara */
+  }
+
+.contact-btn {
+  padding: 0.6rem 1.8rem;
+  border-radius: 4px;
+  
+  /* ZMENA: Jemná výplň namiesto prázdna */
+  background: rgba(34, 211, 238, 0.1); /* 10% Cyan */
+  border: 1px solid var(--cyan);       /* Tenký rámik ostáva */
+  backdrop-filter: blur(4px);          /* Rozostrenie pozadia pod ním */
+  
+  color: var(--cyan);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.1); /* Veľmi jemná žiara v základe */
+}
+
+/* Hover a Active stav (Keď si na spodku stránky) */
+.contact-btn:hover, .contact-btn.active {
+  background-color: var(--cyan); /* Plná farba */
+  color: #000;                   /* Čierny text pre kontrast */
+  box-shadow: 0 0 30px var(--cyan); /* Silná žiara */
+  transform: translateY(-2px);      /* Jemný zdvih */
+}
+
+  /* MOBILNÉ OVERLAY MENU */
+  .mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    z-index: 2000; /* Musí byť pod Headerom (3000) */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-menu-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .mobile-menu-content { padding: 2rem; width: 100%; }
+  .mobile-links { display: flex; flex-direction: column; align-items: center; gap: 2rem; width: 100%; }
+
+  .mobile-link {
+    font-size: 1.8rem;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .mobile-menu-overlay.open .mobile-link {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s;
+  }
+
+  .mobile-menu-overlay.open .mobile-link:nth-child(1) { transition-delay: 0.1s; }
+  .mobile-menu-overlay.open .mobile-link:nth-child(2) { transition-delay: 0.15s; }
+  .mobile-menu-overlay.open .mobile-link:nth-child(3) { transition-delay: 0.2s; }
+  .mobile-menu-overlay.open .mobile-link:nth-child(4) { transition-delay: 0.25s; }
+  .mobile-menu-overlay.open .mobile-link:nth-child(5) { transition-delay: 0.3s; }
+  .mobile-menu-overlay.open .mobile-link:nth-child(6) { transition-delay: 0.35s; }
+
+  .mobile-link:hover { color: var(--cyan); transform: scale(1.1) !important; }
+  .mobile-link.active { color: var(--fuchsia); text-shadow: 0 0 15px rgba(217, 70, 239, 0.6); }
+ /* --- UPRAVENÉ MOBILNÉ TLAČIDLO KONTAKT --- */
+  .mobile-link.highlight {
+    margin-top: 2rem;        /* Väčší odstup od ostatných liniek */
+    padding: 0.8rem 3rem;    /* Širšie a vyššie = lepšie sa na to ťuká */
+    border-radius: 99px;     /* Dokonalý ovál */
+    
+    /* Glassy vzhľad (zladený s desktopom) */
+    border: 1px solid var(--cyan);
+    background: rgba(34, 211, 238, 0.1); /* 10% výplň */
+    backdrop-filter: blur(5px);
+    
+    /* Text */
+    color: var(--cyan);
+    font-size: 1.25rem;      /* Trochu menšie ako nav-linky, ale tučnejšie */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    
+    /* Základná žiara */
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  /* Hover a Active (Keď sa ťukne alebo scrolluje) */
+  .mobile-link.highlight:hover, 
+  .mobile-link.highlight.active {
+    background-color: var(--cyan);
+    color: #000;             /* Čierny text pre kontrast */
+    box-shadow: 0 0 30px var(--cyan); /* Silná žiara */
+    transform: scale(1.05);  /* Jemné zväčšenie */
+    border-color: var(--cyan);
+  }
+
+  /* MEDIA QUERY - DESKTOP */
+  @media (min-width: 768px) {
+    .desktop-menu { display: flex; }
+    .mobile-toggle { display: none; }
+    .mobile-menu-overlay { display: none; }
+  }
+
+  .scroll-progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    z-index: 100;
+  }
+
+  .scroll-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--fuchsia));
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    will-change: transform; /* Plynulý pohyb bez sekania */
+  }
+</style>
+
+<script>
+  const header = document.getElementById('main-header');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  const desktopLinks = document.querySelectorAll('.nav-link');
+
+  let isMenuOpen = false;
+
+  // --- SCROLL PROGRESS BAR LOGIC (Opravené pre scaleX) ---
+  function updateProgressBar() {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    
+    // Ochrana proti deleniu nulou
+    if (height === 0) return;
+
+    const scrolled = winScroll / height; // Hodnota 0 až 1
+    const bar = document.getElementById('scroll-bar');
+    
+    if(bar) {
+        // Používame transform pre výkon
+        bar.style.transform = `scaleX(${scrolled})`;
+    }
+  }
+
+  window.addEventListener('scroll', updateProgressBar);
+  // Zavoláme hneď pre init
+  updateProgressBar();
+
+  // --- STICKY HEADER ---
+  function handleScroll() {
+    if (window.scrollY > 10) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', handleScroll);
+
+  // --- MENU TOGGLE ---
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+    if (isMenuOpen) {
+      mobileMenu?.classList.add('open');
+      menuToggle?.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenu?.classList.remove('open');
+      menuToggle?.classList.remove('is-active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  menuToggle?.addEventListener('click', toggleMenu);
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        isMenuOpen = false;
+        mobileMenu?.classList.remove('open');
+        menuToggle?.classList.remove('is-active');
+        document.body.style.overflow = '';
+    });
+  });
+
+  // --- SCROLL SPY ---
+  function scrollSpy() {
+    const sections = document.querySelectorAll('section[id]');
+    const contactBtn = document.querySelector('.contact-btn');
+    let current = '';
+
+    // 1. Detekcia sekcie
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (window.scrollY >= (sectionTop - 150)) {
+        current = section.getAttribute('id') || '';
+      }
+    });
+
+    // 2. Bottom of Page Check
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+       current = 'contact';
+    }
+
+    // 3. Desktop Links
+    desktopLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+
+    // 4. Desktop Contact Button
+    if (contactBtn) {
+        if (current === 'contact') {
+            contactBtn.classList.add('active');
+        } else {
+            contactBtn.classList.remove('active');
+        }
+    }
+
+    // 5. Mobile Links
+    mobileLinks.forEach((link) => {
+        const el = link as HTMLElement;
+        el.classList.remove('active');
+        
+        // Reset inline styles pre highlight (ak boli nastavené predtým)
+        if(el.classList.contains('highlight')) {
+             el.style.backgroundColor = '';
+             el.style.color = '';
+             el.style.boxShadow = '';
+        }
+
+        if (el.getAttribute('href') === `#${current}`) {
+            if (!el.classList.contains('highlight')) {
+                el.classList.add('active');
+            } else {
+                // Highlight tlačidlo v menu
+                el.style.backgroundColor = 'var(--cyan)';
+                el.style.color = '#000';
+                el.style.boxShadow = '0 0 20px var(--cyan)';
+            }
+        }
+    });
+  }
+
+  window.addEventListener('scroll', scrollSpy);
+  scrollSpy();
+</script>

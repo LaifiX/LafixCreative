@@ -1,0 +1,272 @@
+---
+// src/components/Hero.astro
+import AnimatedBackground from './AnimatedBackground.astro';
+// 1. Import komponentu a obrázka
+import { Image } from 'astro:assets';
+import heroImage from '../assets/images/avatar4.png';
+---
+
+<section id="hero" class="hero-section">
+  <AnimatedBackground />
+
+  <div class="container">
+    <div class="grid-layout">
+      
+      <div class="content-col">
+        <h1 class="title">
+          <span class="text-white">AHOJ, SOM </span>
+          <span class="text-highlight neon-text">PETER</span>
+        </h1>
+
+        <p class="typewriter-wrapper">
+          <span class="bracket">[</span>
+          <span id="typewriter-text" class="typewriter-text"></span>
+          <span class="cursor">|</span>
+          <span class="bracket">]</span>
+        </p>
+
+        <p class="description">
+          Ahoj, som ten, kto spája obchod a kód. Obchod ma naučil zodpovednosti za výsledok, technológie mi dali nástroje, ako výsledky dosiahnuť rýchlejšie a efektívnejšie.<br><br>Pomôžem s tvorbou <strong>webu, sociálnymi sieťami či vyškolím v AI aplikáciách.</strong> Odporučím najvhodnejšie, najekonomickejšie riešenie
+          pre naplnenie Vašej vízie a predstáv.
+          
+          <br><br>
+        </p>
+
+        <a href="#projects" class="cta-button">
+          Moje projekty
+        </a>
+      </div>
+
+      <div class="image-col">
+        <div class="image-wrapper">
+            <Image 
+                src={heroImage} 
+                alt="Peter - Developer a Obchodník" 
+                class="hero-image"
+            />
+            <div class="glow-effect"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+</section>
+
+<style>
+  /* Farby */
+  :root {
+    --fuchsia: #d946ef;
+    --cyan: #22d3ee;
+    --text-gray: #d1d5db;
+  }
+
+  .hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: 120px; /* Zväčšený padding zhora pre mobil */
+    padding-bottom: 4rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 10; /* Obsah musí byť nad animovaným pozadím */
+  }
+
+  
+
+  /* Grid Layout */
+  .grid-layout {
+    display: flex;
+    flex-direction: column-reverse; /* Mobil: Fotka dole/skrytá, Text hore */
+    align-items: center;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  @media (min-width: 992px) {
+    .grid-layout {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+    }
+    .content-col {
+      flex: 0 0 45%
+      padding-right: 2rem;
+    }
+    .image-col {
+      flex: 0 0 55%
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  /* --- TEXT A TLAČIDLO --- */
+  
+  .content-col {
+    position: relative;
+    z-index: 20; /* Textová časť musí byť nad obrázkom */
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .text-white { color: #fff; }
+  .text-highlight { color: var(--fuchsia); display: inline-block; }
+  .neon-text { text-shadow: 0 0 20px rgba(217, 70, 239, 0.6); }
+
+  .typewriter-wrapper {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--cyan);
+    margin-bottom: 2rem;
+    font-family: monospace;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (min-width: 992px) { .typewriter-wrapper { justify-content: flex-start; } }
+
+  .bracket { opacity: 0.5; color: #fff; }
+  .cursor { animation: blink 1s step-end infinite; font-weight: bold; color: var(--fuchsia); margin-left: 5px; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .description {
+    font-size: 1.125rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 3rem; /* Veľký odstup od tlačidla */
+    max-width: 540px; /* Zúžené pre lepšiu čitateľnosť */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: 992px) { .description { margin-left: 0; margin-right: 0; } }
+
+  /* NOVÉ TLAČIDLO (PLNÝ GRADIENT) */
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border-radius: 4px;
+    
+    /* Gradient namiesto borderu */
+    background: linear-gradient(90deg, #a21caf, var(--fuchsia));
+    border: none;
+    
+    color: #000; /* Čierna farba pre lepší kontrast na ružovej */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 800;
+    text-decoration: none;
+    
+    /* Silnejšia žiara */
+    box-shadow: 0 0 25px rgba(217, 70, 239, 0.4);
+    
+    /* Pozícia */
+    margin-top: 1rem;
+    position: relative;
+    z-index: 30; /* Musí byť najvyššie */
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+  }
+
+  .cta-button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 0 40px rgba(217, 70, 239, 0.6);
+  }
+
+  /* --- IMAGE STYLES --- */
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    animation: float 6s ease-in-out infinite;
+    /* Obrázok nesmie prekrývať text/tlačidlá */
+    z-index: 1; 
+    pointer-events: none; /* Dôležité: cez obrázok sa dá klikať (ak by zavadzal) */
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.2));
+  }
+
+  .glow-effect {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.4) 0%, transparent 70%);
+    z-index: 1;
+    filter: blur(40px);
+    opacity: 0.6;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+</style>
+
+<script>
+  // Typewriter Logic
+  const roles = ["OBCHODNÝ ZÁSTUPCA","WEB DEVELOPER", "PODNIKATEĽ", "INOVÁTOR", "KREATÍVEC"];
+  const textElement = document.getElementById('typewriter-text');
+  
+  let loopNum = 0;
+  let isDeleting = false;
+  let txt = '';
+  let delta = 150;
+  const period = 2000;
+
+  function tick() {
+    if (!textElement) return;
+    const i = loopNum % roles.length;
+    const fullText = roles[i];
+
+    if (isDeleting) {
+      txt = fullText.substring(0, txt.length - 1);
+      delta = 80;
+    } else {
+      txt = fullText.substring(0, txt.length + 1);
+      delta = 150;
+    }
+
+    textElement.innerHTML = txt;
+
+    if (!isDeleting && txt === fullText) {
+      delta = period;
+      isDeleting = true;
+    } else if (isDeleting && txt === '') {
+      isDeleting = false;
+      loopNum++;
+      delta = 500;
+    }
+
+    setTimeout(tick, delta);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    tick();
+  });
+</script>

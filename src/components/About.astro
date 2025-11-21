@@ -1,0 +1,316 @@
+---
+// src/components/About.astro
+// src/components/About.astro
+import { Image } from 'astro:assets';
+
+// 1. Importuj svoje lokálne obrázky
+// (Uisti sa, že názvy súborov sedia presne s tými, čo máš v priečinku)
+import imgCard1 from '../assets/images/about/card1.png';
+import imgCard3 from '../assets/images/about/card3.png';
+import imgCard21 from '../assets/images/about/card21.png';
+---
+
+<section id="about" class="about-section">
+  <div class="container fade-in-section">
+    
+    <h2 class="section-title neon-text">O mne</h2>
+
+    <div class="bento-grid">
+      
+      <div class="grid-item story-card">
+        <div class="card-glow"></div>
+        <h3 class="card-title">Synkretizácia: obchod × technológie × AI</h3>
+        <p>
+          Začínal som v rýchlom svete obchodu, kde rozhodujú výsledky. Aby som držal krok, osvojil som si technológie, ktoré dnes prinášajú zákazníkom merateľnú hodnotu. 
+        </p>
+        <p>
+          Postupne som prešiel od WordPressu, HTML a CSS k JavaScriptu, Reactu a Pythonu a aktívne využívam moderné AI nástroje. Vďaka tejto kombinácii viem rýchlo navrhovať, overovať a dodávať riešenia – 
+          <span class="highlight-fuchsia">od webov, grafických materiálov, videí až po interné aplikácie.</span>
+        </p>
+        <p>
+          Ak Vám sedí férovosť, otvorená komunikácia a štýl „poďme to spraviť“, rád si dám s Vami kávu a rozhovor. Hľadám podobne naladených ľudí a tímy, s ktorými vytvoríme niečo, čo má hlavu a pätu.
+          <span class="highlight-cyan"> Chcete sa porozprávať o nápade alebo rozbehnúť spoluprácu? Napíšte mi.</span> 
+        </p>
+      </div>
+
+      <div class="grid-item profile-card" id="tilt-card">
+        <div class="image-wrapper">
+            <Image 
+                src={imgCard3} 
+                alt="Peter - Developer" 
+                class="profile-img slide active"
+            />
+
+             
+           
+            <Image 
+                src={imgCard1} 
+                alt="Peter - Lifestyle" 
+                class="profile-img slide"
+            />
+<!--
+             <img 
+                src="/images/card4.jpg" 
+                alt="Peter - Lifestyle" 
+                class="profile-img slide"
+            />
+        -->
+             <Image 
+                src={imgCard21} 
+                alt="Peter - Lifestyle" 
+                class="profile-img slide"
+            />
+
+            <div class="overlay-gradient"></div>
+        </div>
+        
+        <div class="profile-info">
+            <h4>Peter</h4>
+            <span class="role">Sales & Dev Hybrid</span>
+        </div>
+      </div>
+
+      <div class="grid-item stats-card">
+        <div class="stat-item">
+            <span class="stat-number neon-text-cyan">8+</span>
+            <span class="stat-label">Rokov Skúseností zo sféry obchodu</span>
+        </div>
+        <div class="stat-line"></div>
+        <div class="stat-item">
+            <span class="stat-number neon-text-fuchsia">20+</span>
+            <span class="stat-label">Úspešných Projektov</span>
+        </div>
+      </div>
+
+      <div class="grid-item skills-visual-card">
+        <h4 class="small-title">Môj Mix</h4>
+        <div class="hybrid-bar-container">
+            <div class="hybrid-labels">
+                <span class="label-left">Tech / Logic</span>
+                <span class="label-right">Sales / Creative</span>
+            </div>
+            <div class="hybrid-bar">
+                <div class="bar-fill"></div>
+                <div class="bar-glow"></div>
+            </div>
+            <p class="mini-desc">Dokonalá rovnováha pre moderné riešenia.</p>
+        </div>
+        
+        <button id="download-cv-btn" class="download-mini-btn">
+            Stiahnuť CV &rarr;
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --cyan: #22d3ee;
+    --fuchsia: #d946ef;
+    --bg-card: rgba(17, 24, 39, 0.6);
+    --border-card: rgba(255, 255, 255, 0.1);
+  }
+
+  .about-section {
+    padding: 6rem 1.5rem;
+    position: relative;
+    margin-top: -100px; /* Pritiahnutie k Hero sekcii */
+    z-index: 10;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #fff;
+    margin-bottom: 4rem;
+  }
+
+  .neon-text {
+    text-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+  }
+
+  /* --- BENTO GRID LAYOUT --- */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Desktop Layout */
+  @media (min-width: 992px) {
+    .bento-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, auto);
+    }
+    .story-card { grid-column: 1 / 3; grid-row: 1 / 2; }
+    .profile-card { grid-column: 3 / 4; grid-row: 1 / 3; }
+    .stats-card { grid-column: 1 / 2; grid-row: 2 / 3; }
+    .skills-visual-card { grid-column: 2 / 3; grid-row: 2 / 3; }
+  }
+
+  /* Spoločné štýly kariet */
+  .grid-item {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-card);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .grid-item:hover {
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: translateY(-5px);
+  }
+
+  /* 1. STORY CARD */
+  .story-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .card-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: #fff; }
+  .story-card p { color: #d1d5db; line-height: 1.7; margin-bottom: 1rem; font-size: 1.1rem; }
+  .highlight-fuchsia { color: var(--fuchsia); font-weight: 700; }
+  .highlight-cyan { color: var(--cyan); font-weight: 700; }
+  .card-glow { position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--fuchsia); filter: blur(80px); opacity: 0.2; pointer-events: none; }
+
+  /* 2. PROFILE CARD (Slideshow) */
+  .profile-card {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+    
+    /* SLIDESHOW STYLES */
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 0;
+  }
+
+  .profile-img.active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+    z-index: 2; /* Nad fotkami */
+  }
+
+  .profile-info {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 10;
+  }
+
+  .profile-info h4 { font-size: 2rem; font-weight: 800; margin: 0; color: #fff; text-transform: uppercase; }
+  .role { color: var(--cyan); font-family: monospace; font-size: 1rem; background: rgba(34, 211, 238, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; }
+
+  /* 3. STATS CARD */
+  .stats-card { display: flex; align-items: center; justify-content: space-around; }
+  .stat-item { text-align: center; display: flex; flex-direction: column; }
+  .stat-number { font-size: 3rem; font-weight: 800; line-height: 1; }
+  .neon-text-cyan { color: var(--cyan); text-shadow: 0 0 15px rgba(34, 211, 238, 0.5); }
+  .neon-text-fuchsia { color: var(--fuchsia); text-shadow: 0 0 15px rgba(217, 70, 239, 0.5); }
+  .stat-label { color: #9ca3af; font-size: 0.9rem; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-line { width: 1px; height: 60%; background: rgba(255,255,255,0.1); }
+
+  /* 4. SKILLS VISUAL CARD */
+  .skills-visual-card { display: flex; flex-direction: column; justify-content: space-between; }
+  .small-title { color: #fff; font-size: 1.2rem; margin-bottom: 1.5rem; }
+  .hybrid-bar-container { width: 100%; }
+  .hybrid-labels { display: flex; justify-content: space-between; font-size: 0.8rem; color: #9ca3af; margin-bottom: 0.5rem; font-weight: 600; text-transform: uppercase; }
+  .hybrid-bar { width: 100%; height: 10px; background: #1f2937; border-radius: 99px; position: relative; overflow: hidden; }
+  .bar-fill { position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: linear-gradient(90deg, var(--cyan), var(--fuchsia)); }
+  .bar-glow { position: absolute; top: 0; left: 48%; width: 4px; height: 100%; background: #fff; box-shadow: 0 0 10px #fff; z-index: 2; }
+  .mini-desc { font-size: 0.85rem; color: #6b7280; margin-top: 0.5rem; text-align: center; }
+  .download-mini-btn { margin-top: 1rem; background: none; border: none; color: var(--cyan); font-size: 0.9rem; cursor: pointer; text-align: right; transition: color 0.3s; }
+  .download-mini-btn:hover { color: #fff; text-decoration: underline; }
+
+  /* Animation Utility */
+  .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+  .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  // 3D TILT EFFECT
+  const card = document.getElementById('tilt-card');
+  if (card) {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -10; 
+      const rotateY = ((x - centerX) / centerX) * 10;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+    });
+  }
+
+  // SLIDESHOW LOGIC (NOVÉ)
+  const slides = document.querySelectorAll('.slide');
+  let currentSlide = 0;
+
+  if (slides.length > 0) {
+    setInterval(() => {
+      // Odstráň active z aktuálnej
+      slides[currentSlide].classList.remove('active');
+      // Posuň index
+      currentSlide = (currentSlide + 1) % slides.length;
+      // Pridaj active na novú
+      slides[currentSlide].classList.add('active');
+    }, 4000); // 4 sekundy interval
+  }
+
+  // CV Download
+  const dlBtn = document.getElementById('download-cv-btn');
+  dlBtn?.addEventListener('click', () => {
+      alert("Sťahujem CV...");
+  });
+
+  // Observer
+  const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+</script>

@@ -1,0 +1,154 @@
+---
+// src/components/ServicesBanner.astro
+---
+
+<section class="services-banner">
+  <div class="container fade-in-section">
+    <div class="banner-content">
+        
+        <a href="#contact" class="icon-wrapper no-magnet" aria-label="Kontaktujte ma">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="brain-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            </svg>
+        </a>
+
+        <div class="text-content">
+            <h3 class="banner-title">Posuňte svoj biznis do roku 2026</h3>
+            <p class="banner-desc">
+                Uvažujete nad <strong>webom</strong>? Chcete pomôcť s <strong>prezentáciou v online priestore</strong> alebo na sociálnych sieťach? 
+                Potrebujete naučiť zamestnancov používať <strong>AI nástroje</strong> pre vyššiu efektivitu?
+            </p>
+        </div>
+
+        <div class="action-wrapper">
+            <a href="#contact" class="glow-button no-magnet">
+                Ozvite sa mi
+            </a>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-banner {
+    padding: 4rem 1.5rem;
+    position: relative;
+    margin: 2rem 0;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .banner-content {
+    background: linear-gradient(90deg, rgba(17, 24, 39, 0.8), rgba(0, 0, 0, 0.9));
+    border: 1px solid rgba(34, 211, 238, 0.2);
+    border-radius: 1rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  }
+
+  .banner-content::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--fuchsia), transparent);
+  }
+
+  @media (min-width: 992px) {
+    .banner-content {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
+    }
+    .text-content { flex: 1; padding: 0 2rem; }
+    .action-wrapper { flex-shrink: 0; }
+  }
+
+  /* --- IKONA (Interaktívna) --- */
+  .icon-wrapper {
+      display: block; /* Aby a tag fungoval */
+      transition: transform 0.3s ease;
+      cursor: pointer;
+  }
+
+  .brain-icon {
+    width: 4rem; 
+    height: 4rem; 
+    
+    /* ZMENA: Farba Cyan */
+    color: var(--cyan);
+    
+    /* ZMENA: Jemná Cyan žiara v základe */
+    filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.4));
+    
+    transition: color 0.3s ease, filter 0.3s ease;
+  }
+
+  /* HOVER EFEKT PRE IKONU */
+  .icon-wrapper:hover .brain-icon {
+      color: white; /* Rozsvieti sa na bielo */
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); /* Silná biela žiara */
+      transform: scale(1.1);
+  }
+  
+  .icon-wrapper:hover {
+      transform: scale(1.1); /* Celý obal sa zväčší */
+  }
+
+  /* Texty */
+  .banner-title {
+    font-size: 1.8rem;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 0.5rem;
+  }
+
+  .banner-desc {
+    font-size: 1.1rem;
+    color: #d1d5db;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+  
+  .banner-desc strong { color: var(--cyan); }
+
+  /* Button */
+  .glow-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--cyan);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+    transition: all 0.3s;
+  }
+
+  .glow-button:hover {
+    background: #fff;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+  }
+
+  .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
+  .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+</script>

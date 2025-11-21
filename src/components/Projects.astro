@@ -1,0 +1,517 @@
+---
+// src/components/Projects.astro
+import { Image } from 'astro:assets';
+
+// 1. IMPORT OBRÁZKOV
+import imgAstroFit from '../assets/images/projects/AstroFit.jpg';
+import imgAvengers from '../assets/images/projects/Avengers.jpg';
+import imgCharakteristika from '../assets/images/projects/Charakteristika.jpg';
+import imgEffekty from '../assets/images/projects/effekty.jpg';
+import imgFirma from '../assets/images/projects/firma.jpg';
+import imgFrozen from '../assets/images/projects/Frozen.jpg';
+import imgHernaStranka from '../assets/images/projects/hernastranka.jpg';
+import imgHotel from '../assets/images/projects/hotel.jpg';
+import imgHP from '../assets/images/projects/HP.jpg';
+import imgJesen2026 from '../assets/images/projects/Jesen2026.jpg';
+import imgKyticaodsrdca from '../assets/images/projects/kyticaodsrdca.jpg';
+import imgManager from '../assets/images/projects/manager.jpg';
+import imgMilionar from '../assets/images/projects/milionar.jpg';
+import imgNetlifx from '../assets/images/projects/Netflix.jpg';
+import imgNightyFox from '../assets/images/projects/NightyFox.jpg';
+import imgPernikovadedinka2 from '../assets/images/projects/pernikovadedinka2.jpg';
+import imgPortfolio1 from '../assets/images/projects/Portfolio1.jpg';
+import imgProduktFoto from '../assets/images/projects/produktfoto.jpg';
+import imgPsychologiaPredaja1 from '../assets/images/projects/psychologiapredaja1.jpg';
+import imgPsychologiaPredaja2 from '../assets/images/projects/psychologiapredaja2.jpg';
+import imgPsychologiaPredaja3 from '../assets/images/projects/psychologiapredaja3.jpg';
+import imgPsychologiaPredaja4 from '../assets/images/projects/psychologiapredaja4.jpg';
+import imgPsychologiaPredaja5 from '../assets/images/projects/psychologiapredaja5.jpg';
+import imgRecTela2 from '../assets/images/projects/RecTela2.jpg';
+import imgReklama1 from '../assets/images/projects/reklama1.jpg';
+import imgSaxoParket from '../assets/images/projects/SaxoParket.jpg';
+import imgTaxi1 from '../assets/images/projects/taxi1.jpg';
+import imgTaxi2 from '../assets/images/projects/taxi2.jpg';
+import imgVzorkoveAuto from '../assets/images/projects/vzorkoveauto.jpg';
+
+const projectsData = [
+  {
+    id: 1,
+    title: 'Kytica od srdca',
+    description: 'Webová stránka kvetinárstva v Trenčianskej Teplej',
+    imageUrl: imgKyticaodsrdca, // ✅ OK
+    tags: ['Html', 'CSS', 'JavaSrcipt', 'Astro'],
+    liveUrl: 'https://kyticaodsrdca.netlify.app',
+    category: 'WebDev',
+  },
+  {
+    id: 2,
+    title: 'Obchodná akcia Jeseň 2026',
+    description: 'Interná firemná webová aplikácia s kalkulátorom',
+    imageUrl: imgJesen2026, // ✅ OK
+    tags: ['Html', 'CSS', 'JavaScript',],
+    liveUrl: 'https://jesen2026.netlify.app',
+    category: 'WebDev',
+  },
+  {
+    id: 3,
+    title: 'SAXO PARKET',
+    description: 'Prezentačná stránka pre firmu Saxo parket',
+    imageUrl: imgSaxoParket, // ✅ OK
+    tags: ['Html', 'CSS', 'JavaScript', 'Astro'],
+    liveUrl: 'https://dubovapodlaha.sk',
+    category: 'WebDev',
+  },
+  {
+    id: 4,
+    title: 'Reklama pre Kvetinárstvo Kytica od srdca',
+    description: 'Hudobný reklamný song. Text: Peter Beňo, Hudba: AI',
+    imageUrl: imgReklama1, // ✅ OK
+    tags: ['Kombinácia AI aplikácií '],
+    liveUrl: 'https://www.facebook.com/share/v/17KkaA6z9R/',
+    category: 'AI',
+  },
+  {
+    id: 5,
+    title: 'Reč tela - to najdôležitejšie',
+    description: 'Vzdelávacia prezentácia pre obchodníkov',
+    imageUrl: imgRecTela2, // 🛠️ OPRAVENÉ (bola tam cesta v úvodzovkách)
+    tags: ['CapCut, Canva,'],
+    liveUrl: 'https://www.facebook.com/share/v/1ADHKRubLe/',
+    category: 'Obchod',
+  },
+  {
+    id: 6,
+    title: 'Písomné maturity - Charakteristika',
+    description: 'AI film + podcast s prezentáciou',
+    imageUrl: imgCharakteristika, // 🛠️ OPRAVENÉ
+    tags: ['kombinácia AI aplikácií'],
+    liveUrl: 'https://youtu.be/C1qRQk0qglI',
+    category: 'AI',
+  },
+  {
+    id: 7,
+    title: 'Travel Web - Ayurvedic Retreat Sri Lanka',
+    description: 'Na tejto stránke som participoval v seckii hotely',
+    imageUrl: imgHotel, // 🛠️ OPRAVENÉ
+    tags: ['GoHighLevel'],
+    liveUrl: 'https://ayurvedicretreatsrilanka.com/home',
+    category: 'WebDev',
+  },
+  {
+    id: 8,
+    title: 'Portfolio Website 1',
+    description: 'Jednoduchá portfólio stránka ',
+    imageUrl: imgPortfolio1, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript' ],
+    liveUrl: 'https://youtu.be/ifK3k6IFq5w',
+    category: 'WebDev',
+  },
+  {
+    id: 9,
+    title: 'Fitness - Ebooks Website',
+    description: 'Rýchla responzívna stránka vytvorená vo frameworku Astro ',
+    imageUrl: imgAstroFit, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript', 'Astro'],
+    liveUrl: 'https://youtu.be/juMlA5eRB0I',
+    category: 'WebDev',
+  },
+  {
+    id: 10,
+    title: 'Stránka služby vzorkového auta',
+    description: 'Stránka bola využívaná v čase propagácie služby',
+    imageUrl: imgVzorkoveAuto, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript'],
+    liveUrl: 'https://vzorkoveauto.netlify.app',
+    category: 'WebDev',
+  },
+  {
+    id: 11,
+    title: 'Game Website',
+    description: 'Cvičný projekt na ktorom som sa učil nové pravidlá v CSS ',
+    imageUrl: imgHernaStranka, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript'],
+    liveUrl: 'https://hernastranka.netlify.app/',
+    category: 'WebDev',
+  },
+  {
+    id: 12,
+    title: 'Netflix - Clone',
+    description: 'Cvičný komplexný projekt ',
+    imageUrl: imgNetlifx, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript', 'Tailwind', 'React', 'MongoDB', 'Next.js', 'NextAuth'],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjY2NTk4MjQ4NjI1MzI0MA%3D%3D&view_single=true',
+    category: 'WebDev',
+  },
+  {
+    id: 13,
+    title: 'Avengers - game',
+    description: 'Hra vytvorená na želanie ',
+    imageUrl: imgAvengers, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript', ],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjE0MTIxNDA3OTI3MzI5NTc%3D&view_single=true',
+    category: 'Aplikácie',
+  },
+  {
+    id: 14,
+    title: 'HarryPotter - game',
+    description: 'Hra vytvorená na želanie inšpirovaná príbehom o HP',
+    imageUrl: imgHP, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript', ],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjE1ODQ4Mjg1Mzg5NDA2NTM%3D&view_single=true',
+    category: 'Aplikácie',
+  },
+  {
+    id: 15,
+    title: 'Frozen - game',
+    description: 'Hra vytvorená na želanie inšpirovaná rozprávkou Frozen ',
+    imageUrl: imgFrozen, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript', ],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjExMjM0MDk1NzUzODcwNzI%3D&view_single=true',
+    category: 'Aplikácie',
+  },
+  {
+    id: 16,
+    title: 'Nighty Fox - game',
+    description: 'Hra na precvičovanie algorytmického myslenia',
+    imageUrl: imgNightyFox, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript', ],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjUzMjYzMjY1MjUyNjgzOQ%3D%3D&view_single=true',
+    category: 'Aplikácie',
+  },
+  {
+    id: 17,
+    title: 'Chcete byť milionárom? - game',
+    description: 'cvičný projekt',
+    imageUrl: imgMilionar, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript','React' ],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjg0MTUwODUxMTM2ODEwOQ%3D%3D&view_single=true',
+    category: 'Aplikácie',
+  },
+  {
+    id: 18,
+    title: 'Pár pekných CSS effektov',
+    description: 'Pár pekných moderných CSS efektov',
+    imageUrl: imgEffekty, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS'],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjE1NDI3Mjk5Mzk3NzA5NTc%3D&view_single=true',
+    category: 'WebDev',
+  },
+  {
+    id: 19,
+    title: 'Firma - portfolio',
+    description: 'Portfolio stránka pre technologickú firmu',
+    imageUrl: imgFirma, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript', ],
+    liveUrl: 'https://firmaportfolio.netlify.app/',
+    category: 'WebDev',
+  },
+  {
+    id: 20,
+    title: 'Taxi 1',
+    description: 'Prototyp jednoduchej stránky pre taxi službu',
+    imageUrl: imgTaxi1, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript', ],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjU4OTk0MzUwNDEzNjQ5MQ%3D%3D&view_single=true',
+    category: 'WebDev',
+  },
+  {
+    id: 21,
+    title: 'Taxi 2',
+    description: 'Prototyp jednoduchej stránky pre taxi službu',
+    imageUrl: imgTaxi2, // 🛠️ OPRAVENÉ
+    tags: ['Html','CSS', 'JavaScript', ],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjU4OTk0MzUwNDEzNjQ5MQ%3D%3D&view_single=true',
+    category: 'WebDev',
+  },
+  {
+    id: 22,
+    title: 'Aplikácia pre produktovú fotografiu',
+    description: 'Prototyp aplikácie pre produktovú fotografiu',
+    imageUrl: imgProduktFoto, // 🛠️ OPRAVENÉ
+    tags: ['AI Aplikácie', ],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjg2MDI1OTI3MzMzNzkzOA%3D%3D&view_single=true',
+    category: 'Aplikácie',
+  },
+  {
+    id: 23,
+    title: 'Manažér účasti a nákupov zákazníkov',
+    description: 'Desktopová aplikácia na analýzu dát',
+    imageUrl: imgManager, // 🛠️ OPRAVENÉ
+    tags: ['Python', ],
+    liveUrl: 'https://www.facebook.com/stories/?card_id=UzpfSVNDOjEzNDEyNjYzMDA3MzE3Mjg%3D&view_single=true',
+    category: 'Aplikácie',
+  },
+  {
+    id: 24,
+    title: 'Vianočná reklama',
+    description: 'Vianočná reklama vytvorená prostredníctvom AI aplikácií',
+    imageUrl: imgReklama1, // 🛠️ OPRAVENÉ
+    tags: ['AI aplikácie', ],
+    liveUrl: 'https://www.facebook.com/share/r/1JRDH3FpZq/',
+    category: 'AI',
+  },
+  {
+    id: 25,
+    title: 'Vianočná reklama 2',
+    description: 'Vianočná reklama vytvorená prostredníctvom AI aplikácií',
+    imageUrl: imgPernikovadedinka2, // 🛠️ OPRAVENÉ
+    tags: ['AI aplikácie', ],
+    liveUrl: 'https://www.facebook.com/share/r/1BigQnUQYt/',
+    category: 'AI',
+  },
+  {
+    id: 26,
+    title: 'Psychológia predaja 1',
+    description: 'Ako farby ovplyvńujú nákupné správanie zákazníkov',
+    imageUrl: imgPsychologiaPredaja1, // 🛠️ OPRAVENÉ
+    tags: ['behaviorálna ekonómia', ],
+    liveUrl: 'https://www.facebook.com/share/r/14Nfz7KGr58/',
+    category: 'Obchod',
+  },
+  {
+    id: 27,
+    title: 'Psychológia predaja 2',
+    description: 'Vôňa ako neviditeľný predajca',
+    imageUrl: imgPsychologiaPredaja2, // 🛠️ OPRAVENÉ
+    tags: ['behaviorálna ekonómia', ],
+    liveUrl: 'https://www.facebook.com/share/r/14SJR4e8fE4/',
+    category: 'Obchod',
+  },
+  {
+    id: 28,
+    title: 'Psychológia predaja 3',
+    description: 'Regálová veda',
+    imageUrl: imgPsychologiaPredaja3, // 🛠️ OPRAVENÉ
+    tags: ['behaviorálna ekonómia', ],
+    liveUrl: 'https://www.facebook.com/share/r/17MuvKTaUq/',
+    category: 'Obchod',
+  },
+  {
+    id: 29,
+    title: 'Psychológia predaja 4',
+    description: 'Ako vytvoriť cenovú ilúziu, ktorá predáva',
+    imageUrl: imgPsychologiaPredaja4, // 🛠️ OPRAVENÉ
+    tags: ['behaviorálna ekonómia', ],
+    liveUrl: 'https://www.facebook.com/share/r/19uCB1jPB1/',
+    category: 'Obchod',
+  },
+  {
+    id: 30,
+    title: 'Psychológia predaja 5',
+    description: 'Aká je najsilnejšia veta, ktorú môže zákazník povedať?',
+    imageUrl: imgPsychologiaPredaja5, // 🛠️ OPRAVENÉ
+    tags: ['behaviorálna ekonómia', ],
+    liveUrl: 'https://www.facebook.com/share/r/1UdLEzLGhJ/',
+    category: 'Obchod',
+  },
+];
+
+const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obchod', 'AI'];
+---
+
+<section id="projects" class="projects-section">
+  <div class="container fade-in-section">
+    
+    <h2 class="section-title neon-text-cyan">Projekty</h2>
+
+    <div class="filters-wrapper">
+      {categories.map(category => (
+        <button 
+          class={`filter-btn ${category === 'Všetky' ? 'active' : ''}`}
+          data-category={category}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+
+    <div id="projects-grid" class="projects-grid">
+      {projectsData.map((project) => (
+        <article 
+            class="project-card" 
+            data-category={project.category}
+            style="display: none;" 
+        >
+          <div class="card-inner">
+              <div class="image-wrapper">
+                <Image 
+                    src={project.imageUrl} 
+                    alt={project.title} 
+                    class="project-img-optimized"
+                    width={600}  
+                    height={400}
+                    loading="lazy" 
+                />
+              </div>
+              
+              <div class="card-content">
+                <h3 class="card-title">{project.title}</h3>
+                <p class="card-desc">{project.description}</p>
+                
+                <div class="tags-wrapper">
+                    {project.tags.map(tag => (
+                        <span class="tag">{tag}</span>
+                    ))}
+                </div>
+
+                <div class="links-wrapper">
+                    {project.liveUrl && (
+                        <a href={project.liveUrl} target="_blank" class="link-btn">Ukážka</a>
+                    )}
+                    {/* {project.sourceUrl && (
+                        <a href={project.sourceUrl} target="_blank" class="link-btn">Zdrojový Kód</a>
+                    )} */}
+                </div>
+              </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div id="empty-state" class="empty-state" style="display: none;">
+        <p>V tejto kategórii zatiaľ nie sú žiadne projekty.</p>
+    </div>
+
+    <div class="load-more-wrapper">
+        <button id="load-more-btn" class="action-btn neon-button-cyan">
+            Zobraziť Viac
+        </button>
+        <button id="show-less-btn" class="action-btn neon-button-fuchsia" style="display: none;">
+            Schovať
+        </button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ZVYŠOK CSS A SKRIPT OSTÁVA NEZMENENÝ (Z tvojho pôvodného kódu) */
+  .projects-section { padding: 6rem 1.5rem; position: relative; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-title { text-align: center; font-size: 2.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cyan, #22d3ee); margin-bottom: 3rem; }
+  .neon-text-cyan { text-shadow: 0 0 10px rgba(34, 211, 238, 0.5), 0 0 20px rgba(34, 211, 238, 0.3); }
+  
+  .filters-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 3rem; }
+  .filter-btn { padding: 0.6rem 1.5rem; font-size: 0.95rem; font-weight: 600; border-radius: 99px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px); color: #d1d5db; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; }
+  .filter-btn:hover, .filter-btn.active { background: var(--cyan); border-color: var(--cyan); color: #000; box-shadow: 0 0 20px rgba(34, 211, 238, 0.4); transform: translateY(-2px); }
+  @media (min-width: 768px) { .filter-btn { font-size: 1rem; } }
+
+  .projects-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; min-height: 400px; }
+  @media (min-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+  .project-card { animation: fadeUp 0.5s ease-out forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card-inner { background-color: rgba(17, 24, 39, 0.5); backdrop-filter: blur(4px); border: 1px solid rgba(34, 211, 238, 0.2); border-radius: 0.5rem; overflow: hidden; transition: all 0.5s; height: 100%; display: flex; flex-direction: column; }
+  .card-inner:hover { border-color: rgba(34, 211, 238, 0.8); box-shadow: 0 0 20px rgba(34, 211, 238, 0.4); }
+  
+  .image-wrapper { overflow: hidden; height: 14rem; }
+  /* Pridal som triedu pre image komponent */
+  .project-img-optimized { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .card-inner:hover .project-img-optimized { transform: scale(1.05); }
+
+  .card-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .card-title { font-size: 1.5rem; font-weight: 700; color: var(--cyan, #22d3ee); margin-bottom: 0.5rem; }
+  .card-desc { color: #d1d5db; margin-bottom: 1rem; flex-grow: 1; }
+  .tags-wrapper { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .tag { padding: 0.25rem 0.75rem; background-color: rgba(22, 78, 99, 0.5); color: #67e8f9; font-size: 0.875rem; border-radius: 9999px; }
+  .links-wrapper { display: flex; gap: 1rem; }
+  .link-btn { color: #e879f9; text-decoration: none; transition: color 0.3s; }
+  .link-btn:hover { color: #f0abfc; text-decoration: underline; }
+  .empty-state { text-align: center; color: #9ca3af; font-style: italic; font-size: 1.25rem; padding: 4rem 0; }
+  .load-more-wrapper { text-align: center; margin-top: 3rem; }
+  .action-btn { padding: 1rem 3rem; background: transparent; border: none; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; border-radius: 4px; transition: transform 0.2s, filter 0.2s; }
+  .action-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+  .neon-button-cyan { background: linear-gradient(90deg, #0891b2, var(--cyan)); color: #000; box-shadow: 0 0 20px rgba(34, 211, 238, 0.4); }
+  .neon-button-fuchsia { background: linear-gradient(90deg, #a21caf, var(--fuchsia)); color: #000; box-shadow: 0 0 20px rgba(217, 70, 239, 0.4); }
+  .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+  .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const INITIAL_COUNT = 2; 
+  const LOAD_STEP = 4;
+  
+  let currentCategory = 'Všetky';
+  let visibleCount = INITIAL_COUNT;
+
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projects = document.querySelectorAll('.project-card');
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  const showLessBtn = document.getElementById('show-less-btn');
+  const emptyState = document.getElementById('empty-state');
+  const section = document.getElementById('projects');
+
+  function updateProjects() {
+    let matchedCount = 0;
+    let displayedCount = 0;
+
+    projects.forEach((project) => {
+        const card = project as HTMLElement;
+        const category = card.dataset.category;
+        const isMatch = currentCategory === 'Všetky' || category === currentCategory;
+
+        if (isMatch) {
+            matchedCount++;
+            if (displayedCount < visibleCount) {
+                card.style.display = 'block';
+                card.style.animation = 'none';
+                card.offsetHeight; 
+                card.style.animation = 'fadeUp 0.5s ease-out forwards';
+                displayedCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    if (emptyState) {
+        emptyState.style.display = matchedCount === 0 ? 'block' : 'none';
+    }
+
+    if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+    if (showLessBtn) showLessBtn.style.display = 'none';
+
+    if (matchedCount > INITIAL_COUNT) {
+        if (visibleCount < matchedCount) {
+            if (loadMoreBtn) loadMoreBtn.style.display = 'inline-block';
+        } else {
+            if (showLessBtn) showLessBtn.style.display = 'inline-block';
+        }
+    }
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        (e.target as HTMLElement).classList.add('active');
+        currentCategory = (e.target as HTMLElement).dataset.category || 'Všetky';
+        visibleCount = INITIAL_COUNT;
+        updateProjects();
+    });
+  });
+
+  loadMoreBtn?.addEventListener('click', () => {
+    visibleCount += LOAD_STEP;
+    updateProjects();
+  });
+
+  showLessBtn?.addEventListener('click', () => {
+    visibleCount = INITIAL_COUNT;
+    updateProjects();
+    section?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  updateProjects();
+
+  const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+          if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+          }
+      });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+</script>

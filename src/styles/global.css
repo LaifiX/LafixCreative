@@ -1,0 +1,112 @@
+/* 1. IMPORTS (Fonty musia byť vždy prvé) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap');
+
+/* 2. VARIABLES (Globálne farby) */
+:root {
+  --cyan: #22d3ee;
+  --cyan-hover: #67e8f9;
+  --fuchsia: #d946ef;
+  --gray: #d1d5db;
+  --bg-dark: #0a0a0a;
+}
+
+/* 3. GLOBAL RESET & SETTINGS */
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+  
+  /* Nastavenie hlavného fontu pre celú stránku */
+  font-family: 'Outfit', sans-serif; 
+  
+  /* Hladké scrollovanie */
+  scroll-behavior: smooth; 
+  
+  /* Aby header neprekrýval nadpisy po kliknutí v menu */
+  scroll-padding-top: 80px; 
+  
+  background-color: var(--bg-dark);
+  color: white;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  
+  /* 1. Základná farba (veľmi tmavá, nie úplne čierna) */
+  background-color: #050505; 
+  
+  /* 2. AMBIENTNÉ SVETLO (Toto je ten trik) */
+  background-image: 
+    /* Jemná azúrová žiara vľavo hore */
+    radial-gradient(circle at 0% 0%, rgba(34, 211, 238, 0.15), transparent 40%),
+    
+    /* Jemná ružová žiara vpravo dole */
+    radial-gradient(circle at 100% 100%, rgba(217, 70, 239, 0.15), transparent 40%);
+    
+  /* Zabezpečí, že pozadie ostane na mieste, kým scrolluješ (nepohybuje sa s textom) */
+  background-attachment: fixed; 
+  background-repeat: no-repeat;
+  
+  color: white;
+}
+
+/* 4. TYPOGRAPHY OVERRIDES (Nadpisy) */
+/* Tieto prvky budú mať ten "hranatý tech" font */
+h1, h2, h3, h4, .logo, .stat-number, .section-title {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* 5. MEDIA (Obrázky) */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 6. SCROLLBAR (Voliteľné - krajší posuvník) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #111;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
+}
+
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Aby sa dalo cez to klikať */
+    z-index: 9000; /* Nad všetkým */
+    opacity: 0.02; /* Veľmi jemné */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.3' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    /* V SVG sa zmenilo: baseFrequency='0.3' (bolo 0.65) a numOctaves='1' (bolo 3) */
+  }
+
+
+
+::selection {
+  background-color: var(--fuchsia); /* Pozadie výberu */
+  color: white; /* Farba textu */
+  text-shadow: 0 0 10px rgba(217, 70, 239, 0.8);
+}
+
+::-moz-selection {
+  background-color: var(--fuchsia);
+  color: white;
+}

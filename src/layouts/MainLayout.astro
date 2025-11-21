@@ -1,0 +1,96 @@
+---
+// src/layouts/MainLayout.astro
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { 
+  title = "Peter Beňo | Developer, Obchodník & AI Špecialista",
+  description = "Portfólio špecialistu, ktorý spája svet obchodu a technológií. Tvorba moderných webov, AI marketing a obchodné stratégie.",
+  image = "/images/social-share.jpg" // Obrázok, ktorý sa ukáže pri zdieľaní na FB
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+    <link rel="manifest" href="/site.webmanifest" />
+
+
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+            {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Peter Beňo",
+        "jobTitle": "Web Developer & Sales Strategist",
+        "url": "https://laifix.com",
+        "image": "https://laifix.com/images/social2.jpg",
+        "description": "Pomáham firmám rásť pomocou moderných webov, AI v marketingu a obchodných stratégií.",
+        "email": "peter.beno85@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Slovensko", 
+          "addressCountry": "SK"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/tvoj-profil",
+          "https://github.com/tvoj-profil",
+          "https://www.facebook.com/profile.php?id=100083101874325"
+        ],
+        "knowsAbout": [
+          "Web Development",
+          "Astro Framework",
+          "React",
+          "AI Automation",
+          "Sales Strategy",
+          "Online Marketing"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "description": "Tvorba webových stránok, AI konzultácie a školenia obchodných zručností."
+        }
+           }
+    </script>
+  </head>
+  </head>
+  <body>
+    <slot /> </body>
+</html>

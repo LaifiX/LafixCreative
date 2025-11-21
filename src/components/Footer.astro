@@ -1,0 +1,155 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <h2 class="big-cta">Máte nápad?<br><span class="text-gradient">Zrealizujme ho.</span></h2>
+            <a href="mailto:Peterbeno85@gmail.com" class="email-link">peter.beno85@gmail.com</a>
+        </div>
+        
+        <div class="footer-bottom">
+            
+          
+            <div class="socials">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                    </svg>
+                </a>
+                
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                        <circle cx="4" cy="4" r="2" />
+                    </svg>
+                </a>
+
+                <a href="https://www.facebook.com/profile.php?id=100083101874325" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">&copy; {currentYear} Peter Beňo. Všetky práva vyhradené.</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        padding: 6rem 1.5rem 2rem;
+        background: linear-gradient(to top, #000 0%, transparent 100%);
+        position: relative;
+        z-index: 10;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Veľké CTA */
+    .big-cta {
+        font-size: clamp(3rem, 8vw, 6rem);
+        line-height: 1;
+        font-weight: 800;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: white;
+    }
+
+    .text-gradient {
+        background: linear-gradient(90deg, var(--cyan), var(--fuchsia));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Email Link */
+    .email-link {
+        display: block;
+        text-align: center;
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+        color: #d1d5db;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        width: fit-content;
+        margin: 0 auto 5rem;
+        padding-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .email-link:hover {
+        color: var(--cyan);
+        border-color: var(--cyan);
+    }
+    
+    /* Spodná lišta */
+    .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 2rem;
+        gap: 1.5rem;
+    }
+
+    /* Desktop: Zarovnanie do riadku (Logo vľavo, Ikony stred, Copyright vpravo) */
+    @media (min-width: 768px) {
+        .footer-bottom {
+            flex-direction: row;
+        }
+    }
+
+    /* LOGO V PÄTIČKE */
+    .footer-logo {
+        height: 4rem; /* Rovnaká veľkosť ako v hlavičke */
+        width: auto;
+        filter: grayscale(100%); /* V pätičke ho dáme čiernobiele pre eleganciu */
+        opacity: 1;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .footer-logo:hover {
+        filter: grayscale(0%); /* Pri hoveri sa vyfarbí */
+        opacity: 1;
+        /* Efekt žiary */
+        filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.5)); 
+    }
+
+    /* Ikony */
+    .socials {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .social-icon {
+        color: #9ca3af;
+        width: 2rem;
+        height: 2rem;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social-icon svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .social-icon:hover {
+        color: var(--fuchsia);
+        filter: drop-shadow(0 0 8px var(--fuchsia));
+    }
+
+    .copyright {
+        color: #6b7280;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+</style>

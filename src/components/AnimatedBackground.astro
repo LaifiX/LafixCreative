@@ -1,0 +1,170 @@
+---
+// src/components/AnimatedBackground.astro
+---
+
+<canvas id="network-canvas" class="animated-background"></canvas>
+
+<style>
+  .animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /* Tmavé pozadie s jemným gradientom pre hĺbku */
+   mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('network-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+
+  if (canvas && ctx) {
+    let width = 0;
+    let height = 0;
+    let particles: Particle[] = [];
+    
+    // Konfigurácia
+    const particleCount = window.innerWidth < 768 ? 40 : 80; // Menej na mobile
+    const connectionDistance = 140; // Ako blízko musia byť, aby sa spojili
+    const mouseDistance = 200; // Dosah myši
+
+    // Farby (Tech vs Business)
+    const colors = ['#22d3ee', '#d946ef']; // Cyan, Fuchsia
+
+    // Myš
+    let mouse = { x: -1000, y: -1000 };
+
+    class Particle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      color: string;
+
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        // Náhodná rýchlosť a smer
+        this.vx = (Math.random() - 0.5) * 1.5;
+        this.vy = (Math.random() - 0.5) * 1.5;
+        this.size = Math.random() * 2 + 1;
+        // Náhodne priradíme buď Tech (Cyan) alebo Business (Fuchsia) farbu
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Odraz od stien
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+
+        // Interakcia s myšou (Jemné odpudzovanie/priťahovanie)
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < mouseDistance) {
+            const forceDirectionX = dx / distance;
+            const forceDirectionY = dy / distance;
+            const force = (mouseDistance - distance) / mouseDistance;
+            // Jemne ich odtlačíme, aby text bol čitateľný, alebo zmeň znamienko na += pre pritiahnutie
+            const direction = -1; 
+            this.vx += forceDirectionX * force * 0.05 * direction;
+            this.vy += forceDirectionY * force * 0.05 * direction;
+        }
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    const init = () => {
+      const parent = canvas.parentElement;
+      if (parent) {
+        width = parent.offsetWidth;
+        height = parent.offsetHeight;
+        canvas.width = width;
+        canvas.height = height;
+        
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(new Particle());
+        }
+      }
+    };
+
+    const animate = () => {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+      
+      // 1. Update a Kreslenie bodov
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+
+      // 2. Kreslenie spojení (Networking)
+      connectParticles();
+      
+      requestAnimationFrame(animate);
+    };
+
+    const connectParticles = () => {
+      if (!ctx) return;
+
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < connectionDistance) {
+            // Priehľadnosť podľa vzdialenosti (čím bližšie, tým silnejšia čiara)
+            const opacity = 1 - (distance / connectionDistance);
+            
+            ctx.lineWidth = 1;
+            
+            // Gradient medzi bodmi (Spojenie Tech a Business)
+            const gradient = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
+            gradient.addColorStop(0, particles[a].color); // Farba bodu A
+            gradient.addColorStop(1, particles[b].color); // Farba bodu B
+            
+            ctx.strokeStyle = gradient;
+            ctx.globalAlpha = opacity * 0.4; // Jemné čiary
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+            ctx.globalAlpha = 1; // Reset alpha
+          }
+        }
+      }
+    };
+
+    window.addEventListener('resize', init);
+    window.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+    window.addEventListener('mouseleave', () => {
+        mouse.x = -1000;
+        mouse.y = -1000;
+    });
+
+    init();
+    animate();
+  }
+</script>

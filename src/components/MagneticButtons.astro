@@ -1,0 +1,59 @@
+---
+// Beží na serveri (prázdne)
+---
+
+<script>
+  // Zoznam všetkých tried tlačidiel v projekte
+  const selectors = [
+    'button',                   // Všetky <button> elementy
+    '.contact-btn',             // Kontakt v menu
+    '.cta-button',              // Hero tlačidlo
+    '.neon-button',             // About tlačidlo
+    '.neon-button-fuchsia',     // Download/Blog tlačidlá
+    '.neon-button-cyan',        // Projekty tlačidlá
+    '.clean-button',            // About (Simple) tlačidlo
+    '.hybrid-btn',              // About (Dual Persona) tlačidlo
+    '.action-btn',              // Projekty (Load more)
+    '.back-btn',                // Blog (Späť)
+    '.social-icon',             // Footer ikony
+    '.link-btn',                // Odkazy na projekty
+    '.glow-button'              // Download tlačidlo (ale to chceme vylúčiť)
+  ];
+
+  // Spojíme ich do jedného reťazca s čiarkami
+  const magneticBtns = document.querySelectorAll(selectors.join(', '));
+
+  magneticBtns.forEach(btn => {
+    
+    // --- KĽÚČOVÁ ZMENA: VÝNIMKA ---
+    // Ak má tlačidlo triedu "no-magnet", tento skript ho ignoruje
+    if (btn.classList.contains('no-magnet')) return;
+    // -----------------------------
+
+    const target = btn as HTMLElement;
+
+    // Pridáme CSS transition pre plynulejší dojazd, keď myš odíde
+    target.style.transition = 'transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+    target.addEventListener('mousemove', (e) => {
+        const mouseEvent = e as MouseEvent;
+        const position = target.getBoundingClientRect();
+        
+        // Výpočet pozície
+        const x = mouseEvent.clientX - position.left - position.width / 2;
+        const y = mouseEvent.clientY - position.top - position.height / 2;
+
+        // Počas pohybu vypneme transition, aby to nelagovalo za myšou
+        target.style.transition = 'none';
+        
+        // Aplikujeme posun (sila 0.3)
+        target.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    });
+
+    target.addEventListener('mouseleave', () => {
+        // Pri odchode zapneme transition pre plynulý návrat
+        target.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        target.style.transform = 'translate(0px, 0px)';
+    });
+  });
+</script>
