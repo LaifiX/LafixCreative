@@ -79,7 +79,7 @@ const navLinks = [
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 3000; /* Najvyššia priorita */
+    z-index: 10001; /* Najvyššia priorita */
     padding: 1rem 0;
     /* Opravená transition - odstránené 'all' pre lepší výkon */
     transition: background-color 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;
@@ -116,7 +116,7 @@ const navLinks = [
     display: flex;
     align-items: center;
     gap: 0.4rem; /* Medzera medzi LAIFIX a CREATOR */
-    z-index: 3001;
+    z-index: 10001;
     line-height: 1;
   }
 
@@ -167,7 +167,7 @@ const navLinks = [
     align-items: center;
     justify-content: center;
     position: relative; /* Pre absolútne ikonky vnútri */
-    z-index: 3001; /* Musí byť nad overlayom */
+    z-index: 10001; /* Musí byť nad overlayom */
   }
   
   .mobile-toggle:hover { color: var(--fuchsia); }
@@ -279,7 +279,7 @@ const navLinks = [
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
-    z-index: 2000; /* Musí byť pod Headerom (3000) */
+    z-index: 9999;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
