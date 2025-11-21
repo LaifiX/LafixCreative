@@ -154,7 +154,18 @@
         mouse.y = -1000;
     });
 
-    init();
-    animate();
+    // NOVÉ: Spusti až keď je prehliadač v kľude
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            init();
+            animate();
+        });
+    } else {
+        // Fallback pre staršie prehliadače
+        setTimeout(() => {
+            init();
+            animate();
+        }, 500);
+    }
   }
 </script>
