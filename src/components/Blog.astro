@@ -40,7 +40,7 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
     <div id="blog-list-view">
         <h2 class="section-title neon-text-fuchsia">Z Môjho Blogu</h2>
 
-        <div class="filters-wrapper">
+        <div id="blog-filters" class="filters-wrapper">
             {allTags.map(tag => (
                 <button class="filter-btn" data-tag={tag}>{tag}</button>
             ))}
@@ -196,7 +196,7 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
   let visibleCount = INITIAL_COUNT;
   
   // Elementy
-  const filterBtns = document.querySelectorAll('.filter-btn');
+  const filterBtns = document.querySelectorAll('#blog-filters .filter-btn');
   const blogCards = document.querySelectorAll('.blog-card'); // Všetky karty
   
   const listView = document.getElementById('blog-list-view');

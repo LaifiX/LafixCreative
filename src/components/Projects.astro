@@ -314,7 +314,7 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
     
     <h2 class="section-title neon-text-cyan">Projekty</h2>
 
-    <div class="filters-wrapper">
+    <div id="projects-filters" class="filters-wrapper">
       {categories.map(category => (
         <button 
           class={`filter-btn ${category === 'Všetky' ? 'active' : ''}`}
@@ -430,19 +430,21 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
 <script>
   // JAVASCRIPT LOGIKA PRE PROJEKTY
   
-  const INITIAL_COUNT = 2; 
-  const LOAD_STEP = 4;
+  const INITIAL_COUNT = 2; // Koľko kariet sa zobrazí na začiatku
+  const LOAD_STEP = 4;     // Koľko kariet sa pridá po kliknutí na "Zobraziť Viac"
   
   let currentCategory = 'Všetky';
   let visibleCount = INITIAL_COUNT;
 
-  const filterBtns = document.querySelectorAll('.filter-btn');
+  // Elementy
+  const filterBtns = document.querySelectorAll('#projects-filters .filter-btn');
   const projects = document.querySelectorAll('.project-card');
   const loadMoreBtn = document.getElementById('load-more-btn');
   const showLessBtn = document.getElementById('show-less-btn');
   const emptyState = document.getElementById('empty-state');
   const section = document.getElementById('projects');
 
+  // HLAVNÁ VYROBNO-FILTRAČNÁ FUNKCIA
   function updateProjects() {
     let matchedCount = 0;
     let displayedCount = 0;
@@ -458,8 +460,9 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
             matchedCount++;
             
             if (displayedCount < visibleCount) {
+                // Zobraziť kartu
                 card.style.display = 'block';
-                // Animácia len ak bol predtým skrytý
+                // Animácia len ak je to nové zobrazenie
                 if (card.style.animation === '' || card.style.display === 'none') {
                     card.style.animation = 'none';
                     card.offsetHeight; /* trigger reflow */
@@ -467,58 +470,84 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
                 }
                 displayedCount++;
             } else {
+                // Skryť kartu (nad limit)
                 card.style.display = 'none';
             }
         } else {
+            // Skryť, ak nepasuje filter
             card.style.display = 'none';
         }
     });
 
+    // Kontrola prázdneho stavu
     if (emptyState) {
         emptyState.style.display = matchedCount === 0 ? 'block' : 'none';
     }
 
-    // Logika tlačidiel
+    // --- LOGIKA TLAČIDIEL ---
+    
+    // Predvolené skrytie
     if (loadMoreBtn) loadMoreBtn.style.display = 'none';
     if (showLessBtn) showLessBtn.style.display = 'none';
 
     if (matchedCount > INITIAL_COUNT) {
         if (visibleCount < matchedCount) {
+            // Ukázať "Zobraziť Viac"
             if (loadMoreBtn) loadMoreBtn.style.display = 'inline-block';
         } else {
+            // Ukázať "Schovať" (všetko je zobrazené)
             if (showLessBtn) showLessBtn.style.display = 'inline-block';
         }
     }
   }
 
+  // --- EVENT LISTENERS ---
+
+  // 1. Kliknutie na filter
   filterBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         filterBtns.forEach(b => b.classList.remove('active'));
-        (e.target as HTMLElement).classList.add('active');
         
-        const rawCat = (e.target as HTMLElement).dataset.category;
+        // Použijeme e.currentTarget, aby sa trieda pridelila vždy tlačidlu, nie textu
+        (e.currentTarget as HTMLElement).classList.add('active');
+        
+        const rawCat = (e.currentTarget as HTMLElement).dataset.category;
         currentCategory = rawCat ? rawCat.trim() : 'Všetky';
         
-        visibleCount = INITIAL_COUNT;
+        visibleCount = INITIAL_COUNT; // Reset na 2
         updateProjects();
     });
   });
 
+  // 2. Tlačidlo: Zobraziť Viac
   loadMoreBtn?.addEventListener('click', () => {
-    visibleCount += LOAD_STEP;
+    visibleCount += LOAD_STEP; // Pridaj 4
     updateProjects();
   });
 
+  // 3. Tlačidlo: Schovať
   showLessBtn?.addEventListener('click', () => {
-    visibleCount = INITIAL_COUNT;
+    visibleCount = INITIAL_COUNT; // Reset na 2
     updateProjects();
     section?.scrollIntoView({ behavior: 'smooth' });
   });
 
-  // Spustenie
+  // --- SPUSTENIE A SYNCHRONIZÁCIA ---
+
+  // 1. Natvrdo aktivuj "Všetky" vizuálne na štarte
+  filterBtns.forEach(btn => {
+      const category = (btn.dataset.category || "").trim();
+      if (category === 'Všetky') {
+          btn.classList.add('active');
+      } else {
+          btn.classList.remove('active');
+      }
+  });
+
+  // 2. Prvé spustenie hlavnej funkcie
   updateProjects();
 
-  // Observer
+  // 3. Observer pre fade-in animáciu
   const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
           if (entry.isIntersecting) {
