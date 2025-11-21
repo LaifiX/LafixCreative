@@ -43,8 +43,12 @@ import heroImage from '../assets/images/avatar4.png';
                 src={heroImage} 
                 alt="Peter - Developer a Obchodník" 
                 class="hero-image"
-                loading="eager"        fetchpriority="high"   widths={[300, 500, 800]}
-                sizes="(max-width: 768px) 100vw, 500px"
+                loading="eager" 
+                fetchpriority="high"
+                widths={[350, 600, 1000]} 
+                sizes="(max-width: 768px) 350px, (max-width: 1200px) 600px, 1000px"
+                format="webp"
+                quality={80}
             />
             <div class="glow-effect"></div>
         </div>

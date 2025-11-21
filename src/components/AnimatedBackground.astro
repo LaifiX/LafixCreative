@@ -1,26 +1,4 @@
----
-// src/components/AnimatedBackground.astro
----
-
-<canvas id="network-canvas" class="animated-background"></canvas>
-
-<style>
-  .animated-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    /* Plynulý prechod do stratena na spodku */
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    pointer-events: none; /* Dôležité: aby neblokoval klikania na Hero */
-  }
-</style>
-
 <script>
-  // Obalíme to do funkcie a spustíme ihneď
   const initNetworkAnimation = () => {
     const canvas = document.getElementById('network-canvas') as HTMLCanvasElement;
     if (!canvas) return;
@@ -31,14 +9,16 @@
     let width = 0;
     let height = 0;
     let particles: Particle[] = [];
-    
-    // Optimalizácia počtu častíc
+    let animationFrameId: number;
+    let isVisible = true; // Sleduje viditeľnosť
+
+    // Ešte agresívnejšia optimalizácia pre mobil
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 30 : 70; 
-    const connectionDistance = isMobile ? 110 : 150; 
+    const particleCount = isMobile ? 15 : 60; // Znížil som na 15 pre mobil (stále to vyzerá dobre)
+    const connectionDistance = isMobile ? 100 : 140; 
     const mouseDistance = 200; 
 
-    const colors = ['#22d3ee', '#d946ef']; // Cyan, Fuchsia
+    const colors = ['#22d3ee', '#d946ef'];
 
     let mouse = { x: -1000, y: -1000 };
 
@@ -53,8 +33,8 @@
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 1.0; // Trochu pomalšie pre plynulosť
-        this.vy = (Math.random() - 0.5) * 1.0;
+        this.vx = (Math.random() - 0.5) * 0.8; // Spomalil som pohyb pre plynulosť
+        this.vy = (Math.random() - 0.5) * 0.8;
         this.size = Math.random() * 2 + 1;
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
@@ -63,22 +43,23 @@
         this.x += this.vx;
         this.y += this.vy;
 
-        // Odraz od stien
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
 
-        // Myš interakcia
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        // Interakcia myši (vypneme na mobile pre výkon)
+        if (!isMobile) {
+            const dx = mouse.x - this.x;
+            const dy = mouse.y - this.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < mouseDistance) {
-            const forceDirectionX = dx / distance;
-            const forceDirectionY = dy / distance;
-            const force = (mouseDistance - distance) / mouseDistance;
-            const direction = -1; // Odpudzovanie
-            this.vx += forceDirectionX * force * 0.05 * direction;
-            this.vy += forceDirectionY * force * 0.05 * direction;
+            if (distance < mouseDistance) {
+                const forceDirectionX = dx / distance;
+                const forceDirectionY = dy / distance;
+                const force = (mouseDistance - distance) / mouseDistance;
+                const direction = -1; 
+                this.vx += forceDirectionX * force * 0.05 * direction;
+                this.vy += forceDirectionY * force * 0.05 * direction;
+            }
         }
       }
 
@@ -99,7 +80,6 @@
         canvas.width = width;
         canvas.height = height;
         
-        // Reštart častíc pri zmene veľkosti
         particles = [];
         for (let i = 0; i < particleCount; i++) {
           particles.push(new Particle());
@@ -108,7 +88,8 @@
     };
 
     const animate = () => {
-      if (!ctx) return;
+      if (!ctx || !isVisible) return; // STOP ak nie je vidno
+
       ctx.clearRect(0, 0, width, height);
       
       particles.forEach(particle => {
@@ -118,12 +99,11 @@
 
       connectParticles();
       
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     const connectParticles = () => {
       if (!ctx) return;
-
       for (let a = 0; a < particles.length; a++) {
         for (let b = a; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x;
@@ -133,13 +113,11 @@
           if (distance < connectionDistance) {
             const opacity = 1 - (distance / connectionDistance);
             ctx.lineWidth = 1;
-            
             const gradient = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
             gradient.addColorStop(0, particles[a].color);
             gradient.addColorStop(1, particles[b].color);
-            
             ctx.strokeStyle = gradient;
-            ctx.globalAlpha = opacity * 0.3; // Jemnejšie čiary
+            ctx.globalAlpha = opacity * 0.3;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
@@ -151,25 +129,39 @@
     };
 
     window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
-    });
-    window.addEventListener('mouseleave', () => {
-        mouse.x = -1000;
-        mouse.y = -1000;
-    });
+    
+    // Iba na PC sledujeme myš
+    if (!isMobile) {
+        window.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+    }
 
-    // Spustenie
+    // --- INTELIGENTNÉ ZASTAVOVANIE ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                isVisible = true;
+                animate(); // Znova spustiť
+            } else {
+                isVisible = false;
+                cancelAnimationFrame(animationFrameId); // Zastaviť
+            }
+        });
+    }, { threshold: 0 });
+    
+    observer.observe(canvas);
+
     resize();
     animate();
   };
 
-  // Spustenie po načítaní DOMu (Bezpečné)
-  document.addEventListener('astro:page-load', initNetworkAnimation); // Pre Astro ViewTransitions
-  document.addEventListener('DOMContentLoaded', initNetworkAnimation); // Fallback
-  
-  // Pre istotu spustíme aj hneď (ak script beží defer)
-  initNetworkAnimation();
+  // Spustenie
+  if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initNetworkAnimation);
+  } else {
+      initNetworkAnimation();
+  }
 </script>
