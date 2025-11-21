@@ -214,6 +214,7 @@ import heroImage from '../assets/images/avatar.png';
     .content-col {
       flex: 0 0 45%; /* Opravená syntax - pridal som bodkočiarku */
       padding-right: 2rem;
+      
     }
     
     .image-col {
@@ -238,18 +239,18 @@ import heroImage from '../assets/images/avatar.png';
 
     /* Poradie: 1. Obrázok, 2. Text (Podľa tvojho želania v kóde si mal order 2/1) */
     /* Ak chceš Text prvý, vymeň čísla */
-    .content-col { order: 2; }
+    .content-col { order: 2; margin-top:-1rem; }
     .image-col { 
         order: 1; 
         display: flex;
         justify-content: center;
-        width: 115%;
+        width: 120%;
         z-index: 9001;
     }
     
     .image-wrapper {
         max-width: 90%;
-        margin-top: -8rem;
+        margin-top: -7rem;
         aspect-ratio: 4 / 5;
     }
   }
