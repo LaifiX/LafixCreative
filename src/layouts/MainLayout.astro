@@ -1,6 +1,9 @@
 ---
 // src/layouts/MainLayout.astro
 import '../styles/global.css';
+// Import lokálnych fontov (automaticky a rýchlo)
+import '@fontsource/outfit';
+import '@fontsource/space-grotesk';
 
 interface Props {
   title?: string;
@@ -47,9 +50,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
 
     <script type="application/ld+json">
       {
