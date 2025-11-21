@@ -1,7 +1,6 @@
 ---
 // src/components/Hero.astro
 import AnimatedBackground from './AnimatedBackground.astro';
-// 1. Import komponentu a obrázka
 import { Image } from 'astro:assets';
 import heroImage from '../assets/images/avatar4.png';
 ---
@@ -26,10 +25,8 @@ import heroImage from '../assets/images/avatar4.png';
         </p>
 
         <p class="description">
-          Ahoj, som ten, kto spája obchod a kód. Obchod ma naučil zodpovednosti za výsledok, technológie mi dali nástroje, ako výsledky dosiahnuť rýchlejšie a efektívnejšie.<br><br>Pomôžem s tvorbou <strong>webu, sociálnymi sieťami či vyškolím v AI aplikáciách.</strong> Odporučím najvhodnejšie, najekonomickejšie riešenie
-          pre naplnenie Vašej vízie a predstáv.
-          
-          <br><br>
+          Ahoj, som ten, kto spája obchod a kód. Obchod ma naučil zodpovednosti za výsledok, technológie mi dali nástroje, ako výsledky dosiahnuť rýchlejšie a efektívnejšie.<br><br>
+          Pomôžem s tvorbou <strong>webu, sociálnymi sieťami či vyškolím v AI aplikáciách.</strong> Odporučím najvhodnejšie, najekonomickejšie riešenie pre naplnenie Vašej vízie a predstáv.
         </p>
 
         <a href="#projects" class="cta-button">
@@ -56,17 +53,17 @@ import heroImage from '../assets/images/avatar4.png';
 
     </div>
   </div>
-  
 </section>
 
 <style>
-  /* Farby */
+  /* PREMENNÉ */
   :root {
     --fuchsia: #d946ef;
     --cyan: #22d3ee;
     --text-gray: #d1d5db;
   }
 
+  /* ZÁKLADNÝ LAYOUT */
   .hero-section {
     position: relative;
     min-height: 100vh;
@@ -74,7 +71,7 @@ import heroImage from '../assets/images/avatar4.png';
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding-top: 120px; /* Zväčšený padding zhora pre mobil */
+    padding-top: 120px;
     padding-bottom: 4rem;
   }
 
@@ -83,43 +80,21 @@ import heroImage from '../assets/images/avatar4.png';
     max-width: 1200px;
     padding: 0 1.5rem;
     position: relative;
-    z-index: 10; /* Obsah musí byť nad animovaným pozadím */
+    z-index: 10;
   }
 
-  
-
-  /* Grid Layout */
   .grid-layout {
     display: flex;
     flex-direction: column-reverse; /* Mobil: Fotka dole/skrytá, Text hore */
     align-items: center;
     gap: 3rem;
     text-align: center;
-    z-index: 9001;
   }
 
-  @media (min-width: 992px) {
-    .grid-layout {
-      flex-direction: row;
-      text-align: left;
-      justify-content: space-between;
-    }
-    .content-col {
-      flex: 0 0 45%
-      padding-right: 2rem;
-    }
-    .image-col {
-      flex: 0 0 55%
-      display: flex;
-      justify-content: flex-end;
-    }
-  }
-
-  /* --- TEXT A TLAČIDLO --- */
-  
+  /* --- TYPOGRAPHY & TEXT --- */
   .content-col {
     position: relative;
-    z-index: 20; /* Textová časť musí byť nad obrázkom */
+    z-index: 20;
   }
 
   .title {
@@ -146,7 +121,6 @@ import heroImage from '../assets/images/avatar4.png';
     align-items: center;
     justify-content: center;
   }
-  @media (min-width: 992px) { .typewriter-wrapper { justify-content: flex-start; } }
 
   .bracket { opacity: 0.5; color: #fff; }
   .cursor { animation: blink 1s step-end infinite; font-weight: bold; color: var(--fuchsia); margin-left: 5px; }
@@ -156,37 +130,29 @@ import heroImage from '../assets/images/avatar4.png';
     font-size: 1.125rem;
     color: var(--text-gray);
     line-height: 1.6;
-    margin-bottom: 3rem; /* Veľký odstup od tlačidla */
-    max-width: 540px; /* Zúžené pre lepšiu čitateľnosť */
+    margin-bottom: 3rem;
+    max-width: 540px;
     margin-left: auto;
     margin-right: auto;
     min-height: 100px;
   }
-  @media (min-width: 992px) { .description { margin-left: 0; margin-right: 0; } }
 
-  /* NOVÉ TLAČIDLO (PLNÝ GRADIENT) */
+  /* --- TLAČIDLO (CTA) --- */
   .cta-button {
     display: inline-block;
     padding: 1rem 3rem;
     border-radius: 4px;
-    
-    /* Gradient namiesto borderu */
     background: linear-gradient(90deg, #a21caf, var(--fuchsia));
     border: none;
-    
-    color: #000; /* Čierna farba pre lepší kontrast na ružovej */
+    color: #000;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 800;
     text-decoration: none;
-    
-    /* Silnejšia žiara */
     box-shadow: 0 0 25px rgba(217, 70, 239, 0.4);
-    
-    /* Pozícia */
     margin-top: 1rem;
     position: relative;
-    z-index: 30; /* Musí byť najvyššie */
+    z-index: 30;
     cursor: pointer;
     transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
   }
@@ -197,16 +163,15 @@ import heroImage from '../assets/images/avatar4.png';
     box-shadow: 0 0 40px rgba(217, 70, 239, 0.6);
   }
 
-  /* --- IMAGE STYLES --- */
+  /* --- IMAGE STYLES (Základ) --- */
   .image-wrapper {
     position: relative;
     width: 100%;
     max-width: 650px;
     aspect-ratio: 4 / 5;
     animation: float 6s ease-in-out infinite;
-    /* Obrázok nesmie prekrývať text/tlačidlá */
-    z-index: 9001; 
-    pointer-events: none; /* Dôležité: cez obrázok sa dá klikať (ak by zavadzal) */
+    z-index: 9001;
+    pointer-events: none;
   }
 
   .hero-image {
@@ -237,10 +202,58 @@ import heroImage from '../assets/images/avatar4.png';
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
   }
+
+  /* --- DESKTOP (PC) --- */
+  @media (min-width: 992px) {
+    .grid-layout {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+    }
+    
+    .content-col {
+      flex: 0 0 45%; /* Opravená syntax - pridal som bodkočiarku */
+      padding-right: 2rem;
+    }
+    
+    .image-col {
+      flex: 0 0 55%; /* Opravená syntax */
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .typewriter-wrapper { justify-content: flex-start; }
+    .description { margin-left: 0; margin-right: 0; }
+  }
+
+  /* --- MOBIL (Phone) --- */
+  @media (max-width: 768px) {
+    .grid-layout {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding-top: 4rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Poradie: 1. Obrázok, 2. Text (Podľa tvojho želania v kóde si mal order 2/1) */
+    /* Ak chceš Text prvý, vymeň čísla */
+    .content-col { order: 2; }
+    .image-col { 
+        order: 1; 
+        display: flex;
+        justify-content: center;
+    }
+    
+    .image-wrapper {
+        max-width: 80%;
+        margin-top: -7rem;
+        aspect-ratio: 4 / 5;
+    }
+  }
 </style>
 
 <script>
-  // Typewriter Logic
   const roles = ["OBCHODNÝ ZÁSTUPCA","WEB DEVELOPER", "PODNIKATEĽ", "INOVÁTOR", "KREATÍVEC"];
   const textElement = document.getElementById('typewriter-text');
   
