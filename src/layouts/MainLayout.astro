@@ -94,15 +94,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <slot />
- <script>
-  // TypeScript fix: Povieme editoru, že window môže mať čokoľvek (any)
-  const identity = (window as any).netlifyIdentity;
-
-  if (identity) {
-    // Pridáme typ 'any' aj pre user, aby nekričal
-    identity.on("init", (user: any) => {
+<script>
+  // Tento skript čaká na prihlásenie a potom ťa hodí do adminu
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
       if (!user) {
-        identity.on("login", () => {
+        window.netlifyIdentity.on("login", () => {
           document.location.href = "/admin/";
         });
       }
