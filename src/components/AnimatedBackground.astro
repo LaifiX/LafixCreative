@@ -12,9 +12,9 @@
     width: 100%;
     height: 100%;
     z-index: 0;
-    /* Tmavé pozadie s jemným gradientom pre hĺbku */
-   mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    /* Plynulý prechod do stratena na spodku (90% viditeľné, 100% priehľadné) */
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   }
 </style>
 
@@ -27,15 +27,15 @@
     let height = 0;
     let particles: Particle[] = [];
     
-    // Konfigurácia
-    const particleCount = window.innerWidth < 768 ? 40 : 80; // Menej na mobile
-    const connectionDistance = 140; // Ako blízko musia byť, aby sa spojili
-    const mouseDistance = 200; // Dosah myši
+    // OPTIMALIZÁCIA: Menej častíc na mobile pre vyšší výkon
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 35 : 80; // 35 pre mobil, 80 pre PC
+    
+    const connectionDistance = isMobile ? 100 : 140; // Kratšie čiary na mobile
+    const mouseDistance = 200; 
 
-    // Farby (Tech vs Business)
     const colors = ['#22d3ee', '#d946ef']; // Cyan, Fuchsia
 
-    // Myš
     let mouse = { x: -1000, y: -1000 };
 
     class Particle {
@@ -49,11 +49,9 @@
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        // Náhodná rýchlosť a smer
         this.vx = (Math.random() - 0.5) * 1.5;
         this.vy = (Math.random() - 0.5) * 1.5;
         this.size = Math.random() * 2 + 1;
-        // Náhodne priradíme buď Tech (Cyan) alebo Business (Fuchsia) farbu
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
 
@@ -61,11 +59,9 @@
         this.x += this.vx;
         this.y += this.vy;
 
-        // Odraz od stien
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
 
-        // Interakcia s myšou (Jemné odpudzovanie/priťahovanie)
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -74,7 +70,6 @@
             const forceDirectionX = dx / distance;
             const forceDirectionY = dy / distance;
             const force = (mouseDistance - distance) / mouseDistance;
-            // Jemne ich odtlačíme, aby text bol čitateľný, alebo zmeň znamienko na += pre pritiahnutie
             const direction = -1; 
             this.vx += forceDirectionX * force * 0.05 * direction;
             this.vy += forceDirectionY * force * 0.05 * direction;
@@ -109,13 +104,11 @@
       if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
       
-      // 1. Update a Kreslenie bodov
       particles.forEach(particle => {
         particle.update();
         particle.draw();
       });
 
-      // 2. Kreslenie spojení (Networking)
       connectParticles();
       
       requestAnimationFrame(animate);
@@ -131,23 +124,20 @@
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
-            // Priehľadnosť podľa vzdialenosti (čím bližšie, tým silnejšia čiara)
             const opacity = 1 - (distance / connectionDistance);
-            
             ctx.lineWidth = 1;
             
-            // Gradient medzi bodmi (Spojenie Tech a Business)
             const gradient = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
-            gradient.addColorStop(0, particles[a].color); // Farba bodu A
-            gradient.addColorStop(1, particles[b].color); // Farba bodu B
+            gradient.addColorStop(0, particles[a].color);
+            gradient.addColorStop(1, particles[b].color);
             
             ctx.strokeStyle = gradient;
-            ctx.globalAlpha = opacity * 0.4; // Jemné čiary
+            ctx.globalAlpha = opacity * 0.4;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
             ctx.stroke();
-            ctx.globalAlpha = 1; // Reset alpha
+            ctx.globalAlpha = 1;
           }
         }
       }
