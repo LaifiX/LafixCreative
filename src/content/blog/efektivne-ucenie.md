@@ -1,8 +1,8 @@
 ---
 title: "Keby som toto vedel, učil by som sa menej a mal lepšie známky"
 excerpt: "Ako sa najlepšie a najefektívnejšie učiť podľa mojich skúseností z praxe študenta i lektora?"
-image: "/images/Blog/ucit.jpg"
-tags: ["Osobnostný rozvoj", "Vzdelávanie"]
+image: "../../assets/images/blog/ucit.jpg"
+tags: ["Osobnostný rozvoj", "Vzdelávanie", ]
 author: "Peter"
 date: 2025-11-18
 ---

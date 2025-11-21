@@ -1,65 +1,37 @@
 ---
 // src/components/Blog.astro
+import { getCollection } from 'astro:content';
+import { marked } from 'marked';
 import { Image } from 'astro:assets';
 
-// 1. IMPORT OBRÁZKA
-// Uisti sa, že tento súbor existuje: src/assets/images/blog/ucit.jpg
-import imgUcit from '../assets/images/blog/ucit.jpg';
+// 1. Načítame články
+const allPosts = await getCollection('blog');
 
-const blogPostsData = [
-  {
-    id: 0, 
-    title: 'Keby som toto vedel, učil by som sa menej a mal lepšie známky',
-    excerpt: 'Ako sa najlepšie a najefektívnejšie učiť podľa mojich skúseností z praxe študenta i lektora?',
-    // Tu vkladám tvoj kompletný HTML obsah
-    content: `
-      <p>V dnešnej dobe zažívame vraj najväčšiu technologickú revolúciu v histórii. Niektorí ju vnímajú naplno, iným prebieha popri živote takmer nepozorovane. Jedno je však isté - ovplyvní trh práce aj pracovné pozície. Ak to chceme ustáť a zároveň rásť, musíme sa vzdelávať viac ako kedykoľvek predtým. Ale efektívne, nie chaoticky.</p>
+// 2. Zoradíme podľa dátumu
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-      <h2>Najefektívnejšie spôsoby učenia a zapamätávania si učiva</h2>
-      <p>Bifľovanie je, okrem pár špecifických prípadov, jedna z najmenej efektívnych spôsobov učenia sa. Zaberá veľa času, rýchlo vyčerpáva a výsledky sú sporné. Ak chceme skutočne niečo ovládnuť, potrebujeme systém. A ten musí byť v súlade s tým, čo nám o mozgu prináša neuroveda.</p>
+// 3. Spracujeme dáta
+const blogPostsData = await Promise.all(sortedPosts.map(async (post, index) => {
+  const contentHTML = await marked.parse(post.body);
+  
+  return {
+    id: index, // Použijeme index ako ID pre jednoduchosť
+    title: post.data.title,
+    excerpt: post.data.excerpt,
+    content: contentHTML,
+    // Astro 'image()' v configu nám vráti objekt, ktorý rovno použijeme
+    imageUrl: post.data.image, 
+    tags: post.data.tags,
+    author: post.data.author,
+    date: post.data.date.toLocaleDateString('sk-SK', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }),
+  };
+}));
 
-      <h2>Môžem. Chcem. Namiesto musím.</h2>
-      <p>Prvým krokom je mentálne odblokovanie mysle. Mnohí študenti vnímajú učenie sa ako nudu alebo nutné zlo. V takom stave sa nové informácie do mozgu dostávajú ťažko. Postoj však vieme zmeniť a s ním aj výsledky.</p>
-      <p>Namiesto <em>„musím sa učiť“</em> si skúste položiť otázku: <em>„čo všetko získam, ak sa to naučím rýchlo a efektívne?“</em>
-      Ideálna odpoveď je - viac voľného času, menej stresov, lepšie výsledky, povýšenie v práci alebo nové možnosti v kariére.  
-      Tento posun v nastavení mysle zvyšuje našu motiváciu a znižuje odpor voči učeniu sa.</p>
-
-      <h2>20 minút sústredenia → pauza</h2>
-      <p>Dvadsať minút učenia sa s maximálnym sústredením je pre mozog ideálny interval. Dôležité je, aby po ňom prišla relaxačná pauza. Počas nej musí mozog „uložiť dáta“ podobne ako CD disk, ktorý potrebuje chvíľu na zapisovanie stopy.</p>
-      <p>Ak túto pauzu prehlušíme "psychickou činnosťou" chatovaním, hrami, sociálnymi sieťami či videami, proces ukladania informácií do pamäte tým narušíme.</p>
-      
-      <p><strong>Správny cyklus teda vyzerá takto:</strong></p>
-      <ul>
-        <li><strong>20 minút plnej koncentrácie</strong></li>
-        <li><strong>20-30 minút pauza bez psychickej aktivity</strong></li>
-        <li><strong>Ďalší 15–20-minútový cyklus</strong></li>
-      </ul>
-
-      <h2>Farba – prekvapivo silný pomocník</h2>
-      <p>Možno si spomeniete na študentské časy. V mojom prípade bol napríklad zošit z literatúry jedno veľké modré more škrabopisu. Žiadna štruktúra, žiadne farby, žiadna vizuálna pomôcka. Nie je preto prekvapením, že učenie z takých poznámok bolo nefektívne, čo sa ukázalo aj na mojich známkach.</p>
-      <p>Až na vysokej škole som objavil, čo znamená pojem <strong>sila zvýrazňovača</strong>. Odvtedy je to môj verný spoločník. Farby odlišujú dôležité od nedôležitého a zároveň aktivujú <strong>vizuálnu pamäť</strong>.</p>
-
-      <h2>Farba + asociácie = výkonná pamäťová kotva</h2>
-      <p>Keď farbu doplníte asociáciou, vzniká kombinácia, ktorá <em>dramaticky zlepšuje zapamätávanie.</em> Príklad: ak som sa učil na skúšku z literatúry, romantizmus som si zvýraznil ružovou. To bola prvá farba, ktorá mi napadla pri slove romantizmus. Nie preto, že by mal tento smer niečo spoločné s romantikou a s ružovou farbou, ale preto, že táto farba mi jednoducho napadla pri slove romantizmus. </p>
-
-      <p>Pri naturizme som siahol po zelenej, asociácia s prírodou bola jasná. A takto som si farebne rozlíšil celé okruhy. Keď som si na skúške vytiahol tému, v mojej hlave sa okamžite rozsvietila príslušná farba. Mozog zapol vizuálnu pamäť a informácie sa začali prirodzene vyplavovať. Aj vďaka tomuto systému som si neskôr zo štátnic odniesol pekné hodnotenie, hoci na strednej škole som bol priemerný študent.</p>
-
-      <h2>Prax lektora: cyklus, farby, asociácie fungujú</h2>
-      <p>Tieto metódy som neskôr odovzdal aj svojim študentom. Ako lektor som trval na tom, aby používali farby, využívali asociácie a učili sa v cykloch: <strong>20 minút sústredeného učenia sa → pauza → opakovať</strong>.</p>
-      <p>Výsledky? Zmaturovali veľmi pekne, až prekvapivo dobre. Mnohí z nich priznali, že im tieto informácie pomohli k efektívnejšiemu a rýchlejšiemu učeniu sa.</p>
-      
-      <p>Ako som spomenul v úvode, žijeme v dobe, v ktorej sa potreby pernamentného vzdelávania sa už nezbavíme. Preto je pre nás všetkých dôležité poznať a vyskúšať si na "vlastnej koži" viaceré spôsoby učenia sa, a to hlavne tých, ktorých výsledky sú vedecky potvrdené. Jednu takú som Vám dnes predstavil. Ak natrafíte počas svojich štúdií na ďalšie, určite mi dajte o nich vedieť!</p>
-
-      <p><em>Ak vás tento článok zaujal a poznáte niekoho, komu by mohol pomôcť, budem vďačný za zdieľanie. Je to win-win situácia. Ja odovzdám skúsenosti, ktoré môžu niekomu pomôcť a zároveň sa možno moja stránka dostane k človekovi alebo k firme, ktorú zaujme to, čomu sa venujem. Ďakujem pekne všetkým!</em></p>
-    `,
-    imageUrl: imgUcit, // POUŽITIE IMPORTU
-    tags: ['Osobnostný rozvoj', 'Vzdelávanie'],
-    author: 'Peter',
-    date: '18. november 2025',
-  },
-];
-
-const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
+const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))];
 ---
 
 <section id="blog" class="blog-section">
@@ -70,13 +42,13 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
 
         <div class="filters-wrapper">
             {allTags.map(tag => (
-                <button class={`filter-btn ${tag === 'Všetky' ? 'active' : ''}`} data-tag={tag}>{tag}</button>
+                <button class="filter-btn" data-tag={tag}>{tag}</button>
             ))}
         </div>
 
         <div class="blog-grid">
             {blogPostsData.map((post) => (
-                <article class="blog-card" data-tags={post.tags.join(',')} data-id={post.id}>
+                <article class="blog-card" data-tags={post.tags.join(',')} data-id={post.id} style="display: none;">
                     <div class="card-image-wrapper">
                         <Image 
                             src={post.imageUrl} 
@@ -91,7 +63,7 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
                         <h3 class="card-title">{post.title}</h3>
                         <p class="card-excerpt">{post.excerpt}</p>
                         <div class="card-tags">
-                            {post.tags.map(tag => (
+                            {post.tags.map((tag) => (
                                 <span class="tag">{tag}</span>
                             ))}
                         </div>
@@ -122,6 +94,7 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
                 <div class="detail-meta">
                     <span id="detail-author"></span> &bull; <span id="detail-date"></span>
                 </div>
+                
                 <img id="detail-image" src="" alt="" class="detail-image" />
                 
                 <div id="detail-body" class="detail-body prose"></div>
@@ -143,7 +116,6 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
 </section>
 
 <style>
-  /* CSS ostáva zachované ako v predošlej verzii */
   .blog-section { padding: 6rem 1.5rem; position: relative; }
   .container { max-width: 1200px; margin: 0 auto; }
   .max-w-4xl { max-width: 56rem; margin: 0 auto; }
@@ -183,18 +155,27 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
 
   .back-btn { margin-bottom: 2rem; padding: 0.5rem 1.5rem; border: 2px solid var(--cyan); color: var(--cyan); background: transparent; cursor: pointer; border-radius: 4px; transition: all 0.3s; }
   .back-btn:hover { background: rgba(34, 211, 238, 0.1); box-shadow: 0 0 10px rgba(34, 211, 238, 0.3); }
-  .detail-title { font-size: clamp(2rem, 4vw, 3rem); color: var(--cyan); margin-bottom: 1rem; font-weight: 800; line-height: 1.2; }
+  
+  .detail-title { font-size: clamp(2rem, 4vw, 3rem); color: var(--cyan); margin-bottom: 1rem; font-weight: 800; line-height: 1.1; font-family: 'Space Grotesk', sans-serif; }
+  
+  @media (max-width: 768px) {
+      .detail-title { font-size: 1.75rem; line-height: 1.2; margin-bottom: 0.5rem; }
+  }
+
   .detail-meta { color: #9ca3af; margin-bottom: 2rem; font-family: monospace; }
   .detail-image { width: 100%; border-radius: 0.5rem; margin-bottom: 3rem; border: 1px solid rgba(34, 211, 238, 0.2); }
   
+  /* TYPOGRAPHY */
   .detail-body { color: #d1d5db; line-height: 1.8; font-size: 1.15rem; }
-  .detail-body :global(h2) { color: white; font-size: 1.8rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+  .detail-body :global(h2) { color: white; font-size: 1.8rem; margin-top: 3rem; margin-bottom: 1.5rem; font-weight: 700; border-bottom: 1px solid #333; padding-bottom: 0.5rem; display: inline-block; width: 100%; background: linear-gradient(90deg, var(--cyan), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  @media (max-width: 768px) { .detail-body :global(h2) { font-size: 1.5rem; margin-top: 2rem; } }
   .detail-body :global(p) { margin-bottom: 1.5rem; }
-  .detail-body :global(strong) { color: var(--cyan); font-weight: 600; }
-  .detail-body :global(em) { color: var(--fuchsia); font-style: italic; }
-  .detail-body :global(ul) { margin-bottom: 2rem; padding-left: 1.5rem; list-style: disc; color: #9ca3af; }
-  .detail-body :global(li) { margin-bottom: 0.5rem; }
-  .detail-body :global(pre) { background: #111; padding: 1.5rem; border-radius: 8px; border: 1px solid #333; overflow-x: auto; margin-bottom: 2rem; }
+  .detail-body :global(strong) { color: var(--fuchsia); font-weight: 700; }
+  .detail-body :global(em) { color: #fff; font-style: italic; }
+  .detail-body :global(ul) { margin-bottom: 2rem; padding-left: 1.5rem; list-style: none; }
+  .detail-body :global(li) { margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: #e5e7eb; }
+  .detail-body :global(li::before) { content: '▹'; position: absolute; left: 0; color: var(--cyan); font-weight: bold; }
+  .detail-body :global(pre) { background: #0f0f0f; padding: 1.5rem; border-radius: 8px; border: 1px solid #333; overflow-x: auto; margin: 2rem 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
   .detail-body :global(code) { font-family: 'Courier New', Courier, monospace; color: #a5b4fc; }
 
   .detail-footer { text-align: center; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; gap: 1rem; }
@@ -231,30 +212,40 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
   const detailBody = document.getElementById('detail-body');
   const shareBtn = document.getElementById('detail-share-btn');
 
+  // V src/components/Blog.astro - v sekcii <script>
+
   function renderList() {
     let matchedCount = 0;
     let displayedCount = 0;
 
     blogCards.forEach(card => {
-        const tags = card.dataset.tags.split(',');
-        const matches = currentTag === 'All' || tags.includes(currentTag);
+        // Bezpečné načítanie tagov z datasetu
+        const rawTags = card.dataset.tags || ""; 
+        const tags = rawTags.split(',').map(t => t.trim()); // Odstránime medzery
+
+        // LOGIKA FILTRA
+        // Ak je vybraté 'All' (alebo 'Všetky' - pre istotu kontrolujeme obe), zobrazíme všetko.
+        // Inak kontrolujeme, či zoznam tagov článku obsahuje vybraný tag.
+        const isAll = currentTag === 'All' || currentTag === 'Všetky';
+        const matches = isAll || tags.includes(currentTag);
 
         if (matches) {
             matchedCount++;
             if (displayedCount < visibleCount) {
-                card.style.display = 'flex';
+                card.style.display = 'flex'; // Zobraziť
                 card.style.animation = 'none';
                 card.offsetHeight; 
                 card.style.animation = 'fadeIn 0.5s ease forwards';
                 displayedCount++;
             } else {
-                card.style.display = 'none';
+                card.style.display = 'none'; // Nad limit
             }
         } else {
-            card.style.display = 'none';
+            card.style.display = 'none'; // Nepasuje filter
         }
     });
 
+    // ... zvyšok funkcie (empty state, tlačidlá) ostáva rovnaký
     if (emptyState) emptyState.style.display = matchedCount === 0 ? 'block' : 'none';
 
     if (loadMoreBtn) loadMoreBtn.style.display = 'none';
@@ -272,8 +263,8 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
   filterBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         filterBtns.forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        currentTag = e.target.dataset.tag;
+        e.currentTarget.classList.add('active');
+        currentTag = e.currentTarget.dataset.tag;
         visibleCount = INITIAL_COUNT;
         renderList();
     });
@@ -292,6 +283,8 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
 
   blogCards.forEach(card => {
     card.addEventListener('click', (e) => {
+        if (e.target.closest('.share-btn-small')) return;
+
         const id = parseInt(card.dataset.id);
         const post = blogPostsData.find(p => p.id === id);
 
@@ -300,7 +293,7 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
             if(detailMetaAuthor) detailMetaAuthor.innerText = post.author;
             if(detailMetaDate) detailMetaDate.innerText = post.date;
             
-            // LOGIKA PRE OBRÁZOK (OBJECT VS STRING)
+            // Získanie src z objektu alebo stringu
             const imgSrc = (typeof post.imageUrl === 'object') ? post.imageUrl.src : post.imageUrl;
             if(detailImage) detailImage.src = imgSrc;
             
@@ -317,6 +310,15 @@ const allTags = ['Všetky', 'Osobnostný rozvoj', 'Vzdelávanie'];
     if(detailView) detailView.style.display = 'none';
     if(listView) listView.style.display = 'block';
     window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
+
+    // RESET FILTRA PRI NÁVRATE
+    currentTag = 'All';
+    visibleCount = INITIAL_COUNT;
+    filterBtns.forEach(b => {
+        if (b.dataset.tag === 'All') b.classList.add('active');
+        else b.classList.remove('active');
+    });
+    renderList();
   });
 
   const handleShare = () => {

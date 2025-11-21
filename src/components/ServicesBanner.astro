@@ -32,23 +32,35 @@
 
 <style>
   .services-banner {
-    padding: 4rem 1.5rem;
+    padding: 2rem 1rem; /* Menší padding pre celú sekciu na mobile */
     position: relative;
     margin: 2rem 0;
   }
 
+  /* Na desktope vrátime väčší padding */
+  @media (min-width: 768px) {
+    .services-banner {
+        padding: 4rem 1.5rem;
+    }
+  }
+
   .container { max-width: 1200px; margin: 0 auto; }
 
+  /* --- BANNER CONTENT (Box) --- */
   .banner-content {
     background: linear-gradient(90deg, rgba(17, 24, 39, 0.8), rgba(0, 0, 0, 0.9));
     border: 1px solid rgba(34, 211, 238, 0.2);
     border-radius: 1rem;
-    padding: 3rem;
+    
+    /* ZMENA: Menší padding pre mobil */
+    padding: 2rem 1.5rem;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 2rem;
+    gap: 1.5rem; /* Menšia medzera medzi prvkami */
+    
     position: relative;
     overflow: hidden;
     box-shadow: 0 0 40px rgba(0,0,0,0.5);
@@ -61,68 +73,73 @@
     background: linear-gradient(90deg, transparent, var(--cyan), var(--fuchsia), transparent);
   }
 
+  /* DESKTOP VERZIA */
   @media (min-width: 992px) {
     .banner-content {
         flex-direction: row;
         text-align: left;
         justify-content: space-between;
+        padding: 3rem; /* Väčší padding na PC */
+        gap: 2rem;
     }
     .text-content { flex: 1; padding: 0 2rem; }
     .action-wrapper { flex-shrink: 0; }
   }
 
-  /* --- IKONA (Interaktívna) --- */
+  /* IKONA */
   .icon-wrapper {
-      display: block; /* Aby a tag fungoval */
+      display: block;
       transition: transform 0.3s ease;
       cursor: pointer;
   }
 
   .brain-icon {
-    width: 4rem; 
-    height: 4rem; 
-    
-    /* ZMENA: Farba Cyan */
+    width: 3.5rem; /* Trochu menšia ikona na mobile */
+    height: 3.5rem;
     color: var(--cyan);
-    
-    /* ZMENA: Jemná Cyan žiara v základe */
     filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.4));
-    
     transition: color 0.3s ease, filter 0.3s ease;
   }
 
-  /* HOVER EFEKT PRE IKONU */
+  @media (min-width: 768px) {
+      .brain-icon { width: 4rem; height: 4rem; }
+  }
+
   .icon-wrapper:hover .brain-icon {
-      color: white; /* Rozsvieti sa na bielo */
-      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); /* Silná biela žiara */
+      color: white;
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
       transform: scale(1.1);
   }
   
-  .icon-wrapper:hover {
-      transform: scale(1.1); /* Celý obal sa zväčší */
-  }
+  .icon-wrapper:hover { transform: scale(1.1); }
 
-  /* Texty */
+  /* TEXTY */
   .banner-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem; /* Menší nadpis na mobile */
     color: white;
     font-family: 'Space Grotesk', sans-serif;
     margin-bottom: 0.5rem;
+    line-height: 1.2;
   }
 
   .banner-desc {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #d1d5db;
     line-height: 1.6;
     max-width: 600px;
   }
+
+  @media (min-width: 768px) {
+      .banner-title { font-size: 1.8rem; }
+      .banner-desc { font-size: 1.1rem; }
+  }
   
   .banner-desc strong { color: var(--cyan); }
 
-  /* Button */
+  /* TLAČIDLO */
   .glow-button {
     display: inline-block;
-    padding: 1rem 2.5rem;
+    padding: 0.8rem 2rem; /* Kompaktnejšie na mobile */
     background: var(--cyan);
     color: #000;
     font-weight: 700;
@@ -132,6 +149,11 @@
     border-radius: 4px;
     box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
     transition: all 0.3s;
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 768px) {
+      .glow-button { padding: 1rem 2.5rem; font-size: 1rem; }
   }
 
   .glow-button:hover {
@@ -140,6 +162,7 @@
     transform: scale(1.05);
   }
 
+  /* Animácia */
   .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
   .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
 </style>

@@ -51,14 +51,16 @@ const currentYear = new Date().getFullYear();
         margin: 0 auto;
     }
 
-    /* Veľké CTA */
-    .big-cta {
-        font-size: clamp(3rem, 8vw, 6rem);
-        line-height: 1;
+   .big-cta {
+        /* Zmenšenie minimálnej veľkosti z 3rem na 2.2rem pre mobily */
+        font-size: clamp(2.23rem, 6vw, 5rem); 
+        
+        line-height: 1.1; /* Trochu tesnejšie riadkovanie */
         font-weight: 800;
         margin-bottom: 2rem;
         text-align: center;
         color: white;
+        padding: 0 1rem; /* Pridaj padding, aby sa text nelepil na okraje mobilu */
     }
 
     .text-gradient {

@@ -358,10 +358,18 @@ const navLinks = [
   }
 
   /* MEDIA QUERY - DESKTOP */
-  @media (min-width: 768px) {
+  @media (min-width: 928px) {
     .desktop-menu { display: flex; }
     .mobile-toggle { display: none; }
     .mobile-menu-overlay { display: none; }
+  }
+
+  @media (max-width: 980px){
+    .logo {font-size: 1.5rem;}
+  }
+
+  @media (max-width: 375px){
+    .logo {font-size: 1.3rem;}
   }
 
   .scroll-progress-container {
