@@ -15,16 +15,16 @@
     /* Plynulý prechod do stratena na spodku */
     mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    pointer-events: none; /* Dôležité: aby neblokoval klikania na Hero */
   }
 </style>
 
 <script>
-  const canvas = document.getElementById('network-canvas') as HTMLCanvasElement;
-  
-  // Obalíme to do funkcie, aby sme to mohli spustiť neskôr
-  function startNetworkAnimation() {
+  // Obalíme to do funkcie a spustíme ihneď
+  const initNetworkAnimation = () => {
+    const canvas = document.getElementById('network-canvas') as HTMLCanvasElement;
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -32,16 +32,15 @@
     let height = 0;
     let particles: Particle[] = [];
     
-    // OPTIMALIZÁCIA: Menej častíc na mobile
+    // Optimalizácia počtu častíc
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 25 : 70; 
-    const connectionDistance = isMobile ? 100 : 140; 
+    const particleCount = isMobile ? 30 : 70; 
+    const connectionDistance = isMobile ? 110 : 150; 
     const mouseDistance = 200; 
 
-    const colors = ['#22d3ee', '#d946ef']; 
+    const colors = ['#22d3ee', '#d946ef']; // Cyan, Fuchsia
 
     let mouse = { x: -1000, y: -1000 };
-    let animationFrameId: number;
 
     class Particle {
       x: number;
@@ -54,8 +53,8 @@
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 1.5;
-        this.vy = (Math.random() - 0.5) * 1.5;
+        this.vx = (Math.random() - 0.5) * 1.0; // Trochu pomalšie pre plynulosť
+        this.vy = (Math.random() - 0.5) * 1.0;
         this.size = Math.random() * 2 + 1;
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
@@ -64,9 +63,11 @@
         this.x += this.vx;
         this.y += this.vy;
 
+        // Odraz od stien
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
 
+        // Myš interakcia
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -75,7 +76,7 @@
             const forceDirectionX = dx / distance;
             const forceDirectionY = dy / distance;
             const force = (mouseDistance - distance) / mouseDistance;
-            const direction = -1; 
+            const direction = -1; // Odpudzovanie
             this.vx += forceDirectionX * force * 0.05 * direction;
             this.vy += forceDirectionY * force * 0.05 * direction;
         }
@@ -90,7 +91,7 @@
       }
     }
 
-    const init = () => {
+    const resize = () => {
       const parent = canvas.parentElement;
       if (parent) {
         width = parent.offsetWidth;
@@ -98,6 +99,7 @@
         canvas.width = width;
         canvas.height = height;
         
+        // Reštart častíc pri zmene veľkosti
         particles = [];
         for (let i = 0; i < particleCount; i++) {
           particles.push(new Particle());
@@ -116,7 +118,7 @@
 
       connectParticles();
       
-      animationFrameId = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
     };
 
     const connectParticles = () => {
@@ -137,7 +139,7 @@
             gradient.addColorStop(1, particles[b].color);
             
             ctx.strokeStyle = gradient;
-            ctx.globalAlpha = opacity * 0.4;
+            ctx.globalAlpha = opacity * 0.3; // Jemnejšie čiary
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
@@ -148,7 +150,7 @@
       }
     };
 
-    window.addEventListener('resize', init);
+    window.addEventListener('resize', resize);
     window.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
@@ -160,26 +162,14 @@
     });
 
     // Spustenie
-    init();
+    resize();
     animate();
-  }
+  };
 
-  // Odložené načítanie (Performance Boost)
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => {
-      startAnimation();
-    });
-  } else {
-    setTimeout(() => {
-      startAnimation();
-    }, 100);
-  }
+  // Spustenie po načítaní DOMu (Bezpečné)
+  document.addEventListener('astro:page-load', initNetworkAnimation); // Pre Astro ViewTransitions
+  document.addEventListener('DOMContentLoaded', initNetworkAnimation); // Fallback
   
-  function startAnimation() {
-      // Tu už len zavoláme funkciu, ak by sme ju mali externú, 
-      // ale v tomto prípade je logika priamo v scripte, takže toto je len wrapper
-      // pre prípadné budúce rozšírenie.
-      // Reálne sa kód spustí cez ten blok 'if (canvas && ctx)' vyššie, 
-      // ale pre istotu ho môžeme zabaliť do event listenera.
-  }
+  // Pre istotu spustíme aj hneď (ak script beží defer)
+  initNetworkAnimation();
 </script>
