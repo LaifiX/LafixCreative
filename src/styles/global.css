@@ -42,17 +42,6 @@ body {
   /* 1. Základná farba (veľmi tmavá, nie úplne čierna) */
   background-color: #050505; 
   
-  /* 2. AMBIENTNÉ SVETLO (Toto je ten trik) */
-  background-image: 
-    /* Jemná azúrová žiara vľavo hore */
-    radial-gradient(circle at 0% 0%, rgba(34, 211, 238, 0.15), transparent 40%),
-    
-    /* Jemná ružová žiara vpravo dole */
-    radial-gradient(circle at 100% 100%, rgba(217, 70, 239, 0.15), transparent 40%);
-    
-  /* Zabezpečí, že pozadie ostane na mieste, kým scrolluješ (nepohybuje sa s textom) */
-  background-attachment: fixed; 
-  background-repeat: no-repeat;
   
   color: white;
 }

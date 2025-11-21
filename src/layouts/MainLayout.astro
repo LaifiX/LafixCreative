@@ -91,7 +91,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   
   <body>
-    
+    <div class="fixed-bg"></div>
     <div id="preloader">
         <div class="loader-content">
             <span class="loader-text">INITIALIZING SYSTEM</span>
@@ -183,5 +183,23 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     body.loaded #preloader {
         opacity: 0;
         visibility: hidden;
+    }
+
+    /* Optimalizované pozadie, ktoré netrhá scrollovanie */
+    .fixed-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -10; /* Úplne naspodku */
+        background-color: #050505;
+        background-image: 
+            radial-gradient(circle at 0% 0%, rgba(34, 211, 238, 0.15), transparent 40%),
+            radial-gradient(circle at 100% 100%, rgba(217, 70, 239, 0.15), transparent 40%);
+        background-repeat: no-repeat;
+        background-size: cover;
+        pointer-events: none;
+        will-change: transform; /* Pomoc pre GPU */
     }
 </style>
