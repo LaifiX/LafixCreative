@@ -1,20 +1,37 @@
+---
+// src/components/AnimatedBackground.astro
+---
+
+<canvas id="network-canvas" class="animated-background"></canvas>
+
+<style>
+  .animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none; /* Dôležité! */
+    
+    /* Maska pre plynulý prechod do stratena */
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+</style>
+
 <script>
-  const initNetworkAnimation = () => {
-    const canvas = document.getElementById('network-canvas') as HTMLCanvasElement;
-    if (!canvas) return;
+  const canvas = document.getElementById('network-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
+  if (canvas && ctx) {
     let width = 0;
     let height = 0;
     let particles: Particle[] = [];
-    let animationFrameId: number;
-    let isVisible = true; // Sleduje viditeľnosť
-
-    // Ešte agresívnejšia optimalizácia pre mobil
+    
+    // JEDINÁ OPTIMALIZÁCIA: Menej častíc na mobile
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 15 : 60; // Znížil som na 15 pre mobil (stále to vyzerá dobre)
+    const particleCount = isMobile ? 25 : 70; 
     const connectionDistance = isMobile ? 100 : 140; 
     const mouseDistance = 200; 
 
@@ -33,8 +50,8 @@
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.8; // Spomalil som pohyb pre plynulosť
-        this.vy = (Math.random() - 0.5) * 0.8;
+        this.vx = (Math.random() - 0.5) * 1.0;
+        this.vy = (Math.random() - 0.5) * 1.0;
         this.size = Math.random() * 2 + 1;
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
@@ -46,7 +63,7 @@
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
 
-        // Interakcia myši (vypneme na mobile pre výkon)
+        // Interakcia s myšou (Len na PC pre výkon)
         if (!isMobile) {
             const dx = mouse.x - this.x;
             const dy = mouse.y - this.y;
@@ -72,7 +89,7 @@
       }
     }
 
-    const resize = () => {
+    const init = () => {
       const parent = canvas.parentElement;
       if (parent) {
         width = parent.offsetWidth;
@@ -88,8 +105,7 @@
     };
 
     const animate = () => {
-      if (!ctx || !isVisible) return; // STOP ak nie je vidno
-
+      if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
       
       particles.forEach(particle => {
@@ -98,8 +114,7 @@
       });
 
       connectParticles();
-      
-      animationFrameId = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
     };
 
     const connectParticles = () => {
@@ -128,9 +143,7 @@
       }
     };
 
-    window.addEventListener('resize', resize);
-    
-    // Iba na PC sledujeme myš
+    window.addEventListener('resize', init);
     if (!isMobile) {
         window.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
@@ -139,29 +152,8 @@
         });
     }
 
-    // --- INTELIGENTNÉ ZASTAVOVANIE ---
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                isVisible = true;
-                animate(); // Znova spustiť
-            } else {
-                isVisible = false;
-                cancelAnimationFrame(animationFrameId); // Zastaviť
-            }
-        });
-    }, { threshold: 0 });
-    
-    observer.observe(canvas);
-
-    resize();
+    // Spustenie IHNEĎ
+    init();
     animate();
-  };
-
-  // Spustenie
-  if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initNetworkAnimation);
-  } else {
-      initNetworkAnimation();
   }
 </script>
