@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: main # Tvoja hlavná vetva na GitHube
+
+# Nastavenie obrázkov pre Astro optimalizáciu
+media_folder: "src/assets/images/blog" # Kam sa fyzicky nahrajú
+public_folder: "../../assets/images/blog" # Čo sa zapíše do MD súboru
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog" # Kde sú MD súbory článkov
+    create: true
+    slug: "{{slug}}" # Názov súboru podľa nadpisu
+    fields:
+      - {label: "Titulok", name: "title", widget: "string"}
+      - {label: "Dátum publikovania", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
+      - {label: "Autor", name: "author", widget: "string", default: "Peter"}
+      - {label: "Hlavný Obrázok", name: "image", widget: "image"}
+      - {label: "Tagy (Kategórie)", name: "tags", widget: "list", default: ["Trendy"]}
+      - {label: "Krátky popis (Excerpt)", name: "excerpt", widget: "text"}
+      - {label: "Obsah článku", name: "body", widget: "markdown"}
