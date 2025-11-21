@@ -43,7 +43,8 @@ import heroImage from '../assets/images/avatar4.png';
                 src={heroImage} 
                 alt="Peter - Developer a Obchodník" 
                 class="hero-image"
-                fetchpriority="high"
+                loading="eager"        fetchpriority="high"   widths={[300, 500, 800]}
+                sizes="(max-width: 768px) 100vw, 500px"
             />
             <div class="glow-effect"></div>
         </div>
@@ -196,6 +197,7 @@ import heroImage from '../assets/images/avatar4.png';
     position: relative;
     width: 100%;
     max-width: 650px;
+    aspect-ratio: 4 / 5;
     animation: float 6s ease-in-out infinite;
     /* Obrázok nesmie prekrývať text/tlačidlá */
     z-index: 1; 
