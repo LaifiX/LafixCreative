@@ -428,6 +428,8 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
 </style>
 
 <script>
+  // JAVASCRIPT LOGIKA PRE PROJEKTY
+  
   const INITIAL_COUNT = 2; 
   const LOAD_STEP = 4;
   
@@ -447,16 +449,22 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
 
     projects.forEach((project) => {
         const card = project as HTMLElement;
-        const category = card.dataset.category;
+        // Orezanie medzier pre istotu (Robustnosť)
+        const category = (card.dataset.category || "").trim();
+        
         const isMatch = currentCategory === 'Všetky' || category === currentCategory;
 
         if (isMatch) {
             matchedCount++;
+            
             if (displayedCount < visibleCount) {
                 card.style.display = 'block';
-                card.style.animation = 'none';
-                card.offsetHeight; 
-                card.style.animation = 'fadeUp 0.5s ease-out forwards';
+                // Animácia len ak bol predtým skrytý
+                if (card.style.animation === '' || card.style.display === 'none') {
+                    card.style.animation = 'none';
+                    card.offsetHeight; /* trigger reflow */
+                    card.style.animation = 'fadeUp 0.5s ease-out forwards';
+                }
                 displayedCount++;
             } else {
                 card.style.display = 'none';
@@ -470,6 +478,7 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
         emptyState.style.display = matchedCount === 0 ? 'block' : 'none';
     }
 
+    // Logika tlačidiel
     if (loadMoreBtn) loadMoreBtn.style.display = 'none';
     if (showLessBtn) showLessBtn.style.display = 'none';
 
@@ -486,7 +495,10 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
     btn.addEventListener('click', (e) => {
         filterBtns.forEach(b => b.classList.remove('active'));
         (e.target as HTMLElement).classList.add('active');
-        currentCategory = (e.target as HTMLElement).dataset.category || 'Všetky';
+        
+        const rawCat = (e.target as HTMLElement).dataset.category;
+        currentCategory = rawCat ? rawCat.trim() : 'Všetky';
+        
         visibleCount = INITIAL_COUNT;
         updateProjects();
     });
@@ -503,8 +515,10 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
     section?.scrollIntoView({ behavior: 'smooth' });
   });
 
+  // Spustenie
   updateProjects();
 
+  // Observer
   const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
           if (entry.isIntersecting) {

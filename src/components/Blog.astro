@@ -195,16 +195,20 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
   let currentTag = 'All';
   let visibleCount = INITIAL_COUNT;
   
+  // Elementy
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const blogCards = document.querySelectorAll('.blog-card'); // Všetky karty
+  
   const listView = document.getElementById('blog-list-view');
   const detailView = document.getElementById('blog-detail-view');
-  const blogCards = document.querySelectorAll('.blog-card');
-  const filterBtns = document.querySelectorAll('.filter-btn');
+  
   const loadMoreBtn = document.getElementById('blog-load-more');
   const showLessBtn = document.getElementById('blog-show-less');
   const emptyState = document.getElementById('blog-empty-state');
   const backBtn = document.getElementById('back-to-blog');
   const section = document.getElementById('blog');
 
+  // Elementy detailu
   const detailTitle = document.getElementById('detail-title');
   const detailMetaAuthor = document.getElementById('detail-author');
   const detailMetaDate = document.getElementById('detail-date');
@@ -212,42 +216,49 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
   const detailBody = document.getElementById('detail-body');
   const shareBtn = document.getElementById('detail-share-btn');
 
-  // V src/components/Blog.astro - v sekcii <script>
-
+  // --- HLAVNÁ FUNKCIA FILTROVANIA ---
   function renderList() {
     let matchedCount = 0;
     let displayedCount = 0;
 
+    // Prejdeme všetky karty (aj tie skryté)
     blogCards.forEach(card => {
-        // Bezpečné načítanie tagov z datasetu
-        const rawTags = card.dataset.tags || ""; 
-        const tags = rawTags.split(',').map(t => t.trim()); // Odstránime medzery
+        // 1. Získame tagy karty a vyčistíme ich od medzier
+        const rawTags = card.dataset.tags || "";
+        const tags = rawTags.split(',').map(t => t.trim());
 
-        // LOGIKA FILTRA
-        // Ak je vybraté 'All' (alebo 'Všetky' - pre istotu kontrolujeme obe), zobrazíme všetko.
-        // Inak kontrolujeme, či zoznam tagov článku obsahuje vybraný tag.
+        // 2. Zistíme zhodu
+        // Platí ak je vybraté 'All', 'Všetky', alebo ak tagy obsahujú vybratý tag
         const isAll = currentTag === 'All' || currentTag === 'Všetky';
         const matches = isAll || tags.includes(currentTag);
 
         if (matches) {
             matchedCount++;
+            
+            // 3. Stránkovanie
             if (displayedCount < visibleCount) {
                 card.style.display = 'flex'; // Zobraziť
+                
+                // Reštart animácie
                 card.style.animation = 'none';
-                card.offsetHeight; 
+                card.offsetHeight; /* trigger reflow */
                 card.style.animation = 'fadeIn 0.5s ease forwards';
+                
                 displayedCount++;
             } else {
-                card.style.display = 'none'; // Nad limit
+                card.style.display = 'none'; // Skryť (nad limit)
             }
         } else {
-            card.style.display = 'none'; // Nepasuje filter
+            card.style.display = 'none'; // Skryť (iná kategória)
         }
     });
 
-    // ... zvyšok funkcie (empty state, tlačidlá) ostáva rovnaký
-    if (emptyState) emptyState.style.display = matchedCount === 0 ? 'block' : 'none';
+    // 4. Empty State
+    if (emptyState) {
+        emptyState.style.display = matchedCount === 0 ? 'block' : 'none';
+    }
 
+    // 5. Tlačidlá (Load More / Show Less)
     if (loadMoreBtn) loadMoreBtn.style.display = 'none';
     if (showLessBtn) showLessBtn.style.display = 'none';
 
@@ -260,27 +271,36 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
     }
   }
 
+  // --- EVENT LISTENERS ---
+
+  // Kliknutie na filter
   filterBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
+        // Vizuálny prepínač
         filterBtns.forEach(b => b.classList.remove('active'));
         e.currentTarget.classList.add('active');
+
+        // Nastavenie logiky
         currentTag = e.currentTarget.dataset.tag;
-        visibleCount = INITIAL_COUNT;
+        visibleCount = INITIAL_COUNT; // Reset počítadla
         renderList();
     });
   });
 
+  // Tlačidlo: Zobraziť Viac
   loadMoreBtn?.addEventListener('click', () => {
     visibleCount += LOAD_STEP;
     renderList();
   });
 
+  // Tlačidlo: Schovať
   showLessBtn?.addEventListener('click', () => {
     visibleCount = INITIAL_COUNT;
     renderList();
     section?.scrollIntoView({ behavior: 'smooth' });
   });
 
+  // Kliknutie na kartu (Otvoriť detail)
   blogCards.forEach(card => {
     card.addEventListener('click', (e) => {
         if (e.target.closest('.share-btn-small')) return;
@@ -289,16 +309,20 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
         const post = blogPostsData.find(p => p.id === id);
 
         if (post) {
+            // Naplnenie obsahu
             if(detailTitle) detailTitle.innerText = post.title;
             if(detailMetaAuthor) detailMetaAuthor.innerText = post.author;
             if(detailMetaDate) detailMetaDate.innerText = post.date;
             
-            // Získanie src z objektu alebo stringu
-            const imgSrc = (typeof post.imageUrl === 'object') ? post.imageUrl.src : post.imageUrl;
+            // Obrázok (Objekt vs String fix)
+            const imgSrc = (typeof post.imageUrl === 'object' && post.imageUrl !== null) 
+                           ? post.imageUrl.src 
+                           : post.imageUrl;
             if(detailImage) detailImage.src = imgSrc;
             
             if(detailBody) detailBody.innerHTML = post.content;
 
+            // Prepnutie obrazovky
             if(listView) listView.style.display = 'none';
             if(detailView) detailView.style.display = 'block';
             window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
@@ -306,36 +330,60 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
     });
   });
 
+  // Tlačidlo SPÄŤ (Kompletný RESET)
   backBtn?.addEventListener('click', () => {
+    // 1. Prepnutie obrazovky
     if(detailView) detailView.style.display = 'none';
     if(listView) listView.style.display = 'block';
     window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
 
-    // RESET FILTRA PRI NÁVRATE
+    // 2. RESET FILTROV NA DEFAULT
     currentTag = 'All';
     visibleCount = INITIAL_COUNT;
+
+    // 3. Reset vizuálu tlačidiel
     filterBtns.forEach(b => {
-        if (b.dataset.tag === 'All') b.classList.add('active');
-        else b.classList.remove('active');
+        if (b.dataset.tag === 'All' || b.dataset.tag === 'Všetky') {
+            b.classList.add('active');
+        } else {
+            b.classList.remove('active');
+        }
     });
+
+    // 4. Prekreslenie
     renderList();
   });
 
-  const handleShare = () => {
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
+// Facebook Share
+  const handleShare = () => {
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+  if(shareBtn) shareBtn.addEventListener('click', handleShare);
 
-  shareBtn?.addEventListener('click', handleShare);
+  // --- ZABEZPEČENIE AKTÍVNEHO FILTRA PRI NAČÍTANÍ STRÁNKY ---
+  // Toto zabezpečí, že tlačidlo 'All'/'Všetky' bude vizuálne aktívne hneď na začiatku
+  filterBtns.forEach(btn => {
+      const tag = btn.dataset.tag ? btn.dataset.tag.trim() : '';
+      
+      // Ak je tag 'All' alebo 'Všetky', nastavíme ho ako aktívny
+      if (tag === 'All' || tag === 'Všetky') {
+          btn.classList.add('active');
+      } else {
+          // Ostatné tlačidlá musia byť neaktívne
+          btn.classList.remove('active');
+      }
+  });
 
+  // Prvé spustenie
   renderList();
 
+  // Observer pre fade-in animáciu
   const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('is-visible');
       });
   }, { threshold: 0.1 });
 
-  const fadeElements = document.querySelectorAll('.fade-in-section');
-  fadeElements.forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
 </script>
