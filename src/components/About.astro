@@ -1,5 +1,5 @@
 ---
-// src/components/About.astro
+
 // src/components/About.astro
 import { Image } from 'astro:assets';
 
@@ -20,17 +20,21 @@ import imgCard21 from '../assets/images/about/card21.jpg';
       <div class="grid-item story-card">
         <div class="card-glow"></div>
         <h3 class="card-title">Synkretizácia: obchod × technológie × AI</h3>
-        <p>
-          Začínal som v rýchlom svete obchodu, kde rozhodujú výsledky. Aby som držal krok, osvojil som si technológie, ktoré dnes prinášajú zákazníkom merateľnú hodnotu. 
-        </p>
-        <p>
-          Postupne som prešiel od WordPressu, HTML a CSS k JavaScriptu, Reactu a Pythonu a aktívne využívam moderné AI nástroje. Vďaka tejto kombinácii viem rýchlo navrhovať, overovať a dodávať riešenia – 
-          <span class="highlight-fuchsia">od webov, grafických materiálov, videí až po interné aplikácie.</span>
-        </p>
-        <p>
-          Ak Vám sedí férovosť, otvorená komunikácia a štýl „poďme to spraviť“, rád si dám s Vami kávu a rozhovor. Hľadám podobne naladených ľudí a tímy, s ktorými vytvoríme niečo, čo má hlavu a pätu.
-          <span class="highlight-cyan"> Chcete sa porozprávať o nápade alebo rozbehnúť spoluprácu? Napíšte mi.</span> 
-        </p>
+
+<p>
+  Nie som “len programátor”. Som človek z praxe, ktorý prepája obchodné stratégie s&nbsp;technologickými riešeniami.
+  <strong>Hovorím jazykom kódu, ale ešte viac hovorím jazykom výsledkov.</strong>
+</p>
+
+<p>
+  Pomáham firmám zjednodušovať procesy, automatizovať rutinu, zvyšovať konverzie a vytvárať online prezentácie, ktoré
+  <span class="highlight-cyan">reálne zarábajú.</span>
+  Či už potrebujete web, AI automatizáciu, produktové fotky, reklamy alebo naučiť tím využívať AI —
+  <span class="highlight-cyan"><strong>všetko dostanete s obchodným pohľadom a merateľným dopadom.</strong></span>
+</p>
+
+
+
       </div>
 
       <div class="grid-item profile-card" id="tilt-card">
@@ -116,7 +120,7 @@ import imgCard21 from '../assets/images/about/card21.jpg';
   .about-section {
     padding: 6rem 1.5rem;
     position: relative;
-    margin-top: -100px; /* Pritiahnutie k Hero sekcii */
+    margin-top: -50px; /* Pritiahnutie k Hero sekcii */
     z-index: 10;
   }
 
@@ -184,7 +188,7 @@ import imgCard21 from '../assets/images/about/card21.jpg';
     flex-direction: column;
     justify-content: center;
   }
-  .card-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: #fff; }
+  .card-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: var(--fuchsia); }
   .story-card p { color: #d1d5db; line-height: 1.7; margin-bottom: 1rem; font-size: 1.1rem; }
   .highlight-fuchsia { color: var(--fuchsia); font-weight: 700; }
   .highlight-cyan { color: var(--cyan); font-weight: 700; }

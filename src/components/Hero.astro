@@ -24,10 +24,25 @@ import heroImage from '../assets/images/avatar.png';
           <span class="bracket">]</span>
         </p>
 
-        <p class="description">
-          Ahoj, som ten, kto spája obchod a kód. Obchod ma naučil zodpovednosti za výsledok, technológie mi dali nástroje, ako výsledky dosiahnuť rýchlejšie a efektívnejšie.<br><br>
-          Pomôžem s tvorbou <strong>webu, sociálnymi sieťami či vyškolím v AI aplikáciách.</strong> Odporučím najvhodnejšie, najekonomickejšie riešenie pre naplnenie Vašej vízie a predstáv.
-        </p>
+      <p class="description">
+  Som človek, ktorý spája dva svety — 
+  <span class="highlight-fuchsia">obchod a technológie.</span> 
+  <strong>8&nbsp;rokov predávam, vyjednávam, hľadám riešenia a prinášam výsledky.</strong> 
+  A popri tom som objavil technológie, ktoré dokážu tieto výsledky ešte zrýchliť.
+</p>
+
+<p class="description">
+  Tvorím weby, aplikácie a AI riešenia, ktoré nepôsobia len moderne — 
+  <span class="highlight-fuchsia">oni reálne predávajú, šetria čas a zvyšujú výkon.</span> 
+  Rozumiem kódu, rozumiem zákazníkovi a rozumiem biznisu. 
+  Preto dokážem prepájať logiku s emóciou tak, aby prinášala merateľný efekt.
+</p>
+
+<p class="description">
+  Ak hľadáte človeka, ktorý vie myslieť obchodne, konať technicky a doručovať rýchlo,  
+  <span class="highlight-cyan"><strong>rád sa s vami porozprávam.</strong></span>
+</p>
+
 
         <a href="#projects" class="cta-button">
           Moje projekty
@@ -50,8 +65,7 @@ import heroImage from '../assets/images/avatar.png';
             <div class="glow-effect"></div>
         </div>
       </div>
-
-    </div>
+     </div>
   </div>
 </section>
 
@@ -63,6 +77,9 @@ import heroImage from '../assets/images/avatar.png';
     --text-gray: #d1d5db;
   }
 
+   .highlight-fuchsia { color: var(--fuchsia); font-weight: 700; }
+  .highlight-cyan { color: var(--cyan); font-weight: 700; }
+
   /* ZÁKLADNÝ LAYOUT */
   .hero-section {
     position: relative;
@@ -71,7 +88,7 @@ import heroImage from '../assets/images/avatar.png';
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding-top: 120px;
+    padding-top: 350px;
     padding-bottom: 4rem;
   }
 
@@ -87,7 +104,7 @@ import heroImage from '../assets/images/avatar.png';
     display: flex;
     flex-direction: column-reverse; /* Mobil: Fotka dole/skrytá, Text hore */
     align-items: center;
-    gap: 3rem;
+    gap: 2rem;
     text-align: center;
   }
 
@@ -182,7 +199,7 @@ import heroImage from '../assets/images/avatar.png';
     mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.2));
-    margin-top: 3rem;
+    margin-top: -1rem;
   }
 
   .glow-effect {
@@ -209,23 +226,32 @@ import heroImage from '../assets/images/avatar.png';
       flex-direction: row;
       text-align: left;
       justify-content: space-between;
+      margin-top: -5rem;
     }
-    
+  
     .content-col {
       flex: 0 0 45%; /* Opravená syntax - pridal som bodkočiarku */
       padding-right: 2rem;
+      margin-top: -5rem;
       
     }
     
     .image-col {
-      flex: 0 0 55%; /* Opravená syntax */
+      flex: 0 0 60%; /* Opravená syntax */
       display: flex;
       justify-content: flex-end;
+      padding-top: -5rem;
     }
 
     .typewriter-wrapper { justify-content: flex-start; }
-    .description { margin-left: 0; margin-right: 0; }
+    .description { margin-left: 0; margin-right: 0; margin-bottom: 25px; }
   }
+
+
+@media (max-width:992px){
+    .hero-section {padding-top: 200px;}
+
+}
 
   /* --- MOBIL (Phone) --- */
   @media (max-width: 768px) {
@@ -244,8 +270,10 @@ import heroImage from '../assets/images/avatar.png';
         order: 1; 
         display: flex;
         justify-content: center;
-        width: 120%;
+        width: 130%;
         z-index: 9001;
+        margin-bottom: -7rem;
+        padding-top: 2rem;
     }
     
     .image-wrapper {
@@ -254,6 +282,10 @@ import heroImage from '../assets/images/avatar.png';
         aspect-ratio: 4 / 5;
     }
   }
+
+
+
+
 </style>
 
 <script>
