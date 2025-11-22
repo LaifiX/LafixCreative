@@ -1,0 +1,321 @@
+---
+// src/pages/blog/[...slug].astro
+import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+// ✅ Astro potrebuje vedieť, ktoré slugy má prerenderovať
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+// ✅ render markdownu cez Astro Content
+const { Content } = await post.render();
+
+// ✅ obrázok (string vs Image object)
+const imageUrl =
+  typeof post.data.image === "object" && post.data.image !== null
+    ? post.data.image.src
+    : post.data.image;
+
+// ✅ PRÍPRAVA ODKAZOV NA ZDIEĽANIE
+const currentUrl = encodeURIComponent(Astro.url.href);
+const postTitle = encodeURIComponent(post.data.title);
+
+const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+// LinkedIn zdieľanie (mini=true je starší parameter, ale stále často funguje, url je hlavné)
+const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+---
+
+<MainLayout
+  title={post.data.title}
+  description={post.data.excerpt}
+  image={imageUrl}
+>
+  <section class="blog-detail-page">
+    <div class="container">
+
+      <a href="/#blog" class="back-btn">&larr; Späť na blog</a>
+
+      <h1 class="detail-title">{post.data.title}</h1>
+
+      <div class="detail-meta">
+        <span class="meta-author">{post.data.author}</span>
+        <span class="meta-dot">•</span>
+        <span class="meta-date">
+          {post.data.date.toLocaleDateString("sk-SK", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </span>
+      </div>
+
+      {imageUrl && (
+        <img src={imageUrl} alt={post.data.title} class="detail-image" />
+      )}
+
+      <article class="detail-body">
+        <Content />
+      </article>
+
+      <div class="share-footer">
+        <p class="share-text">Páčil sa vám článok? Zdieľajte ho:</p>
+
+        <div class="share-group">
+            
+            <a
+              href={facebookUrl}
+              class="share-btn share-fb"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Zdieľať na Facebooku"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              <span>Facebook</span>
+            </a>
+
+            <a
+              href={linkedinUrl}
+              class="share-btn share-li"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Zdieľať na LinkedIn"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              <span>LinkedIn</span>
+            </a>
+            
+        </div>
+      </div>
+
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  /* Layout */
+  .blog-detail-page {
+    padding: 6rem 1.5rem;
+    position: relative;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* Back */
+  .back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    margin-bottom: 2rem;
+    color: var(--cyan);
+    text-decoration:none;
+    font-weight:600;
+    padding:.5rem 1rem;
+    border:1px solid rgba(34,211,238,.35);
+    border-radius: 6px;
+    background: rgba(17,24,39,.35);
+    transition: all .25s ease;
+  }
+  .back-btn:hover{
+    border-color: rgba(34,211,238,.8);
+    box-shadow: 0 0 12px rgba(34,211,238,.35);
+    transform: translateY(-2px);
+  }
+
+  /* Title + meta */
+  .detail-title{
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--cyan);
+    margin-bottom: .75rem;
+    text-shadow: 0 0 10px rgba(34,211,238,.25);
+  }
+
+  .detail-meta{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.6rem;
+    color:#9ca3af;
+    font-size:.95rem;
+    margin-bottom: 2.5rem;
+    font-family: monospace;
+  }
+  .meta-author{ color:#d1d5db; }
+  .meta-dot{ opacity:.6; }
+
+  /* Hero image */
+  .detail-image{
+    width:100%;
+    border-radius: .75rem;
+    margin-bottom: 3rem;
+    border:1px solid rgba(34,211,238,.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,.45);
+  }
+
+  /* Body typography */
+  .detail-body{
+    color:#d1d5db;
+    line-height:1.85;
+    font-size:1.12rem;
+  }
+
+  .detail-body :global(h2){
+    margin-top:3rem;
+    margin-bottom:1.25rem;
+    font-size:1.8rem;
+    font-weight:800;
+    color: white;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    padding-bottom:.5rem;
+    background: linear-gradient(90deg, var(--cyan), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .detail-body :global(h3){
+    margin-top:2.2rem;
+    margin-bottom:1rem;
+    font-size:1.35rem;
+    font-weight:700;
+    color:#fff;
+  }
+
+  .detail-body :global(p){
+    margin-bottom:1.4rem;
+  }
+
+  .detail-body :global(strong){
+    color: var(--fuchsia);
+    font-weight:800;
+  }
+
+  .detail-body :global(em){
+    color:#fff;
+    font-style:italic;
+  }
+
+  .detail-body :global(ul),
+  .detail-body :global(ol){
+    margin: 1.5rem 0 2rem;
+    padding-left:1.5rem;
+  }
+
+  .detail-body :global(li){
+    margin-bottom:.6rem;
+  }
+
+  .detail-body :global(blockquote){
+    margin: 2rem 0;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--cyan);
+    background: rgba(17,24,39,.5);
+    border-radius: .5rem;
+    color:#e5e7eb;
+    font-style: italic;
+  }
+
+  .detail-body :global(a){
+    color: var(--cyan);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .detail-body :global(a:hover){
+    color: #67e8f9;
+  }
+
+  .detail-body :global(pre){
+    background:#0b0b0b;
+    padding:1.25rem 1.5rem;
+    border-radius:.75rem;
+    border:1px solid rgba(255,255,255,.08);
+    overflow-x:auto;
+    margin: 2rem 0;
+    box-shadow: inset 0 0 20px rgba(0,0,0,.6);
+  }
+
+  .detail-body :global(code){
+    font-family: "Courier New", monospace;
+    color:#a5b4fc;
+    background: rgba(255,255,255,.05);
+    padding:.1rem .35rem;
+    border-radius:.35rem;
+  }
+
+  /* Share footer */
+  .share-footer{
+    margin-top:4rem;
+    padding-top:2.5rem;
+    border-top:1px solid rgba(255,255,255,.08);
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+  }
+  .share-text{
+    color:#9ca3af;
+    font-style:italic;
+    font-size: 1.1rem;
+  }
+
+  .share-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+  }
+
+  /* Spoločné štýly pre tlačidlá */
+  .share-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding:.7rem 1.8rem;
+    border-radius:999px;
+    background: transparent;
+    font-weight:700;
+    text-decoration:none;
+    transition: all .25s ease;
+    font-size: 0.95rem;
+  }
+
+  /* Facebook */
+  .share-fb {
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    box-shadow: 0 0 10px rgba(34,211,238,.2);
+  }
+  .share-fb:hover {
+    transform: translateY(-2px);
+    background: rgba(34,211,238,.1);
+    box-shadow: 0 0 16px rgba(34,211,238,.45);
+  }
+
+  /* LinkedIn (použijeme tvoju fuchsia farbu, alebo modrú ak chceš originál) */
+  .share-li {
+    color: #e879f9; /* Fuchsia svetlá */
+    border: 1px solid #d946ef; /* Fuchsia tmavšia */
+    box-shadow: 0 0 10px rgba(217, 70, 239, 0.2);
+  }
+  .share-li:hover {
+    transform: translateY(-2px);
+    background: rgba(217, 70, 239, 0.1);
+    box-shadow: 0 0 16px rgba(217, 70, 239, 0.45);
+  }
+
+  @media (max-width: 768px){
+    .detail-body{ font-size:1.05rem; }
+    .detail-body :global(h2){ font-size:1.5rem; margin-top:2.2rem; }
+    .share-group { flex-direction: column; align-items: stretch; }
+    .share-btn { justify-content: center; }
+  }
+</style>

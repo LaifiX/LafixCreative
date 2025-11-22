@@ -12,14 +12,13 @@ import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import Buttons from '../components/MagneticButtons.astro';
 import ServicesBanner from '../components/ServicesBanner.astro';
-import MobileNavBar from '../components/MobileNavbars.astro'
+import MobileNavBar from '../components/MobileNavbars.astro';
 ---
-
 <MainLayout 
   title="Peter Beňo | Web Developer & Sales Strategist"
   description="Hľadáte prepojenie technológií a obchodu? Tvorím weby, ktoré predávajú, a zavádzam AI do firemných procesov."
 >
-    
+
     <div id="preloader">
         <div class="loader-content">
             <span class="loader-text">INITIALIZING SYSTEM</span>
@@ -28,13 +27,11 @@ import MobileNavBar from '../components/MobileNavbars.astro'
     </div>
 
     <div class="noise-overlay"></div>
-    
     <Header />
-    
-    <Hero /> 
-    
+    <Hero />
+
     <main>
-        <About /> 
+        <About />
         <Skills />
         <ServicesBanner />
         <Projects />
@@ -44,74 +41,114 @@ import MobileNavBar from '../components/MobileNavbars.astro'
     </main>
 
     <Footer />
-    
     <Buttons />
     <MobileNavBar />
 </MainLayout>
 
 <style>
-    /* Noise */
-    .noise-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none; 
-        z-index: 9000;
-        opacity: 0.02; 
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.3' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
+/* Noise Overlay */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9000;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.3' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
 
-    /* Preloader */
-    #preloader {
-        position: fixed;
-        inset: 0;
-        background: #050505;
-        z-index: 99999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-    .loader-content {
-        text-align: center;
-        font-family: monospace;
-        color: var(--cyan);
-    }
-    .loader-text {
-        display: block;
-        margin-bottom: 10px;
-        letter-spacing: 0.2em;
-        animation: blink 1s infinite;
-    }
-    .loader-bar {
-        width: 200px;
-        height: 2px;
-        background: rgba(255,255,255,0.1);
-        overflow: hidden;
-    }
-    .loader-progress {
-        width: 0%;
-        height: 100%;
-        background: var(--cyan);
-        animation: load 1.5s ease-in-out forwards;
-        box-shadow: 0 0 10px var(--cyan);
-    }
-    @keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
-    @keyframes blink { 50% { opacity: 0.5; } }
+/* --- PRELOADER CSS --- */
+#preloader {
+    position: fixed;
+    inset: 0;
+    background: #050505;
+    z-index: 99999;
     
-    /* Skrytie po načítaní */
-    body.loaded #preloader {
-        opacity: 0;
-        visibility: hidden;
-    }
+    /* DÔLEŽITÉ: Defaultne je skrytý, aby neblikol pri návrate */
+    display: none; 
+    opacity: 0;
+    visibility: hidden;
+    
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Táto trieda sa pridá cez JS len pri prvej návšteve */
+body.show-preloader #preloader {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.loader-content {
+    text-align: center;
+    font-family: monospace;
+    color: var(--cyan);
+}
+.loader-text {
+    display: block;
+    margin-bottom: 10px;
+    letter-spacing: 0.2em;
+    animation: blink 1s infinite;
+}
+.loader-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    overflow: hidden;
+}
+.loader-progress {
+    width: 0%;
+    height: 100%;
+    background: var(--cyan);
+    /* Animácia beží len keď je viditeľný */
+    animation: load 1.5s ease-in-out forwards;
+    box-shadow: 0 0 10px var(--cyan);
+}
+
+@keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
+@keyframes blink { 50% { opacity: 0.5; } }
+
 </style>
 
-<script>
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            document.body.classList.add('loaded');
-        }, 1500); // Čas na efekt (1.5s)
-    });
+<script is:inline>
+    (function() {
+        // Kľúč v session storage
+        const sessionKey = "preloader_shown";
+        const alreadyShown = sessionStorage.getItem(sessionKey);
+
+        // Ak sme tu EŠTE NEBOLI (nová karta / okno)
+        if (!alreadyShown) {
+            
+            // 1. Okamžite ho zobrazíme (pridáme triedu)
+            document.body.classList.add("show-preloader");
+
+            // 2. Počkáme na načítanie stránky
+            window.addEventListener("load", () => {
+                
+                // Necháme animáciu dobehnúť (1.2s)
+                setTimeout(() => {
+                    
+                    // Začneme stmievanie (fade out)
+                    const preloader = document.getElementById("preloader");
+                    if (preloader) preloader.style.opacity = "0";
+
+                    // Zapamätáme si, že už bežal
+                    sessionStorage.setItem(sessionKey, "true");
+
+                    // Po animácii (0.5s) ho úplne odstránime a vyčistíme triedu
+                    setTimeout(() => {
+                        document.body.classList.remove("show-preloader");
+                        if (preloader) preloader.style.display = "none";
+                    }, 500);
+
+                }, 1200);
+            });
+        }
+        // Ak už sme tu boli (už existuje záznam), nerobíme NIČ.
+        // CSS má default display: none, takže preloader sa vôbec neukáže.
+    })();
 </script>
