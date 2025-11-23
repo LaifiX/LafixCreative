@@ -1,5 +1,5 @@
 ---
-title: "Stop panike: Umelá inteligencia Vás nenahradí, ale možno prinúti k zmene"
+title: "Stop panike: Umelá inteligencia Vás nenahradí, ale možno Vás prinúti robiť veci inak"
 excerpt: "AI neberie ľuďom prácu – transformuje spôsob, akým sa práca doteraz robila. Prečo sa netreba báť?"
 image: "../../assets/images/blog/ai-panika.jpg"
 tags: ["Trendy", "AI", ]
@@ -17,21 +17,23 @@ Posledné dva-tri roky, čo aktívne sledujem scénu okolo AI šialenstva, som z
 
 Po zhliadnutí videí som však väčšinou len skonštatoval, že išlo o ďalší clickbait s nulovou reálnou hodnotou. Youtuber skúša novú aplikáciu pre generovanie fotiek, rozplýva sa nadšením a vyzýva fotografov, aby si hľadali inú profesiu. ***Bullshit! 90 % aplikácií, ktorých značky sú na scéne zvučné, som vyskúšal a nič extrémne sa nedeje.*** Nemusia si hľadať nové miesta ani programátori, ani fotografi, ani dabéri. Nedokáže ich to totiž nahradiť, vysvetlím prečo.
 
-Taký fotograf má umelecké oko a dokáže zachytiť svojím objektívom emóciu, dojem, vyvolať cit. Toto AI nikdy nedokáže. Skúste si vypromptovať obrázok na mieru. Zbláznite sa. Zistíte, že oveľa rýchlejšie, presnejšie, lacnejšie a do detailov si človek dotvorí grafiku vo Photoshope.
+Taký **fotograf** má umelecké oko a dokáže zachytiť svojím objektívom emóciu, dojem, vyvolať cit. Toto AI nikdy nedokáže. Skúste si vypromptovať obrázok na mieru. Zbláznite sa. Zistíte, že oveľa rýchlejšie, presnejšie, lacnejšie a do detailov si človek dotvorí grafiku vo Photoshope.
 
 **Dabing?** AI možno napodobní hlas, možno zvládne oznamovacie vety, možno občas aj opytovaciu. Ale nenahradí herca-dabéra, pretože jedno slovo môže byť vyslovené 1000 spôsobmi a každý z nich vyvoláva inú emóciu alebo dojem. Ak by aj vymysleli univerzálny dabing, čo sa plánuje, nedokáže sa aplikovať do umeleckej roviny. Bude fajn na konferencie, tutoriály, ale nie do kvalitného umeleckého filmu.
 
-**A čo vibe-coding?** Môžete skúsiť. Laikovi to môže pripadať super, ale človeku, čo sa trochu vyzná, tak vygenerovaný web dizajnérsky 10 rokov starý radosť neurobí. Potrebujete ho dotvoriť? Pripravte si ďalšie desiatky presných promptov. Čo potom s ním? Ako ho nastaviť a sfunkčniť? Ako ho optimalizovať? A čo SEO? Vibe-coding je super pomôcka pre človeka, ktorý sa vyzná v kóde a má prehľad o prepájaní technológií, knižníc, domén a pod. Pre laika je vibe-coding len slohová práca, ktorej nerozumie, a preto je výsledok viac ako neistý. V rukách človeka, ktorý sa vyzná v kóde a v problematike,  je to raketa.
+**A čo vibe-coding?** Môžete skúsiť. Laikovi to môže pripadať super, ale človeku, čo sa trochu vyzná, tak vygenerovaný web dizajnérsky 10 rokov starý radosť neurobí. Potrebujete ho dotvoriť? Pripravte si ďalšie desiatky presných promptov. Čo potom s ním? Ako ho nastaviť a sfunkčniť? Ako ho optimalizovať? A čo SEO? Vibe-coding je super pomôcka pre človeka, ktorý sa vyzná v kóde a má prehľad o prepájaní technológií, knižníc, domén a pod. Pre laika je vibe-coding len slohová práca, ktorej nerozumie, a preto je výsledok viac ako neistý. V rukách človeka, ktorý sa vyzná v kóde, je to raketa.
 
 **Je však pravda, že niektoré veľmi rutinné jednoduché úkony môžu byť nahradené. Ohrozený je napríklad telemarketing, zákaznícka podpora a pod.** Ešte to nie je otestované z dlhodobého hľadiska. Zatiaľ sa ukazuje, že ľudia nechcú telefonovať s umelou inteligenciou.
 
 ## Ak by som mal toto všetko zhrnúť:
 Ošiaľ okolo AI je spôsobený hlavne novotou. Je to niečo nové, čo sme doteraz nepoznali. Momentálne sa pre bežného človeka toho moc nezmenilo. Človek si vie vytvoriť obrázok, video, text, vygenerovať e-knihu, ale aby to malo všetko v reálnom využití hlavu a pätu a hlavne kvalitu, treba toho vedieť oveľa viac ako len používať AI nástroje.
 
-Keď spomínam Ai nástroje, za pozornosť stojí hlavne funkcia **deep research / hĺbkový výskum**, ktorá je prístupná vo viacerých AI modeloch. Umožňuje hĺbkový rešerš problematiky s textovým výstupom. S tým sa dá ďalej pracovať napríklad v Notebooku LM.
+Keď spomínam **Ai nástroje**, za pozornosť stojí hlavne funkcia **deep research / hĺbkový výskum**, ktorá je prístupná vo viacerých AI modeloch. Umožňuje hĺbkový rešerš problematiky s textovým výstupom. S tým sa dá ďalej pracovať napríklad v **Notebooku LM.**
 
 Ten dokáže spracovávať údaje LEN z poskytnutých zdrojov. Tvoriť z nich prezentácie, myšlienkové mapy, audioprezentácie, jednoduché kvízy. Niektorí hovoria o budúcnosti vo vzdelávaní. Ja tvrdím, že možno pri menších materiáloch ako doplnok,áno. Treba byť však opatrný. Z väčšieho množstva materiálov dokáže vytvoriť aj pekný informačný guláš - testoval som a zhrozil som sa :-)
 
-Niekedy mám pocit, akoby sa ľudia dobrovoľne vzdávali vecí, ktoré ich robili unikátnymi, jedinečnými a vďaka týmto nástrojom za účelom „efektívnosti“ sa stávali len priemernými. Čiže stále platí: **najdôležitejšie sú vlastné schopnosti, vedomosti, kreativita** — o tie bude na trhu práce vždy záujem. A ak bude treba, promptovať sa naučíte kedykoľvek. To je to najmenej.
+Niekedy mám pocit, akoby sa ľudia dobrovoľne vzdávali vecí, ktoré ich robili unikátnymi, jedinečnými a vďaka týmto nástrojom za účelom „efektívnosti“ sa stávali len priemernými. Čiže stále platí: **najdôležitejšie sú vlastné schopnosti, vedomosti, kreativita** — o tie bude na trhu práce vždy záujem. 
+
+Myslím si, že drvivú väčšinu ľudí AI nenahradí, zmení len spôsob, akým prácu robia. Je možné, že niektoré profesie a pracovné miesta sa časom zlúčia, preto je nevyhnuté vzdelávať sa v oblastiach blízkych Vašej profesii, aby ste časom dokázali svoje poznatky navzájom zúžitkovať, prelínať a využívať synergický efekt. AI tu bude, aplikácie sa budú vyvíjať, meniť. A ak bude treba, promptovať sa naučíte kedykoľvek. To je to najmenej. 
 
 *PS: Všímajte si príspevky na sociálnych sieťach. Začínajú sa podobať jeden na druhý – aj to je daň prílišného používania AI v marketingovom segmente.*
