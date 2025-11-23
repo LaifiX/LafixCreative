@@ -163,10 +163,22 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${curre
   }
 
   /* Body typography */
+  /* Body typography */
   .detail-body{
-    color:#d1d5db;
-    line-height:1.85;
-    font-size:1.12rem;
+    /* Pôvodná farba: #d1d5db (príliš svietivá) */
+    
+    /* NOVÁ FARBA: Slate 300 - mäkšia pre oči */
+    color: #cbd5e1; 
+    
+    /* DÔLEŽITÉ: Jemne zväčšíme rozostup písmen */
+    letter-spacing: 0.015em; 
+    
+    /* Pre istotu nastavíme váhu písma, aby nebolo príliš tenké */
+    font-weight: 400;
+
+    /* Pôvodné nastavenia */
+    line-height: 1.85;
+    font-size: 1.12rem;
   }
 
   .detail-body :global(h2){
@@ -321,8 +333,44 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${curre
   }
 
   @media (max-width: 768px){
-    .detail-body{ font-size:1.05rem; }
-    .detail-body :global(h2){ font-size:1.5rem; margin-top:2.2rem; }
+    /* 1. Zmenšíme obrovskú medzeru hore, aby bol obsah hneď vidieť */
+    .blog-detail-page {
+        padding-top: 2rem; 
+        padding-bottom: 3rem;
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+    }
+
+    /* 2. Upravíme nadpis, aby nezaberal pol obrazovky */
+    .detail-title {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+
+    /* 3. HLAVNÁ OPRAVA TEXTU */
+    .detail-body { 
+        font-size: 1.1rem; /* Trochu zväčšíme písmo pre čitateľnosť */
+        line-height: 1.6;  /* Zmenšíme riadkovanie (z 1.85 na 1.6) - text bude súdržnejší */
+    }
+
+    /* Upravíme medzery medzi odstavcami, aby text "nedýchal" až príliš */
+    .detail-body :global(p) {
+        margin-bottom: 1.1rem;
+    }
+
+    .detail-body :global(h2){ 
+        font-size: 1.6rem; 
+        margin-top: 2.5rem; 
+        line-height: 1.3; /* Nadpisy na viac riadkov musia byť hustejšie */
+    }
+    
+    .detail-body :global(ul),
+    .detail-body :global(ol){
+        padding-left: 1.2rem; /* Aby odrážky nezaberali veľa miesta */
+    }
+
+    /* Tlačidlá na zdieľanie pod seba */
     .share-group { flex-direction: column; align-items: stretch; }
     .share-btn { justify-content: center; }
   }

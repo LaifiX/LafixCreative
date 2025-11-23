@@ -1,5 +1,5 @@
 ---
-title: "Stop panike: Umelá inteligencia ťa nenahradí, ale prinúti ťa k zmene"
+title: "Stop panike: Umelá inteligencia Vás nenahradí, ale možno prinúti k zmene"
 excerpt: "AI neberie ľuďom prácu – transformuje spôsob, akým sa práca doteraz robila. Prečo sa netreba báť?"
 image: "../../assets/images/blog/ai-panika.jpg"
 tags: ["Trendy", "AI", ]
