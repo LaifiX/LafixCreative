@@ -2,7 +2,7 @@
 title: "Stop panike: Umelá inteligencia ťa nenahradí, ale prinúti ťa k zmene"
 excerpt: "AI neberie ľuďom prácu – transformuje spôsob, akým sa práca doteraz robila. Prečo sa netreba báť?"
 image: "../../assets/images/blog/ai-panika.jpg"
-tags: ["Technológie", "AI", "Spoločnosť"]
+tags: ["Trendy", "AI", ]
 author: "Peter"
 date: 2025-11-23
 ---
