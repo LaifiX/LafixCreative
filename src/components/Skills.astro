@@ -91,10 +91,41 @@ const skillCategories = [
   .grid-wrapper { display: grid; grid-template-columns: 1fr; gap: 3rem; }
   @media (min-width: 992px) { .grid-wrapper { grid-template-columns: repeat(2, 1fr); gap: 5rem; } }
 
-  .skill-card { background: rgba(17, 24, 39, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); padding: 2.5rem; border-radius: 4px; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+  /* --- KARTA: MOBILE FIRST (Optimalizované) --- */
+  .skill-card { 
+      /* Bez bluru na mobile */
+      background: rgba(17, 24, 39, 0.95); 
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+
+      border: 1px solid rgba(255,255,255,0.05); 
+      padding: 2.5rem; 
+      border-radius: 4px; 
+      position: relative; 
+      overflow: hidden; 
+      
+      /* GPU akcelerácia */
+      transform: translateZ(0);
+      will-change: transform;
+      
+      transition: transform 0.3s, box-shadow 0.3s; 
+  }
+
   .skill-card:hover { transform: translateY(-5px); }
-  .card-cyan:hover { box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); border-color: rgba(34, 211, 238, 0.3); }
-  .card-fuchsia:hover { box-shadow: 0 0 30px rgba(217, 70, 239, 0.1); border-color: rgba(217, 70, 239, 0.3); }
+  /* Jemnejší tieň na mobile */
+  .card-cyan:hover { border-color: rgba(34, 211, 238, 0.3); }
+  .card-fuchsia:hover { border-color: rgba(217, 70, 239, 0.3); }
+
+  /* --- DESKTOP EFEKTY PRE KARTU --- */
+  @media (min-width: 992px) {
+      .skill-card {
+          background: rgba(17, 24, 39, 0.4); 
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+      }
+      .card-cyan:hover { box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); }
+      .card-fuchsia:hover { box-shadow: 0 0 30px rgba(217, 70, 239, 0.1); }
+  }
 
   .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.5rem; }
   .icon-box { width: 3rem; height: 3rem; }
@@ -110,13 +141,38 @@ const skillCategories = [
 
   .progress-track { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; position: relative; }
   
-  /* DÔLEŽITÉ: width je 0, transition zabezpečí animáciu */
-  .progress-fill { height: 100%; width: 0; position: relative; border-radius: 99px; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+  /* --- PROGRESS BAR: MOBILE FIRST --- */
+  .progress-fill { 
+      height: 100%; 
+      width: 0; 
+      position: relative; 
+      border-radius: 99px; 
+      transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); 
+      /* Na mobile vypneme ťažké tiene */
+      box-shadow: none;
+  }
   
-  .card-cyan .progress-fill { background: linear-gradient(90deg, #0891b2, var(--cyan)); box-shadow: 0 0 10px var(--cyan); }
-  .card-fuchsia .progress-fill { background: linear-gradient(90deg, #a21caf, var(--fuchsia)); box-shadow: 0 0 10px var(--fuchsia); }
+  .card-cyan .progress-fill { background: linear-gradient(90deg, #0891b2, var(--cyan)); }
+  .card-fuchsia .progress-fill { background: linear-gradient(90deg, #a21caf, var(--fuchsia)); }
   
-  .glare { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: translateX(-100%); animation: shimmer 2s infinite; }
+  /* Odlesk (Glare) v základe skryjeme, aby nežral batériu na mobile */
+  .glare { display: none; }
+
+  /* --- DESKTOP EFEKTY PRE PROGRESS BAR --- */
+  @media (min-width: 992px) {
+      .card-cyan .progress-fill { box-shadow: 0 0 10px var(--cyan); }
+      .card-fuchsia .progress-fill { box-shadow: 0 0 10px var(--fuchsia); }
+      
+      /* Zapneme animáciu odlesku len na desktope */
+      .glare { 
+          display: block;
+          position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); 
+          transform: translateX(-100%); 
+          animation: shimmer 2s infinite; 
+      }
+  }
+
   @keyframes shimmer { 100% { transform: translateX(100%); } }
 
   .corner { position: absolute; width: 20px; height: 20px; border: 2px solid transparent; transition: all 0.3s; }
