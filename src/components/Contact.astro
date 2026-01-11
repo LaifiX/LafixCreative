@@ -226,6 +226,29 @@
   /* Fade In */
   .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
   .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+
+
+  /* ... (vaše existujúce štýly nechajte tak, pridajte toto na koniec) ... */
+
+/* 1. STAV ODOSLANÉ: Vynúti FIALOVÉ vyplnenie (rovnaké ako hover) */
+.submit-btn.sent-active {
+    color: white;              /* Biely text */
+    border-color: transparent; /* Zmizne obrys */
+    box-shadow: 0 0 30px rgba(217, 70, 239, 0.4); /* Žiara */
+    cursor: default;           /* Zmení kurzor */
+}
+
+/* Vynútime zobrazenie gradientu (ako pri hoveri) */
+.submit-btn.sent-active::before {
+    left: 0; 
+}
+
+/* 2. DISABLED STAV: Aby tlačidlo nezosivelo */
+.submit-btn:disabled {
+    opacity: 1;           /* Necháme ho plne viditeľné */
+    pointer-events: none; /* Vypne klikanie (zabráni posunu/dvojitému odoslaniu) */
+}
+
 </style>
 
 <script>
@@ -246,45 +269,64 @@
       if (btnText) btnText.textContent = 'Odosielam...';
       btn.style.opacity = '0.7';
       
-      // 2. Zber dát
-      const formData = new FormData(form as HTMLFormElement);
+      // 2. Zber dát (Oprava: odstránené "as HTMLFormElement")
+      const formData = new FormData(form);
 
-      // 3. Odoslanie na Netlify (AJAX)
-      // Posielame to na "/", ale musíme správne enkódovať dáta
+      // 3. Odoslanie
       fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData as any).toString()
+        // Oprava: odstránené "as any"
+        body: new URLSearchParams(formData).toString()
       })
       .then(() => {
-        // ÚSPECH
+        // --- ÚSPECH ---
+        
+        // 1. Zmeníme text na "Odoslané"
+        if (btnText) btnText.textContent = '✓ Odoslané';
+        
+        // 2. Vynútime fialové pozadie a zablokujeme tlačidlo
+        btn.classList.add('sent-active');
+        btn.disabled = true; 
+
+        // 3. Zobrazíme správu pod formulárom
         statusMsg.textContent = '✓ Správa bola úspešne odoslaná! Ďakujem.';
         statusMsg.className = 'status-message visible success';
         
-        (form as HTMLFormElement).reset();
+        // 4. Vyčistíme políčka
+        form.reset();
         
-        if (btnText) btnText.textContent = originalText;
-        btn.style.opacity = '1';
+        // 5. AUTOMATICKÝ RESET PO 4 SEKUNDÁCH
+        setTimeout(() => {
+            // Vrátime pôvodný text
+            if (btnText) btnText.textContent = originalText;
+            
+            // Odstránime "active" triedu (fialové pozadie zmizne)
+            btn.classList.remove('sent-active');
+            
+            // Povolíme opäť tlačidlo
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            
+            // Skryjeme správu pod formulárom
+            statusMsg.classList.remove('visible');
+            
+            // DÔLEŽITÉ PRE MOBIL: Odstránime focus
+            btn.blur(); 
+        }, 4000);
 
-        setTimeout(() => { statusMsg.classList.remove('visible'); }, 5000);
       })
       .catch(error => {
-        // CHYBA
+        // --- CHYBA ---
         console.error('Error:', error);
         statusMsg.textContent = '⚠ Niečo sa pokazilo. Skúste to neskôr.';
         statusMsg.className = 'status-message visible error';
         
+        // Reset hneď pri chybe
         if (btnText) btnText.textContent = originalText;
         btn.style.opacity = '1';
+        btn.disabled = false;
       });
     });
   }
-
-  // Observer pre animáciu
-  const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('is-visible');
-      });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
 </script>
