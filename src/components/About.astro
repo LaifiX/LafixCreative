@@ -165,16 +165,40 @@ import imgCard5 from '../assets/images/about/card5.jpg';
     
   }
 
-  /* Spoločné štýly kariet */
+/* Pôvodné nastavenie zmeňte na toto "Mobile-first" nastavenie */
   .grid-item {
-    background: var(--bg-card);
-    backdrop-filter: blur(10px);
+    /* 1. Na mobile dáme tmavšie/nepriehľadné pozadie, aby bol text čitateľný bez rozmazania */
+    background: #111827; /* Alebo veľmi tmavá šedá: rgba(17, 24, 39, 0.95) */
+    
+    /* 2. DÔLEŽITÉ: Vypneme blur na mobile */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none; /* Pre Safari */
+
     border: 1px solid var(--border-card);
     border-radius: 1.5rem;
     padding: 2rem;
     position: relative;
     overflow: hidden;
+    
+    /* 3. HARDVÉROVÁ AKCELERÁCIA: 
+       Toto povie GPU, aby s kartou zaobchádzalo ako s vrstvou. 
+       Výrazne to pomáha pri skrolovaní. */
+    transform: translateZ(0);
+    will-change: transform; 
+    
     transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+
+  /* --- DESKTOP EFEKTY (zapneme späť "sklo") --- */
+  @media (min-width: 992px) {
+    .grid-item {
+       /* Vrátime polopriehľadnosť */
+       background: var(--bg-card); 
+       
+       /* Zapneme blur len na silných strojoch */
+       backdrop-filter: blur(10px);
+       -webkit-backdrop-filter: blur(10px);
+    }
   }
 
   .grid-item:hover {
