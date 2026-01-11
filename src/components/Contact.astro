@@ -161,7 +161,13 @@
   }
 
   /* --- TLAČIDLO (Cyberpunk Style) --- */
-  .button-wrapper { text-align: center; margin-top: 2rem; }
+ .button-wrapper { 
+    display: flex;         /* Nahradí text-align: center */
+    justify-content: center; 
+    align-items: center;
+    margin-top: 2rem; 
+    width: 100%;
+}
 
   .submit-btn {
     position: relative;
@@ -177,6 +183,10 @@
     overflow: hidden;
     transition: all 0.3s;
     border-radius: 4px;
+    min-width: 250px;    /* Tlačidlo bude mať vždy aspoň túto šírku */
+    text-align: center;  /* Text vnútri bude vždy v strede */
+    display: flex;       /* Pre istotu vycentrujeme span vnútri */
+    justify-content: center;
   }
 
   /* Hover efekt: Vyplnenie gradientom */
