@@ -59,6 +59,7 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
                   width={600}
                   height={400}
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -170,17 +171,47 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
   }
 
   /* --- BLOG KARTY --- */
+  /* --- BLOG KARTY - OPTIMALIZOVANÉ --- */
+.blog-card {
+  /* 1. MOBILE FIRST: Žiadny blur, tmavšie pozadie pre čitateľnosť */
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.5s;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+
+  /* 2. Hardvérová akcelerácia pre plynulý posun */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* 3. DESKTOP: Zapneme "Glassmorphism" efekt až na veľkých obrazovkách */
+@media (min-width: 992px) {
   .blog-card {
     background: rgba(17, 24, 39, 0.5);
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(34, 211, 238, 0.2);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    transition: all 0.5s;
-    cursor: default; /* Už to nie je celé odkaz */
-    display: flex;
-    flex-direction: column;
+    -webkit-backdrop-filter: blur(4px);
   }
+}
+
+.blog-card:hover {
+  border-color: rgba(34, 211, 238, 0.8);
+  transform: translateY(-5px);
+  /* Na mobile zjemníme tieň, na desktope necháme výrazný */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 992px) {
+  .blog-card:hover {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+  }
+}
 
   .blog-card:hover {
     border-color: rgba(34, 211, 238, 0.8);
