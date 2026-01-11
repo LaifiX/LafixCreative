@@ -190,6 +190,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
   }
 
   /* Hover efekt: Vyplnenie gradientom */
@@ -212,6 +213,38 @@
   .submit-btn:hover::before {
     left: 0;
   }
+
+  @media (hover: hover) {
+    .submit-btn:hover {
+        color: white;
+        box-shadow: 0 0 30px rgba(217, 70, 239, 0.4);
+        border-color: transparent;
+    }
+
+    .submit-btn:hover::before {
+        left: 0; /* Vyplní sa len keď je tam myš */
+    }
+}
+
+/* --- STAV ODOSLANÉ (Funguje všade, aj na mobile) --- */
+/* Keď JS pridá túto triedu, tlačidlo sa vyplní */
+.submit-btn.sent-active {
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 0 30px rgba(217, 70, 239, 0.4);
+    cursor: default;
+}
+
+.submit-btn.sent-active::before {
+    left: 0; /* Vynútené vyplnenie */
+}
+
+/* Disabled stav */
+.submit-btn:disabled {
+    opacity: 1;
+    pointer-events: none;
+}
+
 
   /* Status správa */
   .status-message {
