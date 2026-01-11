@@ -171,7 +171,7 @@
 
   .submit-btn {
     position: relative;
-    padding: 1rem 3rem;
+    padding: 1rem 0rem;
     background: transparent;
     border: 1px solid var(--fuchsia);
     color: var(--fuchsia);
@@ -183,10 +183,13 @@
     overflow: hidden;
     transition: all 0.3s;
     border-radius: 4px;
-    min-width: 250px;    /* Tlačidlo bude mať vždy aspoň túto šírku */
-    text-align: center;  /* Text vnútri bude vždy v strede */
-    display: flex;       /* Pre istotu vycentrujeme span vnútri */
+    width: 100%;       /* Roztiahni sa */
+    max-width: 300px;  /* Ale maximálne do 300px (fixná šírka) */
+    
+    /* Flex pre centrovanie textu */
+    display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   /* Hover efekt: Vyplnenie gradientom */
@@ -261,57 +264,48 @@
 
       if (!statusMsg) return;
 
-      // 1. UI Loading
       const btn = form.querySelector('button');
       const btnText = btn.querySelector('.btn-text');
-      const originalText = btnText ? btnText.textContent : 'Odoslať';
+      const originalText = 'Odoslať Správu'; // Pôvodný text natvrdo, aby sa nemenil
       
-      if (btnText) btnText.textContent = 'Odosielam...';
+      // 1. OKAMŽITÝ LOCK (Zabráni posúvaniu a dvojklikom)
+      btn.disabled = true; 
       btn.style.opacity = '0.7';
+      if (btnText) btnText.textContent = 'Odosielam...';
       
-      // 2. Zber dát (Oprava: odstránené "as HTMLFormElement")
       const formData = new FormData(form);
 
-      // 3. Odoslanie
+      // 2. Odoslanie
       fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        // Oprava: odstránené "as any"
         body: new URLSearchParams(formData).toString()
       })
       .then(() => {
         // --- ÚSPECH ---
         
-        // 1. Zmeníme text na "Odoslané"
-        if (btnText) btnText.textContent = '✓ Odoslané';
+        if (btnText) btnText.textContent = 'Odoslané';
         
-        // 2. Vynútime fialové pozadie a zablokujeme tlačidlo
+        // Pridáme efekt (fialová výplň)
         btn.classList.add('sent-active');
-        btn.disabled = true; 
+        // Tlačidlo ostáva disabled (to sme nastavili už na začiatku)
 
-        // 3. Zobrazíme správu pod formulárom
         statusMsg.textContent = '✓ Správa bola úspešne odoslaná! Ďakujem.';
         statusMsg.className = 'status-message visible success';
         
-        // 4. Vyčistíme políčka
         form.reset();
         
-        // 5. AUTOMATICKÝ RESET PO 4 SEKUNDÁCH
+        // 3. RESET PO 4 SEKUNDÁCH
         setTimeout(() => {
-            // Vrátime pôvodný text
             if (btnText) btnText.textContent = originalText;
             
-            // Odstránime "active" triedu (fialové pozadie zmizne)
             btn.classList.remove('sent-active');
             
-            // Povolíme opäť tlačidlo
+            // Až teraz znova povolíme klikanie
             btn.disabled = false;
             btn.style.opacity = '1';
             
-            // Skryjeme správu pod formulárom
             statusMsg.classList.remove('visible');
-            
-            // DÔLEŽITÉ PRE MOBIL: Odstránime focus
             btn.blur(); 
         }, 4000);
 
@@ -322,7 +316,7 @@
         statusMsg.textContent = '⚠ Niečo sa pokazilo. Skúste to neskôr.';
         statusMsg.className = 'status-message visible error';
         
-        // Reset hneď pri chybe
+        // V prípade chyby musíme tlačidlo odomknúť hneď
         if (btnText) btnText.textContent = originalText;
         btn.style.opacity = '1';
         btn.disabled = false;
