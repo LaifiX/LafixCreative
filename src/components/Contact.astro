@@ -78,7 +78,7 @@
   }
 
   .container { max-width: 1200px; margin: 0 auto; }
-  .form-wrapper { max-width: 600px; margin: 0 auto; } /* Užší formulár pre lepší focus */
+  .form-wrapper { max-width: 600px; margin: 0 auto; }
 
   .section-title {
     text-align: center;
@@ -94,20 +94,17 @@
   .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem; /* Väčšie medzery pre vzdušnosť */
+    gap: 2.5rem;
   }
 
-  /* --- NOVÉ INPUTY (Underline Style) --- */
-  .input-group {
-    position: relative;
-    width: 100%;
-  }
+  /* --- INPUTY --- */
+  .input-group { position: relative; width: 100%; }
 
   .input-field {
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Jemná čiara */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding: 1rem 0;
     color: white;
     font-size: 1.1rem;
@@ -118,18 +115,16 @@
 
   .textarea { resize: vertical; min-height: 100px; }
 
-  /* Floating Label */
   .input-label {
     position: absolute;
     top: 1rem;
     left: 0;
     color: #9ca3af;
     font-size: 1.1rem;
-    pointer-events: none; /* Aby sa dalo klikať cez text */
+    pointer-events: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Animácia Labelu: Keď je focus alebo je vyplnené (placeholder-shown trik) */
   .input-field:focus ~ .input-label,
   .input-field:not(:placeholder-shown) ~ .input-label {
     top: -1.2rem;
@@ -139,7 +134,6 @@
     letter-spacing: 0.05em;
   }
 
-  /* Highlight Line (Animovaná čiara zospodu) */
   .input-highlight {
     position: absolute;
     bottom: 0;
@@ -150,28 +144,21 @@
     transition: width 0.4s ease;
   }
 
-  .input-field:focus ~ .input-highlight {
-    width: 100%; /* Roztiahne sa na celú šírku */
-  }
+  .input-field:focus ~ .input-highlight { width: 100%; }
+  .input-field:valid:not(:placeholder-shown) ~ .input-highlight { background: #10b981; width: 100%; }
 
-  /* Validácia (Zelená čiara pri platnom vstupe) */
-  .input-field:valid:not(:placeholder-shown) ~ .input-highlight {
-    background: #10b981; /* Emerald Green */
-    width: 100%;
-  }
-
-  /* --- TLAČIDLO (Cyberpunk Style) --- */
- .button-wrapper { 
-    display: flex;         /* Nahradí text-align: center */
+  /* --- TLAČIDLO (OPRAVENÉ) --- */
+  .button-wrapper { 
+    display: flex;
     justify-content: center; 
     align-items: center;
     margin-top: 2rem; 
     width: 100%;
-}
+  }
 
   .submit-btn {
     position: relative;
-    padding: 1rem 0rem;
+    padding: 1rem 0;
     background: transparent;
     border: 1px solid var(--fuchsia);
     color: var(--fuchsia);
@@ -183,17 +170,16 @@
     overflow: hidden;
     transition: all 0.3s;
     border-radius: 4px;
-    width: 100%;       /* Roztiahni sa */
-    max-width: 300px;  /* Ale maximálne do 300px (fixná šírka) */
+    width: 100%;
+    max-width: 300px;
     
-    /* Flex pre centrovanie textu */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1;
   }
 
-  /* Hover efekt: Vyplnenie gradientom */
+  /* Pozadie (gradient) skryté vľavo */
   .submit-btn::before {
     content: '';
     position: absolute;
@@ -204,16 +190,10 @@
     z-index: -1;
   }
 
-  .submit-btn:hover {
-    color: white;
-    box-shadow: 0 0 30px rgba(217, 70, 239, 0.4);
-    border-color: transparent;
-  }
-
-  .submit-btn:hover::before {
-    left: 0;
-  }
-
+  /* !!! TU BOLA CHYBA !!!
+     Vymazal som globálny hover efekt.
+     Teraz je hover efekt len vnútri tejto podmienky pre myš:
+  */
   @media (hover: hover) {
     .submit-btn:hover {
         color: white;
@@ -222,31 +202,30 @@
     }
 
     .submit-btn:hover::before {
-        left: 0; /* Vyplní sa len keď je tam myš */
+        left: 0; /* Vyplní sa len keď je tam fyzická myš */
     }
-}
+  }
 
-/* --- STAV ODOSLANÉ (Funguje všade, aj na mobile) --- */
-/* Keď JS pridá túto triedu, tlačidlo sa vyplní */
-.submit-btn.sent-active {
+  /* --- STAV ODOSLANÉ (Active) --- */
+  /* Toto zabezpečí vyplnenie farbou, keď to prikáže JavaScript */
+  .submit-btn.sent-active {
     color: white;
     border-color: transparent;
     box-shadow: 0 0 30px rgba(217, 70, 239, 0.4);
     cursor: default;
-}
+  }
 
-.submit-btn.sent-active::before {
+  .submit-btn.sent-active::before {
     left: 0; /* Vynútené vyplnenie */
-}
+  }
 
-/* Disabled stav */
-.submit-btn:disabled {
+  /* --- DISABLED STAV --- */
+  .submit-btn:disabled {
     opacity: 1;
     pointer-events: none;
-}
+  }
 
-
-  /* Status správa */
+  /* --- STATUS SPRÁVA --- */
   .status-message {
     text-align: center;
     margin-top: 2rem;
@@ -262,30 +241,9 @@
   /* Fade In */
   .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
   .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
-
-
-  /* ... (vaše existujúce štýly nechajte tak, pridajte toto na koniec) ... */
-
-/* 1. STAV ODOSLANÉ: Vynúti FIALOVÉ vyplnenie (rovnaké ako hover) */
-.submit-btn.sent-active {
-    color: white;              /* Biely text */
-    border-color: transparent; /* Zmizne obrys */
-    box-shadow: 0 0 30px rgba(217, 70, 239, 0.4); /* Žiara */
-    cursor: default;           /* Zmení kurzor */
-}
-
-/* Vynútime zobrazenie gradientu (ako pri hoveri) */
-.submit-btn.sent-active::before {
-    left: 0; 
-}
-
-/* 2. DISABLED STAV: Aby tlačidlo nezosivelo */
-.submit-btn:disabled {
-    opacity: 1;           /* Necháme ho plne viditeľné */
-    pointer-events: none; /* Vypne klikanie (zabráni posunu/dvojitému odoslaniu) */
-}
-
 </style>
+
+
 
 <script>
   const form = document.getElementById('contact-form');
