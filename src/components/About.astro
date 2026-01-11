@@ -8,6 +8,7 @@ import { Image } from 'astro:assets';
 import imgCard1 from '../assets/images/about/card1.jpg';
 import imgCard3 from '../assets/images/about/card3.jpg';
 import imgCard21 from '../assets/images/about/card21.jpg';
+import imgCard5 from '../assets/images/about/card5.jpg';
 ---
 
 <section id="about" class="about-section">
@@ -52,13 +53,13 @@ import imgCard21 from '../assets/images/about/card21.jpg';
                 alt="Peter - Lifestyle" 
                 class="profile-img slide"
             />
-<!--
-             <img 
-                src="/images/card4.jpg" 
+
+             <Image 
+                src={imgCard5} loading="lazy" 
                 alt="Peter - Lifestyle" 
                 class="profile-img slide"
             />
-        -->
+     
              <Image 
                 src={imgCard21} loading="lazy"
                 alt="Peter - Lifestyle" 
@@ -273,6 +274,54 @@ import imgCard21 from '../assets/images/about/card21.jpg';
   /* Animation Utility */
   .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
   .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+/* --- TABLET OPTIMALIZÁCIA (768px - 991px) --- */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .profile-card {
+      /* 1. Nastavíme fixný štvorec */
+      aspect-ratio: 1 / 1; 
+      
+      /* 2. Dôležité: Musíme nastaviť šírku na 100%, aby aspect-ratio mal z čoho počítať */
+      width: 100%;
+      
+      /* Reset výšky */
+      min-height: unset; 
+      height: auto;
+      
+      /* Centrovanie a obmedzenie maximálnej šírky */
+      max-width: 450px; 
+      margin: 0 auto; 
+    }
+
+    /* 3. OPRAVA ZMIZNUTIA: 
+       Wrapper musíme "vytiahnuť" na celú plochu karty absolútnou pozíciou. 
+       Tým sa zaručí, že fotky budú mať priestor. */
+    .profile-card .image-wrapper {
+        position: absolute;
+        inset: 0; /* top:0, right:0, bottom:0, left:0 */
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-img {
+       /* Centrovanie na tvár */
+       object-position: 50% 15% !important; 
+    }
+    
+    /* Úprava textu */
+    .profile-info {
+        bottom: 1.5rem;
+        left: 1.5rem;
+    }
+    
+    .profile-info h4 {
+        font-size: 1.5rem; 
+    }
+  }
+
+  
+  
+
+
 </style>
 
 <script>
