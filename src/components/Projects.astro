@@ -375,6 +375,7 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
                     width={600}  
                     height={400}
                     loading="lazy" 
+                    decoding="async"
                 />
               </div>
               
@@ -435,7 +436,34 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
   .project-card { animation: fadeUp 0.5s ease-out forwards; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-  .card-inner { background-color: rgba(17, 24, 39, 0.5); backdrop-filter: blur(4px); border: 1px solid rgba(34, 211, 238, 0.2); border-radius: 0.5rem; overflow: hidden; transition: all 0.5s; height: 100%; display: flex; flex-direction: column; }
+  
+  /* 1. Základný štýl pre MOBILY (Rýchly, bez efektov) */
+.card-inner { 
+    background-color: rgba(17, 24, 39, 0.95); /* Menej priehľadné, aby bol text čitateľný bez bluru */
+    backdrop-filter: none; /* Vypnutý blur = 60fps */
+    -webkit-backdrop-filter: none;
+    
+    border: 1px solid rgba(34, 211, 238, 0.2); 
+    border-radius: 0.5rem; 
+    overflow: hidden; 
+    transition: all 0.5s; 
+    height: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    
+    /* Hardvérová akcelerácia pre pohyb */
+    transform: translateZ(0);
+}
+
+/* 2. Efekty zapneme len pre DESKTOP (od 992px vyššie) */
+@media (min-width: 992px) {
+    .card-inner {
+        background-color: rgba(17, 24, 39, 0.6); /* Viac priehľadné */
+        backdrop-filter: blur(4px); /* Tu si to môžeme dovoliť */
+        -webkit-backdrop-filter: blur(4px);
+    }
+}
+
   .card-inner:hover { border-color: rgba(34, 211, 238, 0.8); box-shadow: 0 0 20px rgba(34, 211, 238, 0.4); }
   
   .image-wrapper { overflow: hidden; height: 14rem; }
