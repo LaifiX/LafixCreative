@@ -51,4 +51,4 @@ Na základe týchto základov (cca 2-3 roky večerného štúdia popri práci) u
 
 Mnoho kvalitných kurzov je dostupných zadarmo. Osobne môžem odporučiť YouTube kanál **Hackni svou budoucnost**, v ktorom lektor **David Šetek** veľmi zrozumiteľným spôsobom uvádza študentov do sféry programovania. 
 
-Ak sa naučíte tieto základy, už Vám nebude treba žiadny platený kurz vibe-codingu a Vaša projekty budú mať konečne skutočnú, nielen „vizuálnu“ hodnotu.
+Ak sa naučíte tieto základy, už Vám nebude treba žiadny platený kurz vibe-codingu a Vaše projekty budú mať konečne skutočnú, nielen „vizuálnu“ hodnotu.
