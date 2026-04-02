@@ -23,15 +23,15 @@ Ak by ste vedeli určovať svetové strany na základe nočnej oblohy, dostali b
 
 ## Pasca „AI influencerov“
 
-Vibe-coding učia pomerne často ľudia, ktorí nemajú za sebou programátorskú minulosť a často sa v kódoch ani nevyznajú. Väčšinou sú to marketéri, ktorí z generovania obrázkov a videí prešli na propagáciu vibe-codingu. Naštudovali si zahraničné zdroje, kurzy, tutoriály ako si spojazdniť AI agentov, ktorí za nich píšu kódy, založili si rôzne platené komunity a snažia sa „zviesť“ na vlne AI bubliny. 
+Vibe-coding učia pomerne často ľudia, ktorí nemajú za sebou programátorskú minulosť a často sa v kódoch ani nevyznajú. Väčšinou, čo som spozoroval, sú to marketéri.  Naštudovali si zahraničné zdroje, kurzy, tutoriály ako si spojazdniť AI agentov, ktorí za nich píšu kódy, založili si rôzne platené komunity a snažia sa „zviesť“ na vlne AI bubliny. 
 
-Ich bežná cieľovka sú nadšenci, ktorí sa dajú ľahko získať „wow efektom“. Tí vidia, ako sa im pri generovaní pred očami vytvoril vizuál napr. peknej webovej stránky. V ich mysliach preblyskne neraz myšlienka, že odteraz si môže každý vytvoriť v rámci IT čo chce a nikto nepotrebuje nikoho. **Samozrejme, je to veľký omyl.**
+Ich bežná cieľovka sú nadšenci, ktorí sa dajú ľahko získať „wow efektom“. Tí vidia, ako sa im pri generovaní pred očami vytvorí vizuál napr. peknej webovej stránky. V ich mysliach preblyskne neraz myšlienka, že odteraz si môže každý ľahko vytvoriť v rámci IT čo chce a nikoho pritom nepotrebuje. **Samozrejme, je to veľký omyl.**
 
 ## Reálne hrozby a nekvalitný kód
 
 Vibe-coding má obrovské množstvo nástrah, ktoré sa už začali prejavovať:
 
-* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho zabezpečiť ani z hľadiska kybernetickej bezpečnosti. Nedávno som musel jednému českému AI influencerovi, ktorý tvrdil, že všetci robia hnusné weby, vysvetľovať, prečo je jeho vygenerovaná napohľad ultra-moderná stránka z hľadiska výkonu a času načítania v mobilnom zariadení nepoužiteľná. Pomocou AI rozsekal video na 40-50 obrázkov a vygenerovaným kódom v JavaScripte ich pri skrolovaní rozpohyboval. Výsledok? Niekoľko megabajtová stránka, ktorá sa na mobile 8 sekúnd sťahovala. Následne musel návštevník 3x swipnúť po displeji, aby mu animácia zmizla z obrazovky a dostal sa konečne k informáciám. Ďalšiemu AI influencerovi, ktorý tvrdil, že web developeri skončili, lebo ich AI nahradila, niekto jednoduchým „SQL injekčným útokom“ vybielil databázu a odcudzil osobné údaje zákazníkov. A takýchto prípadov zo dňa na deň pribúda...
+* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho optimalizovať a ani zabezpečiť z hľadiska kybernetickej bezpečnosti. Nedávno som musel jednému českému AI influencerovi, ktorý tvrdil, že všetci robia hnusné weby, vysvetľovať, prečo je jeho vygenerovaná napohľad ultra-moderná stránka z hľadiska výkonu a času načítania v mobilnom zariadení nepoužiteľná. Pomocou AI rozsekal video na 40-50 obrázkov a vygenerovaným kódom v JavaScripte ich pri skrolovaní rozpohyboval. Výsledok? Niekoľko megabajtová stránka, ktorá sa na mobile 8 sekúnd sťahovala. Následne musel návštevník 3x swipnúť po displeji, aby mu animácia zmizla z obrazovky a dostal sa konečne k informáciám. Ďalšiemu AI influencerovi, ktorý tvrdil, že web developeri skončili, lebo ich AI nahradila, niekto jednoduchým „SQL injekčným útokom“ vybielil databázu a odcudzil osobné údaje zákazníkov. A takýchto prípadov zo dňa na deň pribúda...
 * **Technický dlh:** Toto je pasca. AI vygeneruje kód, ktorý dnes funguje, ale je to chaotický „zliepanec“. Ak budete chcieť o pol roka niečo zmeniť, nikto sa v tom nevyzná. Profesionálny programátor takýto kód často odmietne opravovať – je jednoduchšie napísať to celé odznova.
 * **Potreba kontroly:** Sám som vibe-kódoval a musel som AI doslova až „vynadať“, pretože mi lepila dokopy nekvalitný kód a ponúkala mi naoko pekné, ale lacné a nekvalitné riešenia. Ak treba niečo kontrolovať, tak práve umelú inteligenciu a jej kód.
 
@@ -41,9 +41,9 @@ Tu sa dostávame k podstate veci. Aby ste mohli AI efektívne usmerňovať v ná
 
 Bez učenia sa to nepôjde. Treba sa pripraviť na systematické štúdium. Ak chcete tú Severku v kóde vidieť, zamerajte sa na túto „veľkú trojku“:
 
-1. **HTML a CSS** – Základ každej stránky. Zvládnete ich za pár mesiacov.
-2. **JavaScript** – Programovací jazyk pre interaktivitu ale i backend. Učiť sa programovať je už trochu náročnejšie. Počítajte minimálne s rokom štúdia, aby ste mu skutočne rozumeli.
-3. **Frameworky a Databázy** – Pochopenie toho, ako sa dáta ukladajú, prenášajú. Ktoré technológie dobre spolupracujú a podobne.
+1. **HTML a CSS** – Základ každej stránky. Zvládnete ich za pár mesiacov a veľa s nimi dokážete.
+2. **JavaScript** – Programovací jazyk pre interaktivitu ale i backend. Počítajte minimálne s rokom štúdia, aby ste mu skutočne rozumeli.
+3. **Frameworky a Databázy** – Pochopenie toho, ako sa dáta ukladajú, prenášajú, ktoré technológie dobre spolupracujú a podobne.
 
 Na týchto základoch (cca 2 roky večerného štúdia popri práci) už dokážete vyvíjať projekty, ktorým budete rozumieť. Budete vedieť kontrolovať kvalitu výstupu z AI a dosiahnete oveľa lepšie výsledky než bežný vibe-kóder, ktorý vidí len vizuál.
 
