@@ -5,10 +5,10 @@ import { Image } from 'astro:assets';
 
 // 1. Importuj svoje lokálne obrázky
 // (Uisti sa, že názvy súborov sedia presne s tými, čo máš v priečinku)
+import imgCard4 from '../assets/images/about/card4.jpg';
 import imgCard1 from '../assets/images/about/card1.jpg';
 import imgCard3 from '../assets/images/about/card3.jpg';
 import imgCard21 from '../assets/images/about/card21.jpg';
-import imgCard5 from '../assets/images/about/card5.jpg';
 ---
 
 <section id="about" class="about-section">
@@ -28,10 +28,12 @@ import imgCard5 from '../assets/images/about/card5.jpg';
 </p>
 
 <p>
-  Pomáham firmám zjednodušovať procesy, automatizovať rutinu, zvyšovať konverzie a vytvárať online prezentácie, ktoré
-  <span class="highlight-cyan">reálne zarábajú.</span>
-  Či už potrebujete web, AI automatizáciu, produktové fotky, reklamy alebo naučiť tím využívať AI —
-  <span class="highlight-cyan"><strong>všetko dostanete s obchodným pohľadom a merateľným dopadom.</strong></span>
+  Zjednodušujem procesy, automatizujem rutinu, vyvíjam aplikácie a mediálne produkty, ktoré
+  <span class="highlight-cyan">prinášajú výsledky, šetria čas i náklady.</span> </p>
+
+  <p>
+  Či už ide o web, automatizáciu, obsah alebo AI —
+<span class="highlight-cyan"><strong>spoločne nájdeme riešenie s reálnym dopadom na váš biznis.</strong></span>
 </p>
 
 
@@ -41,7 +43,7 @@ import imgCard5 from '../assets/images/about/card5.jpg';
       <div class="grid-item profile-card" id="tilt-card">
         <div class="image-wrapper">
             <Image 
-                src={imgCard3} 
+                src={imgCard4} 
                 alt="Peter - Developer" 
                 class="profile-img slide active"
             />
@@ -54,13 +56,14 @@ import imgCard5 from '../assets/images/about/card5.jpg';
                 class="profile-img slide"
             />
 
+     
              <Image 
-                src={imgCard5} loading="lazy" 
+                src={imgCard3} loading="lazy"
                 alt="Peter - Lifestyle" 
                 class="profile-img slide"
             />
-     
-             <Image 
+
+            <Image 
                 src={imgCard21} loading="lazy"
                 alt="Peter - Lifestyle" 
                 class="profile-img slide"
