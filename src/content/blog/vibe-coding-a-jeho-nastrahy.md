@@ -19,7 +19,7 @@ Je to zaužívaný pojem pre snahu o programovanie bez znalostí programovania p
 
 Ak by som to mal obrazne opísať, vibe kódovať bez znalostí kódu a technológií je, akoby ste sa stratili o polnoci v hustom lese a nevedeli sa z neho vymotať. Viete len, že východ z lesa je smerom na sever. Nad hlavou síce máte hviezdy nočnej oblohy, ale neviete v nich „čítať“. 
 
-Ak by ste vedeli určovať svetové strany na základe nočnej oblohy, dostali by ste sa z lesa rýchlo a efektívne. Tí, ktorí poznajú aspoň základy programovania, nájdu tú **Severku** skôr. Tí, ktorí nemajú absolútne vedomosti ani skúsenosti z programovania idú "na slepo".
+Ak by ste vedeli určovať svetové strany na základe nočnej oblohy, dostali by ste sa z lesa rýchlo a efektívne. Tí, ktorí poznajú aspoň základy programovania, nájdu tú **Severku** skôr. Tí, ktorí nemajú absolútne vedomosti ani skúsenosti z programovania pôjdu ďalej "na slepo".
 
 ## Pasca „AI influencerov“
 
@@ -31,7 +31,7 @@ Ich bežná cieľovka sú nadšenci, ktorí sa dajú ľahko získať "wow efekto
 
 Vibe-coding má obrovské množstvo nástrah, ktoré sa už začali prejavovať:
 
-* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho zabezpečiť z hľadiska kybernetickej bezpečnosti a už vôbec nerieši rýchlosť načítania. Nedávno som musel jednému českému AI influencerovi, ktorý tvrdil, že všetci robia hnusné weby, vysvetľovať, prečo je jeho vygenerovaná napohľad ultra-moderná stránka z hľadiska výkonu a času načítania v mobilnom zariadení v bežnej praxi nepoužiteľná. Pomocou AI rozsekal video na 40-50 obrázkov a pomocou JavaScriptu ich pri skrolovaní rozpohyboval. Výsledok - niekoľko megabajtová stránka, ktorá sa na mobile 8 sekúnd sťahovala. Následne musel návštevník 3x swipnúť po mobile, aby mu animácia konečne zmizla z obrazovky a človek sa dostal k informáciam. Ďaľšiemu AI influencerovi, ktorý tvrdil, že web developeri skončili, lebo ich AI nahradila, niekto jednoduchým " SQL injekčným útokom" vybielil databázu a osobné údaje zákazníkov. A takýchto prípadov zo dňa na deň rastie...
+* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho zabezpečiť z hľadiska kybernetickej bezpečnosti a už vôbec nerieši rýchlosť načítania. Nedávno som musel jednému českému AI influencerovi, ktorý tvrdil, že všetci robia hnusné weby, vysvetľovať, prečo je jeho vygenerovaná napohľad ultra-moderná stránka z hľadiska výkonu a času načítania v mobilnom zariadení v bežnej praxi nepoužiteľná. Pomocou AI rozsekal video na 40-50 obrázkov a pomocou AI vygenerovanom kóde v JavaScripte ich pri skrolovaní rozpohyboval. Výsledok - niekoľko megabajtová stránka, ktorá sa na mobile 8 sekúnd sťahovala. Následne musel návštevník 3x swipnúť po displeji mobilu, aby mu animácia konečne zmizla z obrazovky a dostal sa k informáciam. Ďaľšiemu AI influencerovi, ktorý tvrdil, že web developeri skončili, lebo ich AI nahradila, niekto jednoduchým " SQL injekčným útokom" vybielil databázu a osobné údaje zákazníkov. A takýchto prípadov zo dňa na deň rastie...
 * **Technický dlh:** Toto je pasca. AI vygeneruje kód, ktorý dnes funguje, ale je to chaotický „zliepanec“. Ak budete chcieť o pol roka niečo zmeniť, nikto sa v tom nevyzná. Profesionálny programátor takýto kód často odmietne opravovať – je jednoduchšie napísať to celé odznova.
 * **Potreba kontroly:** Sám som vibe-kódoval a musel som AI doslova až „vynadať“, pretože mi lepila dokopy nekvalitný kód a ponúkala mi naoko pekné, ale lacné a nekvalitné riešenia. Ak treba niekoho kontrolovať, tak práve umelú inteligenciu a jej kód.
 
