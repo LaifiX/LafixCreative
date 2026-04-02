@@ -3,7 +3,7 @@ title: "Vibe coding a jeho reálne nástrahy: Prečo nenaletieť reklamám na r�
 excerpt: "Vibe coding je hitom dnešnej doby, ale bez znalosti základov kódu sa v ňom ľahko stratíte. Zistite, prečo AI potrebuje dozor a ako sa naučiť programovať správne a zadarmo."
 image: "../../assets/images/blog/vibecoding.jpg"
 tags: ["AI", "Programovanie", "Vzdelávanie", "Vibe Coding"]
-author: "Autor"
+author: "Mgr. Peter Beňo"
 date: 2026-04-02
 ---
 
