@@ -19,11 +19,11 @@ Je to zaužívaný pojem pre snahu o programovanie bez znalostí programovania p
 
 Ak by som to mal obrazne opísať, vibe kódovať bez znalostí kódu a technológií je, akoby ste sa stratili o polnoci v hustom lese a nevedeli sa z neho vymotať. Viete len, že východ z lesa je smerom na sever. Nad hlavou síce máte hviezdy nočnej oblohy, ale neviete v nich „čítať“. 
 
-Ak by ste vedeli určovať svetové strany na základe nočnej oblohy, dostali by ste sa z lesa rýchlo a efektívne. Tí, ktorí poznajú aspoň základy programovania, nájdu tú **Severku** skôr. Tí, ktorí nemajú absolútne vedomosti ani skúsenosti z programovania pôjdu ďalej "na slepo".
+Ak by ste vedeli určovať svetové strany na základe nočnej oblohy, dostali by ste sa z lesa rýchlo a efektívne. Tí, ktorí poznajú aspoň základy programovania, nájdu tú **Severku** skôr. Tí, ktorí nemajú absolútne vedomosti ani skúsenosti z programovania pôjdu ďalej "naslepo".
 
 ## Pasca „AI influencerov“
 
-Vibe-coding učia pomerne často ľudia, ktorí nemajú za sebou programátorskú minulosť a často sa v kódoch ani nevyznajú. Väčšinou sú to marketéri, ktorí z generovania obrázkov a videí prešli na vibe-coding. Naštudovali si zahraničné zdroje, kurzy, tutoriály ako si spojazdniť AI agentov, ktorí za nich píšu kódy, založili si rôzne platené komunity a snažia sa "zviesť" na vlne AI bubliny a ideálne aj so ziskom.
+Vibe-coding učia pomerne často ľudia, ktorí nemajú za sebou programátorskú minulosť a často sa v kódoch ani nevyznajú. Väčšinou sú to marketéri, ktorí z generovania obrázkov a videí prešli na propagáciu vibe-codingu. Naštudovali si zahraničné zdroje, kurzy, tutoriály ako si spojazdniť AI agentov, ktorí za nich píšu kódy, založili si rôzne platené komunity a snažia sa "zviesť" na vlne AI bubliny a ideálne aj so ziskom.
 
 Ich bežná cieľovka sú nadšenci, ktorí sa dajú ľahko získať "wow efektom". Tí vidia, ako sa im pri generovaní pred očami vytvorí vizuál napr. webovej stránky. V ich mysliach preblyskne neraz myšlienka, že odteraz si môže každý vytvoriť v rámci IT čo chce a nikto nepotrebuje nikoho. **Samozrejme, je to veľký omyl.**
 
