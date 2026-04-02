@@ -31,7 +31,7 @@ Tá je z toho nadšená, pretože vidí, ako sa jej pred očami vytvoril vizuál
 
 Vibe-coding má obrovské množstvo nástrah, ktoré sa už začali prejavovať:
 
-* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho zabezpečiť z hľadiska kybernetickej bezpečnosti a už vôbec nerieši rýchlosť načítania. Nedávno som musel jednému českému AI influencerovi vysvetľovať, prečo je jeho napohľad ultra-moderná stránka z výkonu a čas načítania v mobilnom zariadení v bežnej praxi nepoužiteľná.
+* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho zabezpečiť z hľadiska kybernetickej bezpečnosti a už vôbec nerieši rýchlosť načítania. Nedávno som musel jednému českému AI influencerovi vysvetľovať, prečo je jeho napohľad ultra-moderná stránka z hľadiska výkonu a času načítania v mobilnom zariadení v bežnej praxi nepoužiteľná.
 * **Technický dlh:** Toto je pasca. AI vygeneruje kód, ktorý dnes funguje, ale je to chaotický „zliepanec“. Ak budete chcieť o pol roka niečo zmeniť, nikto sa v tom nevyzná. Profesionálny programátor takýto kód často odmietne opravovať – je jednoduchšie napísať to celé odznova.
 * **Potreba kontroly:** Sám som vibe-kódoval a musel som AI doslova „nadávať“, prečo zliepa dokopy nekvalitný kód a ponúka mi naoko lacné riešenia. Ak niekoho potrebuje človek kontrolovať, tak je to práve AI.
 
