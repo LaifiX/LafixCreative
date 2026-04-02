@@ -35,7 +35,7 @@ Vibe-coding má obrovské množstvo nástrah, ktoré sa už začali prejavovať:
 * **Technický dlh:** Toto je pasca. AI vygeneruje kód, ktorý dnes funguje, ale je to chaotický „zliepanec“. Ak budete chcieť o pol roka niečo zmeniť, nikto sa v tom nevyzná. Profesionálny programátor takýto kód často odmietne opravovať – je jednoduchšie napísať to celé odznova.
 * **Potreba kontroly:** Sám som vibe-kódoval a musel som AI doslova až „vynadať“, pretože mi lepila dokopy nekvalitný kód a ponúkala mi naoko pekné, ale lacné a nekvalitné riešenia. Ak treba niečo kontrolovať, tak práve umelú inteligenciu a jej kód.
 
-Tu sa dostávame k podstate veci. Aby ste mohli AI efektívne usmerňovať v nástrojoch ako **Cursor**, **Claude 3.5 Sonnetgit** či **v0**, musíte vedieť, čo od nich presne pýtať. AI je geniálny *asistent*, ale mizerný *architekt*. Bez základov ste len pasažierom v aute bez šoféra odkázaný na milosť.
+Tu sa dostávame k podstate veci. Aby ste mohli AI efektívne usmerňovať v nástrojoch ako **Cursor**, **Claude 3.5 Sonnetgit** či **v0**, musíte vedieť, čo od nich presne pýtať. AI je geniálny *asistent*, ale mizerný *architekt*. Bez základov ste len pasažierom v aute bez šoféra.
 
 ## Ako sa naučiť vibe-coding kvalitne a zadarmo?
 
