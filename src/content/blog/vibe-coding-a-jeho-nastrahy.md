@@ -31,7 +31,7 @@ Tá je z toho nadšená, pretože vidí, ako sa jej pred očami vytvoril vizuál
 
 Vibe-coding má obrovské množstvo nástrah, ktoré sa už začali prejavovať:
 
-* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho zabezpečiť z hľadiska kybernetickej bezpečnosti a už vôbec nerieši rýchlosť načítania. Nedávno som musel jednému českému AI influencerovi vysvetľovať, prečo je jeho napohľad ultra-moderná stránka v bežnej praxi nepoužiteľná.
+* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho zabezpečiť z hľadiska kybernetickej bezpečnosti a už vôbec nerieši rýchlosť načítania. Nedávno som musel jednému českému AI influencerovi vysvetľovať, prečo je jeho napohľad ultra-moderná stránka z výkonu a čas načítania v mobilnom zariadení v bežnej praxi nepoužiteľná.
 * **Technický dlh:** Toto je pasca. AI vygeneruje kód, ktorý dnes funguje, ale je to chaotický „zliepanec“. Ak budete chcieť o pol roka niečo zmeniť, nikto sa v tom nevyzná. Profesionálny programátor takýto kód často odmietne opravovať – je jednoduchšie napísať to celé odznova.
 * **Potreba kontroly:** Sám som vibe-kódoval a musel som AI doslova „nadávať“, prečo zliepa dokopy nekvalitný kód a ponúka mi naoko lacné riešenia. Ak niekoho potrebuje človek kontrolovať, tak je to práve AI.
 
@@ -42,7 +42,7 @@ Tu sa dostávame k podstate veci. Aby ste mohli AI efektívne usmerňovať v ná
 Bez učenia to nepôjde. Treba sa pripraviť na systematické štúdium. Ak chcete tú Severku v kóde vidieť, zamerajte sa na túto „veľkú trojku“:
 
 1.  **HTML a CSS** – Základ každej stránky. Zvládnete ich približne za pol roka.
-2.  **JavaScript** – Programovací jazyk pre interaktivitu. Počítajte s minimálne rokom štúdia, aby ste mu skutočne rozumeli.
+2.  **JavaScript** – Programovací jazyk pre interaktivitu ale i backend. Počítajte s minimálne rokom štúdia, aby ste mu skutočne rozumeli.
 3.  **Frameworky a Databázy** – Pochopenie toho, ako sa dáta ukladajú a prenášajú.
 
 Na základe týchto základov (cca 2-3 roky večerného štúdia popri práci) už dokážete vyvíjať projekty, ktorým budete rozumieť. Budete vedieť kontrolovať kvalitu výstupu z AI a dosiahnete oveľa lepšie výsledky než bežný vibe-kóder, ktorý vidí len vizuál.
