@@ -9,7 +9,7 @@ date: 2026-04-02
 
 V poslednej dobe ste možno aj Vy zaregistrovali zvýšenú ponuku rôznych platených kurzov na tzv. **vibe coding**. Možno na Vás tiež vyskakujú rôzne modálne okná, reklamy, videá, v ktorých tvrdia, že dnes je doba, kedy môžete tvoriť aplikácie, webstránky a iné veci bez toho, aby ste vedeli programovať.
 
-Čiastočne je to pravda, ale povedzme si, prečo by ste týmto reklamám nemali „naletieť“ a minúť tak svoje peniaze a ako sa naozaj naučiť „vibe – kódovať“ kvalitne a správne, ak máte o túto zručnosť seriózny záujem.
+Čiastočne je to pravda, ale povedzme si, prečo by ste týmto reklamám nemali „naletieť“ a minúť tak svoje peniaze a ako sa naozaj naučiť „vibe – kódovať“ kvalitne a správne.
 
 ## Čo je to vibe-coding?
 
@@ -19,27 +19,27 @@ Je to zaužívaný pojem pre snahu o programovanie bez znalostí programovania p
 
 Ak by som to mal obrazne opísať, vibe kódovať bez znalostí kódu a technológií je, akoby ste sa stratili o polnoci v hustom lese a nevedeli sa z neho vymotať. Viete len, že východ z lesa je smerom na sever. Nad hlavou síce máte hviezdy nočnej oblohy, ale neviete v nich „čítať“. 
 
-Ak by ste vedeli určovať svetové strany na základe nočnej oblohy, dostali by ste sa z lesa rýchlo a efektívne. Tí, čo poznajú aspoň trochu kód a technológie, nájdu tú **Severku** skôr. A to je ten hlavný problém.
+Ak by ste vedeli určovať svetové strany na základe nočnej oblohy, dostali by ste sa z lesa rýchlo a efektívne. Tí, ktorí poznajú aspoň základy programovania, nájdu tú **Severku** skôr. Tí, ktorí nemajú absolútne vedomosti ani skúsenosti z programovania idú "na slepo".
 
 ## Pasca „AI influencerov“
 
-Vibe-coding učia často ľudia, ktorí nemajú za sebou programátorskú minulosť a často sa v kódoch ani nevyznajú. Naštudovali si zahraničné zdroje, kurzy, tutoriály ako si spojazdniť AI agentov, ktorí za nich píšu kódy, a učia za peniaze tieto „skilly“ bežnú populáciu. 
+Vibe-coding učia pomerne často ľudia, ktorí nemajú za sebou programátorskú minulosť a často sa v kódoch ani nevyznajú. Väčšinou sú to marketéri, ktorí z generovania obrázkov a videí prešli na vibe-coding. Naštudovali si zahraničné zdroje, kurzy, tutoriály ako si spojazdniť AI agentov, ktorí za nich píšu kódy, založili si rôzne platené komunity a snažia sa "zviesť" na vlne AI bubliny a ideálne aj so ziskom.
 
-Tá je z toho nadšená, pretože vidí, ako sa jej pred očami vytvoril vizuál webovej stránky. V ich mysliach preblyskne myšienka, že odteraz si môže každý vytvoriť v rámci IT čo chce a nikto nepotrebuje nikoho. **Samozrejme, je to veľký omyl.**
+Ich bežná cieľovka sú nadšenci, ktorí sa dajú ľahko získať "wow efektom". Tí vidia, ako sa im pri generovaní pred očami vytvorí vizuál napr. webovej stránky. V ich mysliach preblyskne neraz myšlienka, že odteraz si môže každý vytvoriť v rámci IT čo chce a nikto nepotrebuje nikoho. **Samozrejme, je to veľký omyl.**
 
 ## Reálne hrozby a nekvalitný kód
 
 Vibe-coding má obrovské množstvo nástrah, ktoré sa už začali prejavovať:
 
-* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho zabezpečiť z hľadiska kybernetickej bezpečnosti a už vôbec nerieši rýchlosť načítania. Nedávno som musel jednému českému AI influencerovi vysvetľovať, prečo je jeho napohľad ultra-moderná stránka z hľadiska výkonu a času načítania v mobilnom zariadení v bežnej praxi nepoužiteľná.
+* **Bezpečnosť a optimalizácia:** Žiadna AI nenapíše dokonalý a pevný kód. Nedokáže ho zabezpečiť z hľadiska kybernetickej bezpečnosti a už vôbec nerieši rýchlosť načítania. Nedávno som musel jednému českému AI influencerovi, ktorý tvrdil, že všetci robia hnusné weby, vysvetľovať, prečo je jeho vygenerovaná napohľad ultra-moderná stránka z hľadiska výkonu a času načítania v mobilnom zariadení v bežnej praxi nepoužiteľná. Pomocou AI rozsekal video na 40-50 obrázkov a pomocou JavaScriptu ich pri skrolovaní rozpohyboval. Výsledok - niekoľko megabajtová stránka, ktorá sa na mobile 8 sekúnd sťahovala. Následne musel návštevník 3x swipnúť po mobile, aby mu animácia konečne zmizla z obrazovky a človek sa dostal k informáciam. Ďaľšiemu AI influencerovi, ktorý tvrdil, že web developeri skončili, lebo ich AI nahradila, niekto jednoduchým " SQL injekčným útokom" vybielil databázu a osobné údaje zákazníkov. A takýchto prípadov zo dňa na deň rastie...
 * **Technický dlh:** Toto je pasca. AI vygeneruje kód, ktorý dnes funguje, ale je to chaotický „zliepanec“. Ak budete chcieť o pol roka niečo zmeniť, nikto sa v tom nevyzná. Profesionálny programátor takýto kód často odmietne opravovať – je jednoduchšie napísať to celé odznova.
-* **Potreba kontroly:** Sám som vibe-kódoval a musel som AI doslova „nadávať“, prečo lepí dokopy nekvalitný kód a ponúka mi naoko pekné, ale lacné a nekvalitné riešenia. Ak niekoho potrebuje človek kontrolovať, tak je to práve AI.
+* **Potreba kontroly:** Sám som vibe-kódoval a musel som AI doslova až „vynadať“, pretože mi lepila dokopy nekvalitný kód a ponúkala mi naoko pekné, ale lacné a nekvalitné riešenia. Ak treba niekoho kontrolovať, tak práve umelú inteligenciu a jej kód.
 
-Tu sa dostávame k podstate veci. Aby ste mohli AI efektívne usmerňovať v nástrojoch ako **Cursor**, **Claude 3.5 Sonnet** či **v0**, musíte vedieť, čo od nich pýtať. AI je geniálny *asistent*, ale mizerný *architekt*. Bez základov ste len pasažierom v aute bez šoféra.
+Tu sa dostávame k podstate veci. Aby ste mohli AI efektívne usmerňovať v nástrojoch ako **Cursor**, **Claude 3.5 Sonnet** či **v0**, musíte vedieť, čo od nich presne pýtať. AI je geniálny *asistent*, ale mizerný *architekt*. Bez základov ste len pasažierom v aute bez šoféra odkázaný na milosť.
 
 ## Ako sa naučiť vibe-coding kvalitne a zadarmo?
 
-Bez učenia to nepôjde. Treba sa pripraviť na systematické štúdium. Ak chcete tú Severku v kóde vidieť, zamerajte sa na túto „veľkú trojku“:
+Bez učenia sa to nepôjde. Treba sa pripraviť na systematické štúdium. Ak chcete tú Severku v kóde vidieť, zamerajte sa na túto „veľkú trojku“:
 
 1.  **HTML a CSS** – Základ každej stránky. Zvládnete ich približne za pol roka.
 2.  **JavaScript** – Programovací jazyk pre interaktivitu ale i backend. Počítajte s minimálne rokom štúdia, aby ste mu skutočne rozumeli.
@@ -51,4 +51,4 @@ Na základe týchto základov (cca 2-3 roky večerného štúdia popri práci) u
 
 Mnoho kvalitných kurzov je dostupných zadarmo. Osobne môžem odporučiť YouTube kanál **Hackni svou budoucnost**, v ktorom lektor **David Šetek** veľmi zrozumiteľným spôsobom uvádza študentov do sféry programovania. 
 
-Ak sa naučíte tieto základy, už Vám nebude treba žiadny platený kurz vibe-codingu a Vaše projekty budú mať konečne skutočnú, nielen „vizuálnu“ hodnotu.
+Ak sa naučíte tieto základy, už Vám nebude treba žiadny platený kurz vibe-codingu a Vaše projekty budú mať konečne skutočnú, použiteľnú nielen „vizuálnu“ hodnotu.
