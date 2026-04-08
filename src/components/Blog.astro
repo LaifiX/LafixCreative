@@ -351,8 +351,8 @@ const allTags = ['Všetky', ...new Set(blogPostsData.flatMap(post => post.tags))
 <script define:vars={{ blogPostsData }}>
 // IIFE funkcia na izoláciu rozsahu premenných (aby sa nebili s Projects sekciou)
 (function() {
-    const INITIAL_COUNT = 4;
-    const LOAD_STEP = 4;
+    const INITIAL_COUNT = 3;
+    const LOAD_STEP = 3;
 
     let currentTag = "Všetky";
     let visibleCount = INITIAL_COUNT;
