@@ -73,11 +73,11 @@ Dnes tesne pred nasadením na web mi ponúkol AI agent zaujímavé riešenie –
 
 ---
 
-## Prečo to by to u laika nedopadlo dobre<>
+## Prečo to by to u laika nedopadlo dobre?
 
-Tento moment jasne ukazuje, prečo laik nemôže vytvoriť bezpečný softvér.
+Tento moment jasne ukazuje, prečo laik s veľkou pravdepodobnosťou nevytvorí bezpečný softvér.
 
-Amatér by si túto chybu nevšimol, kód by nasadil a jeho citlivé údaje by boli verejne dostupné každému, kto vie, kam sa pozrieť. 
+Laik by si túto chybu nevšimol, kód by nasadil a jeho citlivé údaje by boli verejne dostupné každému, kto vie, kam sa pozrieť. 
 
 ---
 
@@ -101,4 +101,4 @@ IT sektor pravdepodobne pocíti následky tohto skratkovitého prístupu až s o
 
 AI je skvelý sluha a akcelerátor pre tých, ktorí vedia, čo robia.
 
-Pre ostatných je to len veľmi rýchla cesta k drahému právnemu a technickému problému. Treba to mať na to myslieť, ak Vám bude niekto ponúkať ľahké a krásne znejúce riešenia.
+Pre ostatných je to len veľmi rýchla cesta k drahému právnemu a technickému problému. Treba na to myslieť, ak Vám bude niekto ponúkať ľahké a krásne znejúce riešenia a tvrdiť, že Vás naučí tvoriť weby a programy bez predchádzajúceho vzdelania.
