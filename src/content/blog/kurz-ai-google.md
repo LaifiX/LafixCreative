@@ -2,7 +2,7 @@
 title: "Ako sa naučiť pracovať s AI? Odpoveďou môže byť Google AI Professional Certificate"
 excerpt: "Umelá inteligencia nie je len o chatovaní. Zistite, prečo je dôležité ju skutočne pochopiť, naučiť sa ju využívať do hĺbky a ako začať s Google AI certifikátom aj zadarmo."
 image: "../../assets/images/blog/certifikat.jpg"
-tags: ["AI", "Vzdelávanie", "Technológie", "Kariéra"]
+tags: ["AI", "Vzdelávanie"]
 author: "Mgr. Peter Beňo"
 date: 2026-04-08
 ---
