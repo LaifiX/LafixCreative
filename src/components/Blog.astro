@@ -16,7 +16,7 @@ const blogPostsData = await Promise.all(sortedPosts.map(async (post, index) => {
   
   return {
     id: index,
-    slug: post.slug,
+    slug: post.id,
     title: post.data.title,
     excerpt: post.data.excerpt,
     content: contentHTML,

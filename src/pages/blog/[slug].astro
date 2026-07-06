@@ -1,13 +1,13 @@
 ---
 // src/pages/blog/[...slug].astro
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
 
 // ✅ Astro potrebuje vedieť, ktoré slugy má prerenderovať
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 
 // ✅ render markdownu cez Astro Content
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 // ✅ obrázok (string vs Image object)
 const imageUrl =
