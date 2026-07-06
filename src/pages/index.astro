@@ -122,31 +122,37 @@ body.show-preloader #preloader {
 
         // Ak sme tu EŠTE NEBOLI (nová karta / okno)
         if (!alreadyShown) {
-            
+
             // 1. Okamžite ho zobrazíme (pridáme triedu)
             document.body.classList.add("show-preloader");
 
-            // 2. Počkáme na načítanie stránky
-            window.addEventListener("load", () => {
-                
-                // Necháme animáciu dobehnúť (1.2s)
+            let hidden = false;
+            const hidePreloader = () => {
+                if (hidden) return;
+                hidden = true;
+
+                // Začneme stmievanie (fade out)
+                const preloader = document.getElementById("preloader");
+                if (preloader) preloader.style.opacity = "0";
+
+                // Zapamätáme si, že už bežal
+                sessionStorage.setItem(sessionKey, "true");
+
+                // Po animácii (0.5s) ho úplne odstránime a vyčistíme triedu
                 setTimeout(() => {
-                    
-                    // Začneme stmievanie (fade out)
-                    const preloader = document.getElementById("preloader");
-                    if (preloader) preloader.style.opacity = "0";
+                    document.body.classList.remove("show-preloader");
+                    if (preloader) preloader.style.display = "none";
+                }, 500);
+            };
 
-                    // Zapamätáme si, že už bežal
-                    sessionStorage.setItem(sessionKey, "true");
+            // 2. Stačí kostra stránky (DOMContentLoaded) — nečakáme na
+            // stiahnutie všetkých obrázkov, tie nižšie sú aj tak lazy
+            const startCountdown = () => setTimeout(hidePreloader, 1200);
+            if (document.readyState !== "loading") startCountdown();
+            else document.addEventListener("DOMContentLoaded", startCountdown);
 
-                    // Po animácii (0.5s) ho úplne odstránime a vyčistíme triedu
-                    setTimeout(() => {
-                        document.body.classList.remove("show-preloader");
-                        if (preloader) preloader.style.display = "none";
-                    }, 500);
-
-                }, 1200);
-            });
+            // 3. Poistka: nech sa deje čokoľvek, po 2.5s preloader uhne
+            setTimeout(hidePreloader, 2500);
         }
         // Ak už sme tu boli (už existuje záznam), nerobíme NIČ.
         // CSS má default display: none, takže preloader sa vôbec neukáže.
