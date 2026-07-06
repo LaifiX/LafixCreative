@@ -1,5 +1,9 @@
 # netlify.toml
 
+# Astro 7 vyžaduje Node >= 22.12
+[build.environment]
+  NODE_VERSION = "24"
+
 # Cacheovanie pre fonty a obrázky (1 rok)
 [[headers]]
   for = "/_astro/*"
