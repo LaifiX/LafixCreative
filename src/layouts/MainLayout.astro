@@ -86,8 +86,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         }
       }
     </script>
-    
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   
   <body>
@@ -96,21 +94,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <div class="noise-overlay"></div>
 
     <slot />
-
-    <script>
-      // Netlify Identity Logika (s TypeScript opravou)
-      const identity = (window as any).netlifyIdentity;
-
-      if (identity) {
-        identity.on("init", (user: any) => {
-          if (!user) {
-            identity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
   </body>
 </html>
 
