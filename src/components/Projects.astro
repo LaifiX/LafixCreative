@@ -39,6 +39,7 @@ import imgVianoce2026 from '../assets/images/projects/vianoce2026.jpg';
 import imgSalesManagerPro from '../assets/images/projects/salesmanager.jpg';
 import imgRezervacnySystem from '../assets/images/projects/rezervacia.jpg';
 import imgZombie3d from '../assets/images/projects/zombie3d.webp';
+import imgJackpot from '../assets/images/projects/jackpot.webp';
 
 
 const projectsData = [
@@ -359,6 +360,15 @@ const projectsData = [
     liveUrl: 'https://superlative-zabaione-5e16e8.netlify.app',
     category: 'Aplikácie',
   },
+  {
+    id: 36,
+    title: 'Jackpot',
+    description: 'Aplikácia / Hra Jackpot.',
+    imageUrl: imgJackpot,
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    liveUrl: 'https://prvavyhra.netlify.app/',
+    category: 'WebDev, Aplikácie',
+  },
 
 ];
 
@@ -542,7 +552,8 @@ const categories = ['Všetky', 'WebDev', 'Aplikácie','Grafický Dizajn', 'Obcho
         // Orezanie medzier pre istotu (Robustnosť)
         const category = (card.dataset.category || "").trim();
         
-        const isMatch = currentCategory === 'Všetky' || category === currentCategory;
+        // Zmena na "includes" pre podporu viacerých kategórií pre jeden projekt
+        const isMatch = currentCategory === 'Všetky' || category.includes(currentCategory);
 
         if (isMatch) {
             matchedCount++;
